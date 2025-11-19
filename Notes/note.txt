@@ -1,0 +1,28 @@
+tinh tien bao hiem
+input
+ten benh nhan
+
+ngay kham
+
+di kham benh bao nhieu lan
+ngay di kham
+ten thuoc
+so luong
+ngay uong bao nhieu
+tong tien
+
+output: theo thang
+
+ten benh nhan
+
+
+postman
+
+mongo db
+
+
+front end 
+
+user login
+
+back-end 

@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "UEaajDIWWzl6tFZ+z0cwSPBFpr7jkZWQcFo3Wm40wZ4=",
+  "Source": "Medicalcare_API",
+  "BasePath": "_content/Medicalcare_API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

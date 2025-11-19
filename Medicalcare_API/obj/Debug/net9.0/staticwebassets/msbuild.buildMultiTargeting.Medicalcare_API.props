@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/Medicalcare_API.props" />
+</Project>

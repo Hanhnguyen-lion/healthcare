@@ -1,0 +1,10 @@
+    .my-double-bordered-table {
+      border-top: 3px double black; /* Adjust thickness and color as needed */
+      border-bottom: 3px double black; /* Adjust thickness and color as needed */
+    }
+
+    /* Optional: To remove internal cell borders if desired */
+    .my-double-bordered-table th,
+    .my-double-bordered-table td {
+      border: none;
+    }

@@ -1,0 +1,10 @@
+@media screen, print {
+    @page{
+        width: 8.5in;
+        height: 11in;
+    }
+    
+    .fw-bold {
+        font-weight: 700 !important;
+    }
+}

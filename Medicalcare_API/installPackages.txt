@@ -1,0 +1,19 @@
+-- add package EF
+dotnet add package Microsoft.EntityFrameworkCore
+
+-- add postgresSql
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+
+ng generate component Billing --skip-tests
+
+Các thành phần trên hóa đơn thuốc bệnh viện
+Thông tin bệnh nhân: Gồm họ tên, tuổi, giới tính, địa chỉ và số thẻ bảo hiểm y tế (nếu có).
+Thông tin cơ sở y tế: Tên bệnh viện/phòng khám, địa chỉ và thông tin người kê đơn (bác sĩ/y sĩ).
+Chi tiết đơn thuốc:
+Tên thuốc.
+Liều dùng, cách dùng.
+Số lượng.
+Đơn giá.
+Thành tiền.
+Tổng cộng: Tổng chi phí thuốc và các dịch vụ khác. 
+

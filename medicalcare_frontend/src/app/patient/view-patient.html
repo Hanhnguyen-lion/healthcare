@@ -1,0 +1,156 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>Patient Detail</h3>
+          <form [formGroup]="form">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Code</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="code">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">First Name</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="first_name">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Last Name</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="last_name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Date of birth</label>
+                  <input type="date" readonly class="form-control-plaintext" [ngModel]="dob|date:'yyyy-MM-dd'" formControlName="date_of_birth">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Email</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="email">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Gender</label>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <input type="text" readonly class="form-control-plaintext" formControlName="gender">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Phone Number</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="phone_number">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Job</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="job">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="fw-bold">Home Address</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="home_address">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="fw-bold">Office Address</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="office_address">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Emergency Contact Name</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="emergency_contact_name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Emergency Contact Phone</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="emergency_contact_phone">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Insurance Number</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="insurance_policy_number">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Insurance Expire</label>
+                  <input type="date" readonly class="form-control-plaintext" formControlName="insurance_expire" [ngModel]="insuranceExpire|date:'yyyy-MM-dd'">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Insurance Provider</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="insurance_provider">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Insurance Type</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="insurance_type">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="fw-bold">Insurance Info</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="insurance_info">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="fw-bold">Medical History</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="medical_history">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
+                <button [disabled]="loading" (click)="onEdit()" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Edit
+                </button>
+
+                <button class="btn btn-secondary" routerLink="/Patient">Cancel</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+  
