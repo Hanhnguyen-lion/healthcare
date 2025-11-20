@@ -1,0 +1,34 @@
+<div class="container">
+    <h2>Medicine List</h2>
+    <div class="form-group mb-3">
+      <button class="btn btn-primary" routerLink="/Medicine/Add" type="submit">Add Medicine</button>
+    </div>
+<div class="tableFixHead">
+  <table class="table table-striped">
+    <thead class="table-header">
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Input Date</th>
+        <th>Expire Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items | async">
+        <td>{{item.name}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.input_date|date:'dd-MM-yyyy'}}</td>
+        <td>{{item.expire_date|date:'dd-MM-yyyy'}}</td>
+        <td>
+          <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Medicine/Edit/{{item.id}}">Edit</button>
+          <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Medicine/View/{{item.id}}">View</button>
+          <button class="btn btn-danger" style="margin-left: 10px;" (click)="onDelete(item.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+<router-outlet></router-outlet>

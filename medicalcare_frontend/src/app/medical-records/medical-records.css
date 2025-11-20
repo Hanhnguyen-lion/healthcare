@@ -8,3 +8,16 @@
     .my-double-bordered-table td {
       border: none;
     }
+    .medicalcare-border-top td {
+        border-top: 1px solid #000!important;
+
+    }
+    .medicalcare-border-tb td {
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+
+    }
+    .medicalcare-border-r td {
+        border-right: 1px solid black!important;
+
+    }    

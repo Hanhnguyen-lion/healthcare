@@ -20,8 +20,7 @@ export class PatientsService {
   })};
   
   constructor(
-    private http: HttpClient,
-    private router: Router
+    private http: HttpClient
   ){
     this.patientSubject = new BehaviorSubject<Patient | null>(null);
     this.patient = this.patientSubject.asObservable();

@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Medicalcare_API.Helpers;
 using Medicalcare_API.Models;
 using System.Text.Json;
-using System.IO;
 
 namespace Medicalcare_API.Controllers{
 
@@ -180,9 +179,9 @@ namespace Medicalcare_API.Controllers{
         {
             await Task.Run(() =>
             {
-                var patients = this.context.ReadJsonFile(JsonFile);
-                if (patients != null)
-                    this.context.m_patient.AddRange(patients);
+                var items = this.context.ReadJsonFileToPatient(JsonFile);
+                if (items != null)
+                    this.context.m_patient.AddRange(items);
             });
 
             return Ok(new {message = "Import Json to patient table"});

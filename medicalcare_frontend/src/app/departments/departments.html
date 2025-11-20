@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Hospital List</h2>
+    <div class="form-group mb-3">
+      <button class="btn btn-primary" routerLink="/Departments/Add" type="submit">Add Department</button>
+    </div>
+<div class="tableFixHead">
+  <table class="table table-striped">
+    <thead class="table-header">
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of departments | async">
+        <td>{{item.name}}</td>
+        <td>{{item.phone}}</td>
+        <td>
+          <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Department/Edit/{{item.id}}">Edit</button>
+          <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Department/View/{{item.id}}">View</button>
+          <button class="btn btn-danger" style="margin-left: 10px;" (click)="onDelete(item.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+<router-outlet></router-outlet>

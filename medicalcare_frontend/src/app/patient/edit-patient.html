@@ -8,7 +8,7 @@
             <div class="row mb-3">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="fw-bold">Code</label>
+                  <label class="fw-bold">Code <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" formControlName="code" placeholder="Enter code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
                   <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
                       <div *ngIf="f.code.errors.required">Code is required</div>
@@ -17,7 +17,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="fw-bold">First Name</label>
+                  <label class="fw-bold">First Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" formControlName="first_name" placeholder="Enter first name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
                   <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
                       <div *ngIf="f.first_name.errors.required">First name is required</div>
@@ -28,7 +28,7 @@
             <div class="row mb-3">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="fw-bold">Last Name</label>
+                  <label class="fw-bold">Last Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" formControlName="last_name" placeholder="Enter last name" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
                   <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
                       <div *ngIf="f.last_name.errors.required">Last name is required</div>

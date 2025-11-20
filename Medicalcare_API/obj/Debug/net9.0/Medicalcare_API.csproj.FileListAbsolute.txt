@@ -38,3 +38,4 @@
 /data/projects/Healthcare/Medicalcare_API/bin/Debug/net9.0/Npgsql.dll
 /data/projects/Healthcare/Medicalcare_API/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /data/projects/healthcare/Medicalcare_API/bin/Debug/net9.0/Data/patient.json
+/data/projects/healthcare/Medicalcare_API/bin/Debug/net9.0/Data/hospital.json
