@@ -138,7 +138,9 @@ namespace Medicalcare_API.Controllers{
                         quanlification = name,
                         phone = "123456789",
                         job_specification = name,
-                        gender = gender
+                        gender = gender,
+                        hospital_id = null,
+                        department_id = null
                     };
                     this.context.m_doctor.Add(item);
                 }

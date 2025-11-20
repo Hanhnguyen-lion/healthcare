@@ -10,21 +10,21 @@ const baseUrl = `${enviroment.apiUrl}/Departments`;
 @Injectable({
   providedIn: 'root',
 })
-export class DepartmentsService{
+export class DepartmentsService extends BaseServices{
   
   private departmentSubject: BehaviorSubject<Department | null>;
   public department: Observable<Department | null>;
   
   constructor(
-    private http: HttpClient,
-    private baseService: BaseServices
+    public override http: HttpClient,
   ){
+    super(http);
     this.departmentSubject = new BehaviorSubject<Department | null>(null);
     this.department = this.departmentSubject.asObservable();
   }
   
   GetDepartments(): Observable<Department[]>{
-    return this.baseService.GetItems(baseUrl, this.http);
+    return this.GetItems(baseUrl);
   }
   
 }

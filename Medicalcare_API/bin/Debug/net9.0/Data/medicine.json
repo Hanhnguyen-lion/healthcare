@@ -1,0 +1,402 @@
+[
+  {
+    "id": 1,
+    "type": "Medicine_001",
+    "name": "Medicine_001",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 2,
+    "type": "Medicine_002",
+    "name": "Medicine_002",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 3,
+    "type": "Medicine_003",
+    "name": "Medicine_003",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 4,
+    "type": "Medicine_004",
+    "name": "Medicine_004",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 5,
+    "type": "Medicine_005",
+    "name": "Medicine_005",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 6,
+    "type": "Medicine_006",
+    "name": "Medicine_006",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 7,
+    "type": "Medicine_007",
+    "name": "Medicine_007",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 8,
+    "type": "Medicine_008",
+    "name": "Medicine_008",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 9,
+    "type": "Medicine_009",
+    "name": "Medicine_009",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 10,
+    "type": "Medicine_0010",
+    "name": "Medicine_0010",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 11,
+    "type": "Medicine_0011",
+    "name": "Medicine_0011",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 12,
+    "type": "Medicine_0012",
+    "name": "Medicine_0012",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 13,
+    "type": "Medicine_0013",
+    "name": "Medicine_0013",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 14,
+    "type": "Medicine_0014",
+    "name": "Medicine_0014",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 15,
+    "type": "Medicine_0015",
+    "name": "Medicine_0015",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 16,
+    "type": "Medicine_0016",
+    "name": "Medicine_0016",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 17,
+    "type": "Medicine_0017",
+    "name": "Medicine_0017",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 18,
+    "type": "Medicine_0018",
+    "name": "Medicine_0018",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 19,
+    "type": "Medicine_0019",
+    "name": "Medicine_0019",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 20,
+    "type": "Medicine_0020",
+    "name": "Medicine_0020",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 21,
+    "type": "Medicine_0021",
+    "name": "Medicine_0021",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 22,
+    "type": "Medicine_0022",
+    "name": "Medicine_0022",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 23,
+    "type": "Medicine_0023",
+    "name": "Medicine_0023",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 24,
+    "type": "Medicine_0024",
+    "name": "Medicine_0024",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 25,
+    "type": "Medicine_0025",
+    "name": "Medicine_0025",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 26,
+    "type": "Medicine_0026",
+    "name": "Medicine_0026",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 27,
+    "type": "Medicine_0027",
+    "name": "Medicine_0027",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 28,
+    "type": "Medicine_0028",
+    "name": "Medicine_0028",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 29,
+    "type": "Medicine_0029",
+    "name": "Medicine_0029",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 30,
+    "type": "Medicine_0030",
+    "name": "Medicine_0030",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 31,
+    "type": "Medicine_0031",
+    "name": "Medicine_0031",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 32,
+    "type": "Medicine_0032",
+    "name": "Medicine_0032",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 33,
+    "type": "Medicine_0033",
+    "name": "Medicine_0033",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 34,
+    "type": "Medicine_0034",
+    "name": "Medicine_0034",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 35,
+    "type": "Medicine_0035",
+    "name": "Medicine_0035",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 36,
+    "type": "Medicine_0036",
+    "name": "Medicine_0036",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 37,
+    "type": "Medicine_0037",
+    "name": "Medicine_0037",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 38,
+    "type": "Medicine_0038",
+    "name": "Medicine_0038",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 39,
+    "type": "Medicine_0039",
+    "name": "Medicine_0039",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 40,
+    "type": "Medicine_0040",
+    "name": "Medicine_0040",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 41,
+    "type": "Medicine_0041",
+    "name": "Medicine_0041",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 42,
+    "type": "Medicine_0042",
+    "name": "Medicine_0042",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 43,
+    "type": "Medicine_0043",
+    "name": "Medicine_0043",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 44,
+    "type": "Medicine_0044",
+    "name": "Medicine_0044",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 45,
+    "type": "Medicine_0045",
+    "name": "Medicine_0045",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 46,
+    "type": "Medicine_0046",
+    "name": "Medicine_0046",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 47,
+    "type": "Medicine_0047",
+    "name": "Medicine_0047",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 48,
+    "type": "Medicine_0048",
+    "name": "Medicine_0048",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 49,
+    "type": "Medicine_0049",
+    "name": "Medicine_0049",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  },
+  {
+    "id": 50,
+    "type": "Medicine_0050",
+    "name": "Medicine_0050",
+    "price": 100,
+    "input_date": "2025-11-21T00:00:00+07:00",
+    "expire_date": "2024-11-21T00:00:00+07:00"
+  }
+]

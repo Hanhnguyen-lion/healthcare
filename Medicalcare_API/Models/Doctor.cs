@@ -22,7 +22,7 @@ namespace Medicalcare_API.Models{
         public string? gender{get;set;}
         public string? quanlification{get;set;}
         public string? job_specification{get;set;}
-        public int hospital_id{get;set;}
-        public int department_id{get;set;}
+        public int? hospital_id{get;set;}
+        public int? department_id{get;set;}
   }
 }

@@ -17,29 +17,29 @@ namespace Medicalcare_API.Controllers{
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPatients()
+        public async Task<IActionResult> GetItems()
         {
-            var data = await this.context.m_patient.ToListAsync();
+            var data = await this.context.m_hospital.ToListAsync();
 
             return Ok(data);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetPatientById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            Patient? item = await this.context.m_patient.FirstOrDefaultAsync(
+            Hospital? item = await this.context.m_hospital.FirstOrDefaultAsync(
                     m => m.id == id);
             if (item == null)
             {
-                return NotFound(new { message = "Patient not found." });
+                return NotFound(new { message = "Hospital not found." });
             }
             return Ok(item);
         }
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> Add(Patient patient)
+        public async Task<IActionResult> Add(Hospital patient)
         {
             // Validate the incoming model.
             if (!ModelState.IsValid)
@@ -48,26 +48,26 @@ namespace Medicalcare_API.Controllers{
             }
             if (patient != null)
             {
-                string? code = patient.code?.ToLower();
+                string? name = patient.name?.ToLower();
                 // Check if the email already exists.
-                Patient? item = await this.context.m_patient.FirstOrDefaultAsync(m => m.code == code);
+                Hospital? item = await this.context.m_hospital.FirstOrDefaultAsync(m => m.name == name);
                 if (item != null)
                 {
-                    return Conflict(new { message = "Patient is already exists." });
+                    return Conflict(new { message = "Hospital is already exists." });
                 }
 
                 await Task.Run(() =>
                 {
-                    this.context.m_patient.Add(patient);
+                    this.context.m_hospital.Add(patient);
                     this.context.SaveChanges();
                 });
             }
-            return Ok(new { message = "Patient add successfully." });
+            return Ok(new { message = "Hospital add successfully." });
         }        
 
         [HttpPut]
         [Route("Edit/{id}")]
-        public async Task<IActionResult> Edit(int id, Patient patient)
+        public async Task<IActionResult> Edit(int id, Hospital patient)
         {
             // Validate the incoming model.
             if (!ModelState.IsValid)
@@ -79,18 +79,17 @@ namespace Medicalcare_API.Controllers{
             {
                 return BadRequest("ID mismatch in the URL and body.");
             }
-            // Check if patient exists
-            Patient? item = await this.context.m_patient.FirstOrDefaultAsync(
+            Hospital? item = await this.context.m_hospital.FirstOrDefaultAsync(
                     m => m.id == patient.id);
             if (item == null)
             {
-                return NotFound(new { message = "Patient not found." });
+                return NotFound(new { message = "Hospital not found." });
             }
             else
             {
                 await Task.Run(() =>
                 {
-                    this.context.m_patient.Entry(item).CurrentValues.SetValues(patient);
+                    this.context.m_hospital.Entry(item).CurrentValues.SetValues(patient);
                     this.context.SaveChanges();
                 });
 
@@ -108,22 +107,21 @@ namespace Medicalcare_API.Controllers{
                 return BadRequest(ModelState);
             }
 
-            // Check if patient exists
-            Patient? item = await this.context.m_patient.FirstOrDefaultAsync(
+            Hospital? item = await this.context.m_hospital.FirstOrDefaultAsync(
                     m => m.id == id);
             if (item == null)
             {
-                return NotFound(new { message = "Patient not found." });
+                return NotFound(new { message = "Hospital not found." });
             }
             else
             {
                 await Task.Run(() =>
                 {
-                    this.context.m_patient.Remove(item);
+                    this.context.m_hospital.Remove(item);
                     this.context.SaveChanges();
                 });
 
-                return Ok(new {message = "Patient deleted "});
+                return Ok(new {message = "Hospital deleted "});
             }
         }
 

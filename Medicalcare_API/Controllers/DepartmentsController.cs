@@ -139,7 +139,9 @@ namespace Medicalcare_API.Controllers{
                     var item = new Department
                     {
                         name = name,
-                        phone = "123456789"
+                        phone = "123456789",
+                        doctor_id = null,
+                        hospital_id = null
                     };
                     this.context.m_department.Add(item);
                 }

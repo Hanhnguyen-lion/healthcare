@@ -1,0 +1,352 @@
+[
+  {
+    "id": 2,
+    "name": "Department_001",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 3,
+    "name": "Department_002",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 4,
+    "name": "Department_003",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 5,
+    "name": "Department_004",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 6,
+    "name": "Department_005",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 7,
+    "name": "Department_006",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 8,
+    "name": "Department_007",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 9,
+    "name": "Department_008",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 10,
+    "name": "Department_009",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 11,
+    "name": "Department_0010",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 12,
+    "name": "Department_0011",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 13,
+    "name": "Department_0012",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 14,
+    "name": "Department_0013",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 15,
+    "name": "Department_0014",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 16,
+    "name": "Department_0015",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 17,
+    "name": "Department_0016",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 18,
+    "name": "Department_0017",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 19,
+    "name": "Department_0018",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 20,
+    "name": "Department_0019",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 21,
+    "name": "Department_0020",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 22,
+    "name": "Department_0021",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 23,
+    "name": "Department_0022",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 24,
+    "name": "Department_0023",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 25,
+    "name": "Department_0024",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 26,
+    "name": "Department_0025",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 27,
+    "name": "Department_0026",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 28,
+    "name": "Department_0027",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 29,
+    "name": "Department_0028",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 30,
+    "name": "Department_0029",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 31,
+    "name": "Department_0030",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 32,
+    "name": "Department_0031",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 33,
+    "name": "Department_0032",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 34,
+    "name": "Department_0033",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 35,
+    "name": "Department_0034",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 36,
+    "name": "Department_0035",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 37,
+    "name": "Department_0036",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 38,
+    "name": "Department_0037",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 39,
+    "name": "Department_0038",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 40,
+    "name": "Department_0039",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 41,
+    "name": "Department_0040",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 42,
+    "name": "Department_0041",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 43,
+    "name": "Department_0042",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 44,
+    "name": "Department_0043",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 45,
+    "name": "Department_0044",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 46,
+    "name": "Department_0045",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 47,
+    "name": "Department_0046",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 48,
+    "name": "Department_0047",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 49,
+    "name": "Department_0048",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 50,
+    "name": "Department_0049",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  },
+  {
+    "id": 51,
+    "name": "Department_0050",
+    "doctor_id": null,
+    "hospital_id": null,
+    "phone": "123456789"
+  }
+]
