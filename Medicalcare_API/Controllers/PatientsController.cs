@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Medicalcare_API.Helpers;
 using Medicalcare_API.Models;
+using System.Text.Json;
+using System.IO;
 
 namespace Medicalcare_API.Controllers{
 
@@ -10,7 +12,7 @@ namespace Medicalcare_API.Controllers{
     [Route("Medicalcare/api/[controller]")]
     public class PatientsController: ControllerBase{
         readonly DataContext context;
-
+        readonly string JsonFile = "Data/patient.json";
         public PatientsController(DataContext context){
             this.context = context;
         }
@@ -124,6 +126,66 @@ namespace Medicalcare_API.Controllers{
 
                 return Ok(new {message = "Patient deleted "});
             }
+        }
+
+        [HttpPost]
+        [Route("ExportJson")]
+        public async Task<IActionResult> ExportJson()
+        {
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < 50; i++)
+                {
+                    var name = $"Patient_00{i+1}";
+                    var gender = (i <= 30) ? "Female" : "Male";
+                    var item = new Patient
+                    {
+                        code = name,
+                        first_name = name,
+                        last_name = name,
+                        email = $"{name}@test.com",
+                        home_address = name,
+                        office_address = name,
+                        date_of_birth = DateTime.Today.AddYears(-20).AddDays(i+1),
+                        insurance_expire = DateTime.Today.AddYears(-20).AddDays(i+1),
+                        insurance_policy_number = name,
+                        insurance_provider = name,
+                        insurance_type = name,
+                        insurance_info = name,
+                        medical_history = name,
+                        job = name,
+                        phone_number = "123456789",
+                        gender = gender,
+                        emergency_contact_name = name,
+                        emergency_contact_phone = "123456789"
+                    };
+                    this.context.m_patient.Add(item);
+                }
+                this.context.SaveChanges();
+
+                List<Patient> patients = this.context.m_patient.ToList();
+
+                var jsonString = JsonSerializer.Serialize(patients, new JsonSerializerOptions{WriteIndented=true});
+
+                this.context.WriteJsonFile(JsonFile, jsonString);
+
+            });
+
+            return Ok(new {message = "Export Json Successfull"});
+        }
+
+        [HttpPost]
+        [Route("ImportJson")]
+        public async Task<IActionResult> ImportJson()
+        {
+            await Task.Run(() =>
+            {
+                var patients = this.context.ReadJsonFile(JsonFile);
+                if (patients != null)
+                    this.context.m_patient.AddRange(patients);
+            });
+
+            return Ok(new {message = "Import Json to patient table"});
         }
     }
 }
