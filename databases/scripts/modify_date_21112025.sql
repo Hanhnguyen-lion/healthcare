@@ -1,3 +1,11 @@
+ALTER TABLE m_hospital
+ALTER COLUMN description TYPE VARCHAR(1000);
+
+ALTER TABLE m_hospital
+ALTER COLUMN address TYPE VARCHAR(1000);
+
+ALTER TABLE m_hospital
+ALTER COLUMN phone TYPE VARCHAR(100);
 
 DROP TABLE if exists public.m_disease;
 

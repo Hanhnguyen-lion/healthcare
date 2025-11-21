@@ -12,19 +12,14 @@ const baseUrl = `${enviroment.apiUrl}/Hospitals`;
 })
 export class HospitalsService extends BaseServices{
   
-  private hospitalSubject: BehaviorSubject<Hospital | null>;
-  public hospital: Observable<Hospital | null>;
-  
   constructor(
     public override http: HttpClient,
   ){
     super(http);
-    this.hospitalSubject = new BehaviorSubject<Hospital | null>(null);
-    this.hospital = this.hospitalSubject.asObservable();
   }
   
-  GetHospitals(): Observable<Hospital[]>{
-    return this.GetItems(baseUrl);
-  }
+  // GetHospitals(): Observable<Hospital[]>{
+  //   return this.GetItems(baseUrl);
+  // }
   
 }
