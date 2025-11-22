@@ -1,1 +1,60 @@
-<p>create-department works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h3>Add New Department</h3>
+          <form [formGroup]="form" (ngSubmit)="addItem()">
+            <div class="row mb-3">
+                <div class="form-group">
+                  <label class="fw-bold">Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="name" placeholder="Enter name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                  <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                      <div *ngIf="f.name.errors.required">Name is required</div>
+                  </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Phone</label>
+                    <input type="text" class="form-control" formControlName="phone" placeholder="Enter phone number">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                  <label class="fw-bold">Hospital</label>
+                  <select class="form-select" formControlName="hospital_id" placeholder="Enter hospital">
+                    <option *ngFor="let item of hospitalItems" [ngValue]="item.id">
+                        {{item.name}}
+                    </option>
+                  </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Doctor</label>
+                    <select class="form-select" formControlName="doctor_id" placeholder="Enter doctor">
+                    <option *ngFor="let item of doctorItems" [ngValue]="item.id">
+                        {{item.last_name}} {{item.first_name}}
+                    </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Save
+                </button>
+
+                <button class="btn btn-secondary" routerLink="/Doctor">Cancel</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+  

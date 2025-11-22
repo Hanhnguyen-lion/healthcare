@@ -18,8 +18,7 @@ export class DialogService {
     return new Observable((observable) =>{
       modalRef.result.then(
         (result) =>{
-          console.log(`Closed with: ${result}`);
-          observable.next(result);
+          observable.next(true);
           observable.complete();
         },
         (reason) =>{

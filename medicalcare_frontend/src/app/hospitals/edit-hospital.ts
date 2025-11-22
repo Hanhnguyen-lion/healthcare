@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from '../BaseComponent';
 import { NgClass, NgIf } from '@angular/common';
-import { HospitalsService } from '../services/hospitals';
 import { AlertService } from '../helpers/alert-service';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { enviroment } from '../../enviroments/enviroment';
 import { DialogService } from '../services/dialog';
+import { BaseComponent } from '../BaseComponent';
+import { BaseServices } from '../services/base-service';
 
 
 @Component({
@@ -14,29 +14,33 @@ import { DialogService } from '../services/dialog';
   imports: [NgIf, NgClass, RouterLink, RouterOutlet, ReactiveFormsModule],
   templateUrl: './edit-hospital.html',
   styleUrl: './edit-hospital.css',
+  providers: [BaseServices]
 })
-export class EditHospital extends BaseComponent{
+export class EditHospital extends BaseComponent implements OnInit{
 
   id: number = 0;
 
   constructor(
-    public override srv: HospitalsService, 
-    public override alertService: AlertService,
-    public override router: Router, 
+    protected override router: Router,
+    protected override baseSrv: BaseServices,
     protected override dialogService: DialogService,
-    private formBuilder: FormBuilder,
-    private routerActive: ActivatedRoute
+    protected override alertService: AlertService,
+    protected override routerActive: ActivatedRoute,
+    private formBuilder: FormBuilder
   ){
-    super(srv, 
+    super(
       `${enviroment.apiUrl}/Hospitals`, 
-      "/Hospital", 
+      "", 
       "Edit hospital successful",
-      alertService,
+      "/Hospital",
       router,
-      dialogService)
+      baseSrv,
+      dialogService,
+      alertService,
+      routerActive)
   }
 
-  ngOnInit(): void{
+  override ngOnInit(): void{
 
      this.form = this.formBuilder.group({
       name: ["", Validators.required],
@@ -47,15 +51,13 @@ export class EditHospital extends BaseComponent{
       country: [""]
     });
 
-    this.id = +this.routerActive.snapshot.params["id"] | 0;
-
     this.setFormValue();
   }
 
   setFormValue(){
-    
-    this.srv.GetItemById(this.id, this.url)
-      .subscribe(item=>{
+    var id = +this.routerActive.snapshot.params["id"] |0;
+    this.baseSrv.GetItemById(id, this.apiUrl)
+      .subscribe(item =>{
         this.form.setValue({
           name: item.name, 
           description: item.description, 
@@ -64,11 +66,9 @@ export class EditHospital extends BaseComponent{
           phone: item.phone, 
           country: item.country
         });
-    });
+      },
+      error=>{
+        this.alertService.error(error);
+      });  
   }
-
-  onsubmit(){
-    this.updateItem(this.id);
-  }
-
 }

@@ -1,36 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { PatientsService } from '../services/patient';
 import { dateLessThanTodayValidator } from '../date-validators';
 import { AlertService } from '../helpers/alert-service';
 import { DatePipe, NgClass, NgIf } from '@angular/common';
+import { BaseComponent } from '../BaseComponent';
+import { BaseServices } from '../services/base-service';
+import { DialogService } from '../services/dialog';
+import { enviroment } from '../../enviroments/enviroment';
 
 @Component({
   selector: 'app-create-patient',
   imports: [RouterLink, RouterOutlet, FormsModule, ReactiveFormsModule, DatePipe, NgIf, NgClass],
   templateUrl: './create-patient.html',
   styleUrl: './create-patient.css',
+  providers: [BaseServices]
 })
-export class CreatePatient implements OnInit{
-
-  loading = false;
-  submitted = false;
-  form: any;
-  today: Date = new Date();
+export class CreatePatient extends BaseComponent implements OnInit{
 
   constructor(
-    private patientService: PatientsService,
-    private alertService: AlertService,
-    private router: Router,
+    protected override router: Router,
+    protected override baseSrv: BaseServices,
+    protected override dialogService: DialogService,
+    protected override alertService: AlertService,
+    protected override routerActive: ActivatedRoute,
     private formBuilder: FormBuilder
   ){
-
+    super(
+      `${enviroment.apiUrl}/Patients`, 
+      "", 
+      "Create Patient successful",
+      "/Patient",
+      router,
+      baseSrv,
+      dialogService,
+      alertService,
+      routerActive)
   }
-  
-  get f() { return this.form.controls; }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.form = this.formBuilder.group({
       code: ["", Validators.required],
       first_name: ["", Validators.required],
@@ -51,34 +59,6 @@ export class CreatePatient implements OnInit{
       insurance_info: [""],
       medical_history: [""]
     });
-  }
-
-  onsubmit(){
-
-    this.submitted = true;
-    this.alertService.clear();
-
-    if (this.form.invalid){
-      return;
-    }
-
-    this.loading = true;
-
-    var item = this.form.value;
-
-    this.patientService.Add(item)
-    .subscribe(
-      (data) =>{
-        this.alertService.success('Create patient successful, please check your email for verification instructions', { keepAfterRouteChange: true });
-        this.router.navigate(['/Patient']);
-      }, 
-      error =>{
-        this.alertService.error(error);
-        this.loading = false;
-      }
-
-    )
-    
   }
 
 }

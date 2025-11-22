@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,14 +7,19 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './confirm-dialog.html',
   styleUrl: './confirm-dialog.css',
 })
-export class ConfirmDialog {
+export class ConfirmDialog  implements AfterContentChecked{
   
   @Input() title: string = "";
   
   @Input() message: string = "";
 
-  constructor(public activeDialog: NgbActiveModal){
+  constructor(
+    public activeDialog: NgbActiveModal,
+    private changeDetector: ChangeDetectorRef){
 
+  }
+  ngAfterContentChecked(): void {
+    this.changeDetector .detectChanges();
   }
 
   onClose(){

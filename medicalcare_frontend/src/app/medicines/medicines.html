@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of items | async">
+      <tr *ngFor="let item of data | async">
         <td>{{item.name}}</td>
         <td>{{item.type}}</td>
         <td>{{item.price}}</td>
@@ -25,7 +25,7 @@
         <td>
           <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Medicine/Edit/{{item.id}}">Edit</button>
           <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Medicine/View/{{item.id}}">View</button>
-          <button class="btn btn-danger" style="margin-left: 10px;" (click)="onDelete(item.id)">Delete</button>
+          <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
         </td>
       </tr>
     </tbody>

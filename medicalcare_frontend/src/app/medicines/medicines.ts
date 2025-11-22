@@ -1,40 +1,39 @@
 import { AsyncPipe, DatePipe, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { Medicine } from '../models/medicine';
-import { MedicinesService } from '../services/medcine';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { BaseComponent } from '../BaseComponent';
+import { BaseServices } from '../services/base-service';
+import { DialogService } from '../services/dialog';
+import { enviroment } from '../../enviroments/enviroment';
+import { AlertService } from '../helpers/alert-service';
 
 @Component({
   selector: 'app-medicines',
   imports: [NgFor, AsyncPipe, RouterLink, RouterOutlet, DatePipe],
   templateUrl: './medicines.html',
   styleUrl: './medicines.css',
+  providers: [BaseServices]
 })
-export class MedicinesComponent implements OnInit{
+export class MedicinesComponent extends BaseComponent implements OnInit{
+
   
-
-  items?: Observable<Medicine[]>;
-  items_1?: Observable<Medicine[]>;
-
   constructor(
-    private svc: MedicinesService
-
+    protected override router: Router,
+    protected override baseSrv: BaseServices,
+    protected override dialogService: DialogService,
+    protected override alertService: AlertService,
+    protected override routerActive: ActivatedRoute
   ){
-
+    super(
+      `${enviroment.apiUrl}/Medicines`,
+      "",
+      "",
+      "Delete Medicine", 
+      router, 
+      baseSrv,
+      dialogService,
+      alertService,
+      routerActive
+    );
   }
-
-  getMedicines(){
-    this.items_1 = this.svc.GetMedicines();
-    this.items = this.items_1;
-  }
-
-  ngOnInit(): void {
-    this.getMedicines();
-  }
-
-  onDelete(id: number){
-
-  }
-
 }

@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { PatientsService } from '../services/patient';
 import { FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { DatePipe, NgIf } from '@angular/common';
 import { Patient } from '../models/patient';
 import { AlertService } from '../helpers/alert-service';
+import { BaseServices } from '../services/base-service';
+import { enviroment } from '../../enviroments/enviroment';
 
 @Component({
   selector: 'app-view-patient',
   imports: [NgIf, RouterLink, RouterOutlet, ReactiveFormsModule, DatePipe],
   templateUrl: './view-patient.html',
   styleUrl: './view-patient.css',
+  providers: [BaseServices]
 })
 export class ViewPatient implements OnInit{
 
@@ -25,7 +27,7 @@ export class ViewPatient implements OnInit{
   insuranceExpire:Date = new Date();
 
   constructor(
-    private patientService: PatientsService,
+    private patientService: BaseServices,
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -66,7 +68,7 @@ export class ViewPatient implements OnInit{
   }
 
   getPatientById(id: number){
-    this.patientService.GetPatientById(id)
+    this.patientService.GetItemById(id, `${enviroment.apiUrl}/Patients`)
     .subscribe((item)=>{
       this.setFormValue(item);
     },

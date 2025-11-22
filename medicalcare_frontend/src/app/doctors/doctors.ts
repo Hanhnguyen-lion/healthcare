@@ -1,40 +1,38 @@
 import { AsyncPipe, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { Doctor } from '../models/doctor';
-import { Observable } from 'rxjs';
-import { DoctorsService } from '../services/doctor';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { BaseComponent } from '../BaseComponent';
+import { BaseServices } from '../services/base-service';
+import { DialogService } from '../services/dialog';
+import { enviroment } from '../../enviroments/enviroment';
+import { AlertService } from '../helpers/alert-service';
 
 @Component({
   selector: 'app-doctors',
   imports: [RouterLink, RouterOutlet, NgFor, AsyncPipe],
   templateUrl: './doctors.html',
   styleUrl: './doctors.css',
+  providers: [BaseServices]
 })
-export class DoctorsCompnonent implements OnInit{
+export class DoctorsCompnonent extends BaseComponent implements OnInit{
   
-
-  items?: Observable<Doctor[]>;
-  items_1?: Observable<Doctor[]>;
-
   constructor(
-    private svc: DoctorsService
-
+    protected override router: Router,
+    protected override baseSrv: BaseServices,
+    protected override dialogService: DialogService,
+    protected override alertService: AlertService,
+    protected override routerActive: ActivatedRoute
   ){
-
+    super(
+      `${enviroment.apiUrl}/Doctors`,
+      "",
+      "",
+      "Delete Doctor", 
+      router, 
+      baseSrv,
+      dialogService,
+      alertService,
+      routerActive
+    );
   }
-
-  getDoctors(){
-    this.items_1 = this.svc.GetDoctors();
-    this.items = this.items_1;
-  }
-
-  ngOnInit(): void {
-    this.getDoctors();
-  }
-
-  onDelete(id: number){
-
-  }
-
 }

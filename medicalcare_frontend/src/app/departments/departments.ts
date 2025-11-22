@@ -1,43 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { Department } from '../models/department';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { enviroment } from '../../enviroments/enviroment';
-import { DepartmentsService } from '../services/department';
 import { AsyncPipe, NgFor } from '@angular/common';
+import { BaseComponent } from '../BaseComponent';
+import { BaseServices } from '../services/base-service';
+import { DialogService } from '../services/dialog';
+import { AlertService } from '../helpers/alert-service';
 
 @Component({
   selector: 'app-departments',
   imports: [RouterLink, RouterOutlet, NgFor, AsyncPipe],
   templateUrl: './departments.html',
   styleUrl: './departments.css',
+  providers: [BaseServices]
 })
 
 
-export class DepartmentsComponent implements OnInit{
+export class DepartmentsComponent extends BaseComponent implements OnInit{
   
-
-  departments?: Observable<Department[]>;
-  departments_1?: Observable<Department[]>;
-
   constructor(
-    private svc: DepartmentsService
-
+    protected override router: Router,
+    protected override baseSrv: BaseServices,
+    protected override dialogService: DialogService,
+    protected override alertService: AlertService,
+    protected override routerActive: ActivatedRoute
   ){
-
-  }
-
-  getDepartments(){
-    this.departments_1 = this.svc.GetDepartments();
-    this.departments = this.departments_1;
-  }
-
-  ngOnInit(): void {
-    this.getDepartments();
-  }
-
-  onDelete(id: number){
-
+    super(
+      `${enviroment.apiUrl}/Departments`,
+      "",
+      "",
+      "Delete Department", 
+      router, 
+      baseSrv,
+      dialogService,
+      alertService,
+      routerActive
+    );
   }
 
 }

@@ -1,52 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from "@angular/router";
-import { PatientsService } from '../services/patient';
-import { Observable } from 'rxjs';
-import { Patient } from '../models/patient';
+import { Component, inject, isDevMode, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from "@angular/router";
 import { AsyncPipe, DatePipe, NgFor } from '@angular/common';
 import { DialogService } from '../services/dialog';
+import { BaseComponent } from '../BaseComponent';
+import { BaseServices } from '../services/base-service';
+import { enviroment } from '../../enviroments/enviroment';
+import { AlertService } from '../helpers/alert-service';
 
 @Component({
   selector: 'app-patient',
   imports: [RouterLink, RouterOutlet, NgFor, AsyncPipe, DatePipe],
   templateUrl: './patient.html',
   styleUrl: './patient.css',
+  providers: [BaseServices]
 })
-export class PatientComponent implements OnInit{
+export class PatientComponent extends BaseComponent implements OnInit{
 
-  patients? : Observable<Patient[]>;
-  patients_1? : Observable<Patient[]>;
-
+  
   constructor(
-    private patientsService: PatientsService,
-    private dialogService: DialogService
+    protected override router: Router,
+    protected override baseSrv: BaseServices,
+    protected override dialogService: DialogService,
+    protected override routerActive: ActivatedRoute,
+    protected override alertService: AlertService
   ){
-
-  }
-
-  ngOnInit(): void {
-    this.getPatients();
-  }
-
-  getPatients(): void{
-    this.patients_1 = this.patientsService.GetPatients();
-    this.patients = this.patients_1;;
-  }
-
-  onDelete(id: number){
-    this.dialogService.openConfirmDialog("Are you sure to want delete this item?", "Delete Patient")
-    .subscribe((result)=>{
-      if (result){
-        this.patientsService.Delete(id)
-        .subscribe(
-          ()=>{
-            this.getPatients();    
-          },
-        (error)=>{
-          console.log("Delete Patient Error");
-        })
-      }
-    })
+    super(
+      `${enviroment.apiUrl}/Patients`,
+      "",
+      "",
+      "Delete Patient", 
+      router, 
+      baseSrv,
+      dialogService,
+      alertService,
+      routerActive
+    );
   }
 
 }
