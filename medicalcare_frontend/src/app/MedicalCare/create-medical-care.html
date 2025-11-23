@@ -1,0 +1,162 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Add New Medical Care</h3>
+                    <form [formGroup]="form" (ngSubmit)="addItem()">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="fw-bold">Visit Date <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" [ngModel]="today|date:'yyyy-MM-dd'" formControlName="visit_date" placeholder="Enter visit date" [ngClass]="{ 'is-invalid': submitted && f.visit_date.errors }">
+                                    <div *ngIf="submitted && f.visit_date.errors" class="invalid-feedback">
+                                        <div *ngIf="form.get('visit_date')?.hasError('dateGreaterThanToday')">Visit date cannot be today or in the future
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="fw-bold">Patient <span class="text-danger">*</span></label>
+                                    <select class="form-select" formControlName="patient_id" placeholder="Enter Patient">
+                                        <option *ngFor="let item of patientItems" [ngValue]="item.id">
+                                            {{item.first_name}} {{item.last_name}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="submitted && f.patient_id.errors" class="invalid-feedback">
+                                        <div *ngIf="f.patient_id.errors.required">Patient is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="fw-bold">Department <span class="text-danger">*</span></label>
+                                    <select class="form-select" formControlName="department_id" placeholder="Enter department">
+                                        <option *ngFor="let item of departmentItems" [ngValue]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="submitted && f.department_id.errors" class="invalid-feedback">
+                                        <div *ngIf="f.department_id.errors.required">Department is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="fw-bold">Doctor <span class="text-danger">*</span></label>
+                                    <select class="form-select" formControlName="doctor_id" placeholder="Enter doctor">
+                                        <option *ngFor="let item of doctorItems" [ngValue]="item.id">
+                                            {{item.first_name}} {{item.last_name}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="submitted && f.doctor_id.errors" class="invalid-feedback">
+                                        <div *ngIf="f.doctor_id.errors.required">Doctor is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="fw-bold">Start Date <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" [ngModel]="today|date:'yyyy-MM-dd'" formControlName="start_date" placeholder="Enter start date" [ngClass]="{ 'is-invalid': submitted && f.start_date.errors }">
+                                    <div *ngIf="submitted && f.start_date.errors" class="invalid-feedback">
+                                        <div *ngIf="f.start_date.errors.required">Start date required</div>
+                                        <div *ngIf="form.get('start_date')?.hasError('dateGreaterThanToday')">Start date cannot be today or in the future</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="fw-bold">End Date <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" [ngModel]="today|date:'yyyy-MM-dd'" formControlName="end_date" placeholder="Enter start date" [ngClass]="{ 'is-invalid': submitted && f.end_date.errors }">
+                                    <div *ngIf="submitted && f.end_date.errors" class="invalid-feedback">
+                                        <div *ngIf="f.end_date.errors.required">End date required</div>
+                                        <div *ngIf="form.get('end_date')?.hasError('dateGreaterThanToday')">End date cannot be today or in the future</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="fw-bold">Diagnostic</label>
+                                    <textarea rows="3" class="form-control" formControlName="diagnostic" placeholder="Enter diagnostic"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="fw-bold">Treatment</label>
+                                    <textarea rows="3" class="form-control" formControlName="treatment" placeholder="Enter Treatment"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="fw-bold">Notes</label>
+                                    <textarea rows="3" class="form-control" formControlName="notes" placeholder="Enter Notes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="fw-bold">Prescriptions:</label>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary" routerLink="/MedicalCare/Add" type="submit">Add</button>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="tableFixHead">
+                                    <table class="table table-striped">
+                                        <thead class="table-header">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Dosage</th>
+                                                <th>Frequency</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/MedicalCare/Edit/1">Edit</button>
+                                                    <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(1)">Delete</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
+                                <button [disabled]="loading" class="btn btn-primary">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                        Save
+                                </button>
+                                <button class="btn btn-secondary" routerLink="/MedicalCare">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

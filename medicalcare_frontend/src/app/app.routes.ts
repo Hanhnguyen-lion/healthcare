@@ -8,7 +8,6 @@ import { PatientComponent } from './patient/patient';
 import { EditPatient } from './patient/edit-patient';
 import { CreatePatient } from './patient/create-patient';
 import { Billing } from './billing/billing';
-import { MedicalRecords } from './medical-records/medical-records';
 import { ViewPatient } from './patient/view-patient';
 import { HospitalsComponent } from './hospitals/hospitals';
 import { EditHospital } from './hospitals/edit-hospital';
@@ -26,6 +25,8 @@ import { MedicinesComponent } from './medicines/medicines';
 import { EditMedicine } from './medicines/edit-medicine';
 import { ViewMedicine } from './medicines/view-medicine';
 import { CreateMedicine } from './medicines/create-medicine';
+import { MedicalCaresComponent } from './MedicalCare/medical-cares';
+import { CreateMedicalCare } from './MedicalCare/create-medical-care';
 
 
 export const routes: Routes = [
@@ -132,7 +133,11 @@ export const routes: Routes = [
     },
     {
         path: "MedicalCare",
-        component: MedicalRecords
+        component: MedicalCaresComponent
+    },
+    {
+        path: "MedicalCare/Add",
+        component: CreateMedicalCare
     },
     { path: '**', redirectTo: '' }
 ];

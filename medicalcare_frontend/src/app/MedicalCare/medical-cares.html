@@ -1,0 +1,39 @@
+<div class="container">
+    <h2>Hồ sơ bệnh án</h2>
+    <div class="form-group mb-3">
+      <button class="btn btn-primary" routerLink="/MedicalCare/Add" type="submit">Add Medical Care</button>
+    </div>
+<div class="tableFixHead">
+  <table class="table table-striped">
+    <thead class="table-header">
+      <tr>
+        <th>#</th>
+        <th>Patient</th>
+        <th>Visit Date</th>
+        <th>Dianostic</th>
+        <th>Treatment</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data | async">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.visit_date|date:'dd-MM-yyyy'}}</td>
+        <td>{{item.diagnostic}}</td>
+        <td>{{item.treatment}}</td>
+        <td>{{item.start_date|date:'dd-MM-yyyy'}}</td>
+        <td>{{item.end_date|date:'dd-MM-yyyy'}}</td>
+        <td>
+          <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/MedicalCare/Print/{{item.id}}">Print</button>
+          <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/MedicalCare/Edit/{{item.id}}">Edit</button>
+          <button class="btn btn-info" style="margin-left: 10px;" routerLink="/MedicalCare/View/{{item.id}}">View</button>
+          <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+<router-outlet></router-outlet>
