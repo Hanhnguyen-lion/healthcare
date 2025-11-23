@@ -29,7 +29,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="fw-bold">Date of birth</label>
-                  <input type="date" readonly class="form-control-plaintext" [ngModel]="dob|date:'yyyy-MM-dd'" formControlName="date_of_birth">
+                  <input type="text" readonly class="form-control-plaintext" formControlName="date_of_birth">
                 </div>
               </div>
             </div>
@@ -103,7 +103,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="fw-bold">Insurance Expire</label>
-                  <input type="date" readonly class="form-control-plaintext" formControlName="insurance_expire" [ngModel]="insuranceExpire|date:'yyyy-MM-dd'">
+                  <input type="text" readonly class="form-control-plaintext" formControlName="insurance_expire">
                 </div>
               </div>
             </div>

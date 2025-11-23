@@ -1,44 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { DatePipe, NgIf } from '@angular/common';
+import { formatDate, NgIf } from '@angular/common';
 import { Patient } from '../models/patient';
 import { AlertService } from '../helpers/alert-service';
 import { BaseServices } from '../services/base-service';
 import { enviroment } from '../../enviroments/enviroment';
+import { BaseComponent } from '../BaseComponent';
+import { DialogService } from '../services/dialog';
 
 @Component({
   selector: 'app-view-patient',
-  imports: [NgIf, RouterLink, RouterOutlet, ReactiveFormsModule, DatePipe],
+  imports: [NgIf, RouterLink, RouterOutlet, ReactiveFormsModule],
   templateUrl: './view-patient.html',
   styleUrl: './view-patient.css',
   providers: [BaseServices]
 })
-export class ViewPatient implements OnInit{
+export class ViewPatient extends BaseComponent implements OnInit{
 
-  form: any;
-  submitted = false;
-  loading = false;
-  today = new Date();
+  formatInsuranceExpire:string = "";
 
-  patientId: number = 0;
-
-  dob:Date = new Date();
-  insuranceExpire:Date = new Date();
+  formatDob: string = "";
 
   constructor(
-    private patientService: BaseServices,
-    private alertService: AlertService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private routerActive: ActivatedRoute
-  ){
+    @Inject(LOCALE_ID) private locale: string,
+    protected override router: Router,
+    protected override baseSrv: BaseServices,
+    protected override dialogService: DialogService,
+    protected override alertService: AlertService,
+    protected override routerActive: ActivatedRoute,
+    private formBuilder: FormBuilder
 
+  ){
+   super(
+      `${enviroment.apiUrl}/Patients`, 
+      "", 
+      "View Patient successful",
+      "/Patient",
+      router,
+      baseSrv,
+      dialogService,
+      alertService,
+      routerActive)
   }
 
-  get f(){return this.form.controls;}
-
-  ngOnInit(): void {
+  override ngOnInit(): void {
 
     this.form = this.formBuilder.group({
       code: [""],
@@ -61,50 +67,44 @@ export class ViewPatient implements OnInit{
       medical_history: [""]
     });
 
-    this.patientId = +this.routerActive.snapshot.params["id"] | 0;
-
-    this.getPatientById(this.patientId);
+    this.setFormValue();
 
   }
 
-  getPatientById(id: number){
-    this.patientService.GetItemById(id, `${enviroment.apiUrl}/Patients`)
-    .subscribe((item)=>{
-      this.setFormValue(item);
-    },
-    error=>{
-      this.alertService.error(error);
-    });
-  }
+  setFormValue(){
+    var id = +this.routerActive.snapshot.params["id"] |0;
+    this.baseSrv.GetItemById(id, this.apiUrl)
+      .subscribe(item =>{
+        var gender = (item.gender) ? item.gender : "Female";
+        var dob = (item.date_of_birth) ? item.date_of_birth : null;
+        var insuranceExpire = (item.insurance_expire) ? item.insurance_expire : null;
+        this.formatDob = (dob == null) ? "" : formatDate(dob, 'dd/MM/yyyy', this.locale);
+        this.formatInsuranceExpire = (insuranceExpire == null) ? "" : formatDate(insuranceExpire, "dd/MM/yyyy", this.locale);
 
-  setFormValue(item: Patient){
-    var gender = (item.gender) ? item.gender : "Female";
-    this.dob = (item.date_of_birth) ? item.date_of_birth : new Date();
-    this.insuranceExpire = (item.insurance_expire) ? item.insurance_expire : new Date();
+        this.form.setValue({
+          code: item.code, 
+          first_name: item.first_name, 
+          last_name: item.last_name, 
+          gender: gender, 
+          email: item.email, 
+          date_of_birth: this.formatDob, 
+          phone_number: item.phone_number, 
+          home_address: item.home_address, 
+          office_address: item.office_address, 
+          job: item.job, 
+          insurance_expire: this.formatInsuranceExpire, 
+          insurance_info: item.insurance_info, 
+          insurance_policy_number: item.insurance_policy_number, 
+          insurance_type: item.insurance_type, 
+          insurance_provider: item.insurance_provider, 
+          emergency_contact_name: item.emergency_contact_name, 
+          emergency_contact_phone: item.emergency_contact_phone, 
+          medical_history: item.medical_history
+        });
+      },
+      error=>{
+        this.alertService.error(error);
+      }); 
 
-    this.form.setValue({
-      code: item.code, 
-      first_name: item.first_name, 
-      last_name: item.last_name, 
-      gender: gender, 
-      email: item.email, 
-      date_of_birth: item.date_of_birth, 
-      phone_number: item.phone_number, 
-      home_address: item.home_address, 
-      office_address: item.office_address, 
-      job: item.job, 
-      insurance_expire: item.insurance_expire, 
-      insurance_info: item.insurance_info, 
-      insurance_policy_number: item.insurance_policy_number, 
-      insurance_type: item.insurance_type, 
-      insurance_provider: item.insurance_provider, 
-      emergency_contact_name: item.emergency_contact_name, 
-      emergency_contact_phone: item.emergency_contact_phone, 
-      medical_history: item.medical_history
-    });
-  }
-  onEdit(){
-    var url = `/Patient/Edit/${this.patientId}`;
-    this.router.navigateByUrl(url)
   }
 }

@@ -1,1 +1,60 @@
-<p>view-hospitals works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h3>View Hospital</h3>
+          <form [formGroup]="form">
+            <div class="row mb-3">
+                <div class="form-group">
+                  <label class="fw-bold">Name <span class="text-danger">*</span></label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="name">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                  <label class="fw-bold">Phone</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="phone">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                  <label class="fw-bold">Country</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="country">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Address</label>
+                    <input type="text" readonly class="form-control-plaintext" formControlName="address">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Email</label>
+                    <input type="text" readonly class="form-control-plaintext" formControlName="email">
+                </div>
+            </div>  
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Description</label>
+                    <textarea readonly rows="3" class="form-control-plaintext" formControlName="description"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
+                <button [disabled]="loading" class="btn btn-primary" (click)="onEdit()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Save
+                </button>
+
+                <button class="btn btn-secondary" routerLink="/Hospital">Cancel</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+  

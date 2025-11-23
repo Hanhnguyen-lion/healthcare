@@ -1,1 +1,55 @@
-<p>view-medicine works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h3>View Medicine</h3>
+          <form [formGroup]="form">
+            <div class="row mb-3">
+                <div class="form-group">
+                  <label class="fw-bold">Name </label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="name">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Input Date </label>
+                    <input type="text" readonly class="form-control-plaintext" formControlName="input_date">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Expire Date </label>
+                    <input type="text" readonly class="form-control-plaintext" formControlName="expire_date">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Type</label>
+                    <input type="text" readonly class="form-control-plaintext" formControlName="type">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Price</label>
+                    <input type="text" readonly class="form-control-plaintext" formControlName="price">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
+                <button [disabled]="loading" class="btn btn-primary" (click)="onEdit()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Edit
+                </button>
+
+                <button class="btn btn-secondary" routerLink="/Medicine">Cancel</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+  

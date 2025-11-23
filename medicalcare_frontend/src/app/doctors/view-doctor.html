@@ -1,1 +1,89 @@
-<p>view-doctor works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>View Doctor</h3>
+          <form [formGroup]="form">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">First Name</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="first_name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Last Name</label>
+                  <input type="text" readonly  class="form-control-plaintext" formControlName="last_name">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Phone Number</label>
+                  <input type="text" readonly  class="form-control-plaintext" formControlName="phone">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Email</label>
+                  <input type="text" readonly  class="form-control-plaintext" formControlName="email">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Gender</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="gender">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Quanlification</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="quanlification">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Hospital</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="Hospital_id">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="fw-bold">Department</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="department_id">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="fw-bold">Job Specification</label>
+                  <textarea readonly rows="3" class="form-control-plaintext" formControlName="job_specification"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
+                <button [disabled]="loading" class="btn btn-primary" (click)="onEdit()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Edit
+                </button>
+
+                <button class="btn btn-secondary" routerLink="/Doctor">Cancel</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+  

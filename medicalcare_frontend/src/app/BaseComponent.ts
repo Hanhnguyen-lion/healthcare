@@ -114,7 +114,7 @@ export class BaseComponent implements OnInit {
         );
   }
 
-  deleteItem(id: number){
+  protected deleteItem(id: number){
     this.dialogService.openConfirmDialog("Are you sure to want delete this item?", this.titleConfirmDialog)
         .subscribe((result)=>{
             if (result){
@@ -136,7 +136,13 @@ export class BaseComponent implements OnInit {
     this.router.navigateByUrl(route);
   }
 
-  compareFn(option1: any, option2: any): boolean {
+  protected compareFn(option1: any, option2: any): boolean {
     return option1 && option2 ? option1.id === option2.id : option1 === option2;
   }
+
+  protected onEdit(){
+    var id = +this.routerActive.snapshot.params["id"] | 0;
+    var url = `${this.navigateByUrl}/Edit/${id}`;
+    this.navigateTo(url)
+  }  
 }

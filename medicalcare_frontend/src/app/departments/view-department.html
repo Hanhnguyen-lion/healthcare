@@ -1,1 +1,49 @@
-<p>view-department works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h3>View Department</h3>
+          <form [formGroup]="form">
+            <div class="row mb-3">
+                <div class="form-group">
+                  <label class="fw-bold">Name</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="name">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Phone</label>
+                    <input type="text" readonly class="form-control-plaintext" formControlName="phone">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                  <label class="fw-bold">Hospital</label>
+                  <input type="text" readonly class="form-control-plaintext" formControlName="hospital_name">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="form-group">
+                    <label class="fw-bold">Doctor</label>
+                  <input type="text" readonly class="form-control-plaintext " formControlName="doctor_name">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
+                <button [disabled]="loading" class="btn btn-primary" (click)="onEdit()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Edit
+                </button>
+
+                <button class="btn btn-secondary" routerLink="/Department">Cancel</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+  
