@@ -1,4 +1,4 @@
-import { DatePipe, NgClass, NgIf } from '@angular/common';
+import { DatePipe, NgClass} from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -9,7 +9,7 @@ import {dateLessThanTodayValidator} from "../date-validators"
 
 @Component({
   selector: 'app-register',
-  imports: [NgIf, DatePipe, ReactiveFormsModule, FormsModule, NgClass, RouterLink],
+  imports: [DatePipe, ReactiveFormsModule, FormsModule, NgClass, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
@@ -59,16 +59,15 @@ export class Register implements OnInit {
         this.loading = true;
         var account = this.form.value;
         this.accountService.register(account)
-            .subscribe(
-                (data) => {
+            .subscribe({
+                next:()=>{
                     this.alertService.success('Registration successful, please check your email for verification instructions', { keepAfterRouteChange: true });
                     this.router.navigate(['/Account/Login']);
                 },
-                error => {
-                    //this.alertService.error(error);
+                error: () =>{
                     this.loading = false;
                 }
-            );
+            });
     }
 }
 

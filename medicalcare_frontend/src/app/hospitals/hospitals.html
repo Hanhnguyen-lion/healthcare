@@ -15,17 +15,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of data | async">
-        <td>{{item.name}}</td>
-        <td>{{item.phone}}</td>
-        <td>{{item.email}}</td>
-        <td>{{item.country}}</td>
-        <td>
-          <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Hospital/Edit/{{item.id}}">Edit</button>
-          <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Hospital/View/{{item.id}}">View</button>
-          <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
-        </td>
-      </tr>
+      @for (item of data | async; track $index) {
+        <tr>
+          <td>{{item.name}}</td>
+          <td>{{item.phone}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.country}}</td>
+          <td>
+            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Hospital/Edit/{{item.id}}">Edit</button>
+            <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Hospital/View/{{item.id}}">View</button>
+            <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
+          </td>
+        </tr>
+      }
     </tbody>
   </table>
   </div>

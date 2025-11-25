@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass} from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../helpers/alert-service';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -10,7 +10,7 @@ import { BaseServices } from '../services/base-service';
 
 @Component({
   selector: 'app-creat-hospital',
-  imports: [NgIf, NgClass, FormsModule, ReactiveFormsModule, RouterLink, RouterOutlet],
+  imports: [NgClass, FormsModule, ReactiveFormsModule, RouterLink, RouterOutlet],
   templateUrl: './creat-hospital.html',
   styleUrl: './creat-hospital.css',
   providers: [BaseServices]

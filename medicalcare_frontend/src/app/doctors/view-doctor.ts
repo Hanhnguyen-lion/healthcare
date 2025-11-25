@@ -8,12 +8,11 @@ import { Hospital } from '../models/hospital';
 import { Department } from '../models/department';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-view-doctor',
   imports: [RouterLink, RouterOutlet, 
-          ReactiveFormsModule, NgIf],
+          ReactiveFormsModule],
   templateUrl: './view-doctor.html',
   styleUrl: './view-doctor.css',
   providers: [BaseServices]
@@ -59,35 +58,36 @@ export class ViewDoctor extends BaseComponent implements OnInit{
   private setFormValue(){
     var id = +this.routerActive.snapshot.params["id"] |0;
     this.baseSrv.GetItemById(id, this.apiUrl)
-      .subscribe(item =>{
-        var hospital_id = +item.hospital_id | 0;
-        var department_id = +item.department_id| 0;
+      .subscribe({
+        next: (item)=>{
+          var hospital_id = +item.hospital_id | 0;
+          var department_id = +item.department_id| 0;
+          this.baseSrv.GetItems(`${enviroment.apiUrl}/Departments`)
+            .subscribe(items =>{
+              var departmentItem: Department = items.find(item=> item.id == department_id);
 
-        this.baseSrv.GetItems(`${enviroment.apiUrl}/Departments`)
-          .subscribe(items =>{
-            var departmentItem: Department = items.find(item=> item.id == department_id);
+              this.baseSrv.GetItems(`${enviroment.apiUrl}/Hospitals`)
+                .subscribe(items =>{
+                  var hospitalItem: Hospital = items.find(item => item.id == hospital_id);
 
-            this.baseSrv.GetItems(`${enviroment.apiUrl}/Hospitals`)
-              .subscribe(items =>{
-                var hospitalItem: Hospital = items.find(item => item.id == hospital_id);
-
-                this.form.setValue({
-                  first_name: item.first_name,
-                  last_name: item.last_name,
-                  email: item.email,
-                  phone: item.phone,
-                  gender: item.gender,
-                  quanlification: item.quanlification,
-                  job_specification: item.job_specification, 
-                  hospital_id: (hospitalItem != null) ? hospitalItem.name : "", 
-                  department_id: (departmentItem != null) ? departmentItem.name : ""
-                });              
-              });
-
-          });
-      },
-      error=>{
-        this.alertService.error(error);
+                  this.form.setValue({
+                    first_name: item.first_name,
+                    last_name: item.last_name,
+                    email: item.email,
+                    phone: item.phone,
+                    gender: item.gender,
+                    quanlification: item.quanlification,
+                    job_specification: item.job_specification, 
+                    hospital_id: (hospitalItem != null) ? hospitalItem.name : "", 
+                    department_id: (departmentItem != null) ? departmentItem.name : ""
+                  });
+                  this.detectChanges();
+                })
+            })
+        },
+        error: (error)=>{
+          this.alertService.error(error);
+        }
       });
   }
 }

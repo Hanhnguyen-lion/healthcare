@@ -1,0 +1,98 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add Prescription</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onClose()"></button>
+</div>
+<div class="modal-body">
+    <div class="container">
+            <form [formGroup]="form">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="fw-bold">Medicine <span class="text-danger">*</span></label>
+                            <select class="form-select" formControlName="medicine_id" placeholder="Enter Medicine" [ngClass]="{ 'is-invalid': submitted && f.medicine_id.errors }">
+                                @for (item of medicineItems | async; track $index) {
+                                    <option [ngValue]="item.id">
+                                        {{item.name}}
+                                    </option>
+                                }
+                            </select>
+                            @if (submitted && f.medicine_id.errors) {
+                                <div class="invalid-feedback">
+                                @if (f.medicine_id.errors.required) {
+                                    <div>Medicine is required</div>
+                                }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        <label class="fw-bold">Doctor <span class="text-danger">*</span></label>
+                        <select class="form-select" formControlName="doctor_id" placeholder="Enter doctor" [ngClass]="{ 'is-invalid': submitted && f.doctor_id.errors }">
+                            @for (item of doctorItems | async; track $index) {
+                                <option [ngValue]="item.id">
+                                    {{item.last_name}} {{item.first_name}}
+                                </option>
+                            }
+                        </select>
+                        @if (submitted && f.doctor_id.errors) {
+                            <div class="invalid-feedback">
+                            @if (f.doctor_id.errors.required) {
+                                <div>Doctor is required</div>
+                            }
+                            </div>
+                        }
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        <label class="fw-bold">Start date</label>
+                        <input type="date" class="form-control" formControlName="start_date" placeholder="Enter start date">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        <label class="fw-bold">End date</label>
+                        <input type="date" class="form-control" formControlName="end_date" placeholder="Enter end date">
+                        </div>
+                    </div>
+                </div>    
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="fw-bold">Frequency <span class="text-danger">*</span></label>
+                            <textarea rows="3" class="form-control" formControlName="frequency" placeholder="Enter frequency" [ngClass]="{ 'is-invalid': submitted && f.frequency.errors }"></textarea>
+                            @if (submitted && f.frequency.errors) {
+                                <div class="invalid-feedback">
+                                @if (f.frequency.errors.required) {
+                                    <div>Frequency is required</div>
+                                }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="fw-bold">Dosage <span class="text-danger">*</span></label>
+                            <textarea rows="3" class="form-control" formControlName="dosage" placeholder="Enter dosage" [ngClass]="{ 'is-invalid': submitted && f.dosage.errors }"></textarea>
+                            @if (submitted && f.dosage.errors) {
+                                <div class="invalid-feedback">
+                                @if (f.dosage.errors.required) {
+                                    <div>Dosage is required</div>
+                                }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="onClose()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onConfirm()">OK</button>
+</div>

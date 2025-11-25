@@ -10,18 +10,26 @@
                 <div class="form-group">
                   <label class="fw-bold">Code <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" formControlName="code" placeholder="Enter code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
-                  <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
-                      <div *ngIf="f.code.errors.required">Code is required</div>
-                  </div>
+                  @if (submitted && f.code.errors) {
+                    <div  class="invalid-feedback">
+                        @if (f.code.errors.required) {
+                          <div >Code is required</div>
+                        }
+                    </div>
+                  }
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="fw-bold">First Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" formControlName="first_name" placeholder="Enter first name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
-                  <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
-                      <div *ngIf="f.first_name.errors.required">First name is required</div>
-                  </div>
+                  @if (submitted && f.first_name.errors) {
+                    <div  class="invalid-feedback">
+                      @if (f.first_name.errors.required) {
+                        <div >First name is required</div>
+                      }
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -30,19 +38,29 @@
                 <div class="form-group">
                   <label class="fw-bold">Last Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" formControlName="last_name" placeholder="Enter last name" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
-                  <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
-                      <div *ngIf="f.last_name.errors.required">Last name is required</div>
-                  </div>
+                  @if (submitted && f.last_name.errors) {
+                    <div  class="invalid-feedback">
+                      @if (f.last_name.errors.required) {
+                        <div >Last name is required</div>
+                      }
+                    </div>
+                  }
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="fw-bold">Date of birth</label>
-                  <input type="date" class="form-control" [ngModel]="form.get('date_of_birth').value|date:'yyyy-MM-dd'" formControlName="date_of_birth" placeholder="Enter date of birth" [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }">
-                  <div *ngIf="submitted && f.date_of_birth.errors" class="invalid-feedback">
-                      <div *ngIf="f.date_of_birth.errors.required">Date of birth is required</div>
-                      <div *ngIf="form.get('date_of_birth')?.hasError('dateGreaterThanToday')">Date of birth cannot be today or in the future</div>
-                  </div>
+                  <input type="date" class="form-control" formControlName="date_of_birth" placeholder="Enter date of birth" [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }">
+                  @if (submitted && f.date_of_birth.errors) {
+                    <div  class="invalid-feedback">
+                      @if(f.date_of_birth.errors.required){
+                        <div >Date of birth is required</div>
+                      }
+                      @if (form.get('date_of_birth')?.hasError('dateGreaterThanToday')) {
+                        <div >Date of birth cannot be today or in the future</div>
+                      }
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -51,10 +69,16 @@
                 <div class="form-group">
                   <label class="fw-bold">Email</label>
                   <input type="text" class="form-control" formControlName="email" placeholder="Enter email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                      <div *ngIf="f.email.errors.required">Email is required</div>
-                      <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                  </div>
+                  @if (submitted && f.email.errors) {
+                    <div class="invalid-feedback">
+                      @if (f.email.errors.required) {
+                        <div>Email is required</div>
+                      }
+                      @if (f.email.errors.email) {
+                        <div>Email must be a valid email address</div>
+                      }
+                    </div>
+                  }
                 </div>
               </div>
               <div class="col-md-6">
@@ -128,7 +152,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="fw-bold">Insurance Expire</label>
-                  <input type="date" class="form-control" formControlName="insurance_expire" [ngModel]="form.get('insurance_expire').value|date:'yyyy-MM-dd'" placeholder="Enter insurance expire">
+                  <input type="date" class="form-control" formControlName="insurance_expire" placeholder="Enter insurance expire">
                 </div>
               </div>
             </div>
@@ -165,7 +189,9 @@
             <div class="row mb-3">
               <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
                 <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    @if (loading){
+                      <span class="spinner-border spinner-border-sm mr-1"></span>
+                    }
                     Save
                 </button>
 

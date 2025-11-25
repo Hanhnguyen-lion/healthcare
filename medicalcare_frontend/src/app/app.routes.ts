@@ -139,5 +139,9 @@ export const routes: Routes = [
         path: "MedicalCare/Add",
         component: CreateMedicalCare
     },
+    {
+        path: "MedicalCare/Edit/:id",
+        component: CreateMedicalCare
+    },
     { path: '**', redirectTo: '' }
 ];

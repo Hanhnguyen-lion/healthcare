@@ -9,9 +9,13 @@
                 <div class="form-group">
                   <label class="fw-bold">Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" formControlName="name" placeholder="Enter name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                  <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                      <div *ngIf="f.name.errors.required">Names required</div>
-                  </div>
+                  @if(submitted && f.name.errors){
+                    <div class="invalid-feedback">
+                      @if(f.name.errors.required){
+                        <div>Names required</div>
+                      }
+                    </div>
+                  }  
                 </div>
             </div>
             <div class="row mb-3">
@@ -36,9 +40,13 @@
                 <div class="form-group">
                     <label class="fw-bold">Email</label>
                     <input type="text" class="form-control" formControlName="email" placeholder="Enter email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                    </div>
+                    @if(submitted && f.email.errors){
+                      <div  class="invalid-feedback">
+                          @if(f.email.errors.email){
+                            <div>Email must be a valid email address</div>
+                          }
+                      </div>
+                    }
                 </div>
             </div>  
             <div class="row mb-3">
@@ -50,7 +58,9 @@
             <div class="row mb-3">
               <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
                 <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    @if (loading){
+                      <span class="spinner-border spinner-border-sm mr-1"></span>
+                    }
                     Save
                 </button>
 

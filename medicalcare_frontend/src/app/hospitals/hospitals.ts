@@ -1,4 +1,3 @@
-import { AsyncPipe, NgFor } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BaseServices } from '../services/base-service';
@@ -6,10 +5,11 @@ import { BaseComponent } from '../BaseComponent';
 import { enviroment } from '../../enviroments/enviroment';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-hospitals',
-  imports: [NgFor, RouterLink, RouterOutlet, AsyncPipe],
+  imports: [RouterLink, RouterOutlet, AsyncPipe],
   templateUrl: './hospitals.html',
   styleUrl: './hospitals.css',
   providers: [BaseServices]

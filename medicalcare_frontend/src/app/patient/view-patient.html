@@ -140,7 +140,9 @@
             <div class="row mb-3">
               <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
                 <button [disabled]="loading" (click)="onEdit()" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    @if (loading){
+                      <span class="spinner-border spinner-border-sm mr-1"></span>
+                    }
                     Edit
                 </button>
 

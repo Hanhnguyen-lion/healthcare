@@ -6,21 +6,23 @@ import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { enviroment } from '../../enviroments/enviroment';
-import { NgClass, NgIf, NgFor } from '@angular/common';
+import { AsyncPipe, NgClass} from '@angular/common';
 import { Department } from '../models/department';
 import { Hospital } from '../models/hospital';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-doctor',
-  imports: [RouterLink, RouterOutlet, NgIf, ReactiveFormsModule, NgClass, NgFor],
+  imports: [RouterLink, RouterOutlet, 
+            ReactiveFormsModule, NgClass, AsyncPipe],
   templateUrl: './create-doctor.html',
   styleUrl: './create-doctor.css',
   providers: [BaseServices]
 })
 export class CreateDoctor extends BaseComponent implements OnInit{
 
-  hospitalItems: Hospital[] = [];
-  departmentItems: Department[] = [];
+  hospitalItems?: Observable<Hospital[]>;
+  departmentItems?: Observable<Department[]>;
 
   constructor(
     protected override router: Router,
@@ -43,6 +45,10 @@ export class CreateDoctor extends BaseComponent implements OnInit{
   }
 
   override ngOnInit(): void {
+
+    this.hospitalItems = this.baseSrv.GetItems(`${enviroment.apiUrl}/Hospitals`);
+    this.departmentItems = this.baseSrv.GetItems(`${enviroment.apiUrl}/Departments`);
+
     this.form = this.formBuilder.group({
       first_name: ["", Validators.required],
       last_name: ["", Validators.required],
@@ -54,21 +60,5 @@ export class CreateDoctor extends BaseComponent implements OnInit{
       hospital_id: [""],
       department_id: [""]
     });
-    this.getDepartments();
-    this.getHospitals();
-  }
-
-  private getHospitals(){
-    this.baseSrv.GetItems(`${enviroment.apiUrl}/Hospitals`)
-      .subscribe(items =>{
-        this.hospitalItems = items;
-      });
-  }
-
-  private getDepartments(){
-    this.baseSrv.GetItems(`${enviroment.apiUrl}/Departments`)
-      .subscribe(items =>{
-        this.departmentItems = items;
-      });
   }
 }

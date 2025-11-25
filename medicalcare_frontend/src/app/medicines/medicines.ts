@@ -1,4 +1,4 @@
-import { AsyncPipe, DatePipe, NgFor } from '@angular/common';
+import { AsyncPipe, DatePipe} from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BaseComponent } from '../BaseComponent';
@@ -9,7 +9,7 @@ import { AlertService } from '../helpers/alert-service';
 
 @Component({
   selector: 'app-medicines',
-  imports: [NgFor, AsyncPipe, RouterLink, RouterOutlet, DatePipe],
+  imports: [AsyncPipe, RouterLink, RouterOutlet, DatePipe],
   templateUrl: './medicines.html',
   styleUrl: './medicines.css',
   providers: [BaseServices]
@@ -26,9 +26,9 @@ export class MedicinesComponent extends BaseComponent implements OnInit{
   ){
     super(
       `${enviroment.apiUrl}/Medicines`,
+      "Delete Medicine",
       "",
-      "",
-      "Delete Medicine", 
+      "", 
       router, 
       baseSrv,
       dialogService,

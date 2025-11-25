@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe} from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BaseComponent } from '../BaseComponent';
@@ -9,7 +9,7 @@ import { AlertService } from '../helpers/alert-service';
 
 @Component({
   selector: 'app-doctors',
-  imports: [RouterLink, RouterOutlet, NgFor, AsyncPipe],
+  imports: [RouterLink, RouterOutlet, AsyncPipe],
   templateUrl: './doctors.html',
   styleUrl: './doctors.css',
   providers: [BaseServices]
@@ -25,9 +25,9 @@ export class DoctorsCompnonent extends BaseComponent implements OnInit{
   ){
     super(
       `${enviroment.apiUrl}/Doctors`,
+      "Delete Doctor",
       "",
-      "",
-      "Delete Doctor", 
+      "", 
       router, 
       baseSrv,
       dialogService,

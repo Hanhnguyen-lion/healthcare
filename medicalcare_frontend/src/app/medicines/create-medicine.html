@@ -9,27 +9,39 @@
                 <div class="form-group">
                   <label class="fw-bold">Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" formControlName="name" placeholder="Enter name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                  <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                      <div *ngIf="f.name.errors.required">Name is required</div>
-                  </div>
+                    @if (submitted && f.name.errors) {
+                      <div class="invalid-feedback">
+                      @if (f.name.errors.required) {
+                          <div>Name is required</div>
+                      }
+                      </div>
+                    }
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="form-group">
                     <label class="fw-bold">Input Date <span class="text-danger">*</span></label>
-                    <input type="date" class="form-control" [ngModel]="today|date:'yyyy-MM-dd'"  formControlName="input_date" placeholder="Enter input date" [ngClass]="{ 'is-invalid': submitted && f.input_date.errors }">
-                    <div *ngIf="submitted && f.input_date.errors" class="invalid-feedback">
-                        <div *ngIf="f.input_date.errors.required">Input date is required</div>
-                    </div>
+                    <input type="date" class="form-control" [ngModel]="today|date:'yyyy-MM-dd'" formControlName="input_date" placeholder="Enter input date" [ngClass]="{ 'is-invalid': submitted && f.input_date.errors }">
+                    @if (submitted && f.input_date.errors) {
+                      <div class="invalid-feedback">
+                      @if (f.input_date.errors.required) {
+                          <div>Input date is required</div>
+                      }
+                      </div>
+                    }
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="form-group">
                     <label class="fw-bold">Expire Date <span class="text-danger">*</span></label>
                     <input type="date" class="form-control" [ngModel]="today|date:'yyyy-MM-dd'" formControlName="expire_date" placeholder="Enter expire date" [ngClass]="{ 'is-invalid': submitted && f.expire_date.errors }">
-                    <div *ngIf="submitted && f.expire_date.errors" class="invalid-feedback">
-                        <div *ngIf="f.expire_date.errors.required">Expire date is required</div>
-                    </div>
+                    @if (submitted && f.expire_date.errors) {
+                      <div class="invalid-feedback">
+                        @if (f.expire_date.errors.required) {
+                          <div>Expire date is required</div>
+                        }  
+                      </div>
+                    }
                 </div>
             </div>
             <div class="row mb-3">
@@ -48,7 +60,9 @@
             <div class="row mb-3">
               <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
                 <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    @if (loading){
+                      <span class="spinner-border spinner-border-sm mr-1"></span>
+                    }
                     Save
                 </button>
 

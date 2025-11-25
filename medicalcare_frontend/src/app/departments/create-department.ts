@@ -6,24 +6,25 @@ import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
 import { enviroment } from '../../enviroments/enviroment';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass} from '@angular/common';
 import { Hospital } from '../models/hospital';
 import { Doctor } from '../models/doctor';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-department',
   imports: [RouterLink, 
             RouterOutlet, 
             ReactiveFormsModule,
-            NgIf, NgFor, NgClass],
+            NgClass, AsyncPipe],
   templateUrl: './create-department.html',
   styleUrl: './create-department.css',
   providers: [BaseServices]
 })
 export class CreateDepartment extends BaseComponent implements OnInit{
   
-  hospitalItems: Hospital[] = [];
-  doctorItems: Doctor[] = [];
+  hospitalItems?: Observable<Hospital[]>;
+  doctorItems?: Observable<Doctor[]>;
 
   constructor(
     protected override router: Router,
@@ -47,27 +48,13 @@ export class CreateDepartment extends BaseComponent implements OnInit{
   } 
 
   override ngOnInit(): void {
+    this.hospitalItems = this.baseSrv.GetItems(`${enviroment.apiUrl}/Hospitals`);
+    this.doctorItems = this.baseSrv.GetItems(`${enviroment.apiUrl}/Doctors`);
     this.form = this.formBuilder.group({
       name: ["", Validators.required],
       phone: [""],
       hospital_id: [""],
       doctor_id: [""]
     });
-    this.getDoctors();
-    this.getHospitals();
-  }
-
-  private getHospitals(){
-    this.baseSrv.GetItems(`${enviroment.apiUrl}/Hospitals`)
-      .subscribe(items =>{
-        this.hospitalItems = items;
-      });
-  }
-
-  private getDoctors(){
-    this.baseSrv.GetItems(`${enviroment.apiUrl}/Doctors`)
-      .subscribe(items =>{
-        this.doctorItems = items;
-      });
   }
 }

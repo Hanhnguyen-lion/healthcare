@@ -10,18 +10,26 @@
                 <div class="form-group">
                   <label class="fw-bold">First Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" formControlName="first_name" placeholder="Enter first name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
-                  <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
-                      <div *ngIf="f.first_name.errors.required">First name is required</div>
-                  </div>
+                  @if (submitted && f.first_name.errors) {
+                    <div class="invalid-feedback">
+                      @if(f.first_name.errors.required){
+                        <div>First name is required</div>
+                      }
+                    </div>
+                  }
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="fw-bold">Last Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" formControlName="last_name" placeholder="Enter last name" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
-                  <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
-                      <div *ngIf="f.last_name.errors.required">Last name is required</div>
-                  </div>
+                  @if (submitted && f.last_name.errors) {
+                    <div class="invalid-feedback">
+                      @if (f.last_name.errors.required) {
+                        <div>Last name is required</div>
+                      }
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -36,9 +44,13 @@
                 <div class="form-group">
                   <label class="fw-bold">Email</label>
                   <input type="text" class="form-control" formControlName="email" placeholder="Enter email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                      <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                  </div>
+                  @if (submitted && f.email.errors) {
+                    <div class="invalid-feedback">
+                      @if (f.email.errors.email) {
+                        <div>Email must be a valid email address</div>
+                      }
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -71,9 +83,11 @@
                 <div class="form-group">
                   <label class="fw-bold">Hospital</label>
                   <select class="form-select" formControlName="hospital_id" placeholder="Enter hospital">
-                    <option *ngFor="let item of hospitalItems" [ngValue]="item.id">
-                        {{item.name}}
-                    </option>
+                    @for (item of hospitalItems | async; track $index) {
+                      <option [ngValue]="item.id">
+                          {{item.name}}
+                      </option>
+                    }
                   </select>
                 </div>
               </div>
@@ -81,9 +95,11 @@
                 <div class="form-group">
                   <label class="fw-bold">Department</label>
                   <select class="form-select" formControlName="department_id" placeholder="Enter department">
-                    <option *ngFor="let item of departmentItems" [ngValue]="item.id">
-                        {{item.name}}
-                    </option>
+                    @for (item of departmentItems | async; track $index) {
+                      <option [ngValue]="item.id">
+                          {{item.name}}
+                      </option>
+                    }
                   </select>
                 </div>
               </div>
@@ -100,7 +116,9 @@
             <div class="row mb-3">
               <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
                 <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    @if (loading){
+                      <span class="spinner-border spinner-border-sm mr-1"></span>
+                    }
                     Save
                 </button>
 

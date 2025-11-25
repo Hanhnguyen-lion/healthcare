@@ -10,42 +10,68 @@
                                     <div class="form-group mb-3">
                                         <label>First Name <span class="text-danger">*</span></label>
                                         <input type="text" formControlName="first_name" placeholder="Enter first name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" />
-                                        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
-                                            <div *ngIf="f.first_name.errors.required">First Name is required</div>
-                                        </div>
+                                        @if (submitted && f.first_name.errors) {
+                                            <div class="invalid-feedback">
+                                                @if (f.first_name.errors.required) {
+                                                    <div>First Name is required</div>
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                     <div class="form-group mb-3">
                                         <label>Last Name <span class="text-danger">*</span></label>
                                         <input type="text" formControlName="last_name" placeholder="Enter last name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" />
-                                        <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
-                                            <div *ngIf="f.last_name.errors.required">Last Name is required</div>
-                                        </div>
+                                        @if (submitted && f.last_name.errors) {
+                                            <div class="invalid-feedback">
+                                                @if (f.last_name.errors.required) {
+                                                    <div>Last Name is required</div>
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label>Email <span class="text-danger">*</span></label>
                                     <input type="text" formControlName="email" placeholder="Enter email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                        <div *ngIf="f.email.errors.required">Email is required</div>
-                                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                                    </div>
+                                    @if (submitted && f.email.errors) {
+                                        <div class="invalid-feedback">
+                                            @if (f.email.errors.required) {
+                                                <div>Email is required</div>
+                                            }
+                                            @if (f.email.errors.email) {
+                                                <div>Email must be a valid email address</div>
+                                            }
+                                        </div>
+                                    }
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group mb-3">
                                         <label>Password <span class="text-danger">*</span></label>
                                         <input type="password" formControlName="password" placeholder="Enter password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                            <div *ngIf="f.password.errors.required">Password is required</div>
-                                            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                                        </div>
+                                        @if (submitted && f.password.errors) {
+                                            <div class="invalid-feedback">
+                                                @if (f.password.errors.required) {
+                                                    <div>Password is required</div>
+                                                }
+                                                @if (f.password.errors.minlength) {
+                                                    <div>Password must be at least 6 characters</div>
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                     <div class="form-group mb-3">
                                         <label>Confirm Password <span class="text-danger">*</span></label>
                                         <input type="password" formControlName="confirmPassword" placeholder="Enter confirm password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-                                        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                                            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-                                            <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
-                                        </div>
+                                        @if (submitted && f.confirmPassword.errors) {
+                                            <div class="invalid-feedback">
+                                                @if (f.confirmPassword.errors.required) {
+                                                    <div>Confirm Password is required</div>
+                                                }
+                                                @if (f.confirmPassword.errors.mustMatch) {
+                                                    <div>Passwords must match</div>
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
@@ -55,21 +81,33 @@
                                         <option value="Admin">Admin</option>
                                         <option value="Doctor">Doctor</option>
                                     </select>
-                                    <div *ngIf="submitted && f.account_type.errors" class="invalid-feedback">
-                                        <div *ngIf="f.account_type.errors.required">Account Type is required</div>
-                                    </div>
+                                    @if (submitted && f.account_type.errors) {
+                                        <div class="invalid-feedback">
+                                            @if (f.account_type.errors.required) {
+                                                <div>Account Type is required</div>
+                                            }
+                                        </div>
+                                    }
                                 </div>
                                 <div class="form-group mb-3">
                                     <label>Date of birth <span class="text-danger">*</span></label>
                                     <input type="date" formControlName="dob" placeholder="Enter date of borth" [ngModel]="today | date:'yyyy-MM-dd'" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
-                                    <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
-                                        <div *ngIf="f.dob.errors.required">Date of birth is required</div>
-                                        <div *ngIf="form.get('dob')?.hasError('dateGreaterThanToday')">Date of birth cannot be today or in the future</div>
-                                    </div>
+                                    @if (submitted && f.dob.errors) {
+                                        <div class="invalid-feedback">
+                                            @if (f.dob.errors.required) {
+                                                <div>Date of birth is required</div>
+                                            }
+                                            @if (form.get('dob')?.hasError('dateGreaterThanToday')) {
+                                                <div>Date of birth cannot be today or in the future</div>
+                                            }
+                                        </div>
+                                    }
                                 </div>
                                 <div class="form-group mb-3 d-grid gap-2 d-md-flex">
                                     <button [disabled]="loading" class="btn btn-primary">
-                                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                        @if(loading){
+                                            <span class="spinner-border spinner-border-sm mr-1"></span>
+                                        }
                                         Register
                                     </button>
                                 </div>

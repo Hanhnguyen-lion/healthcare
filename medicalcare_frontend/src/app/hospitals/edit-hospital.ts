@@ -11,7 +11,8 @@ import { BaseServices } from '../services/base-service';
 
 @Component({
   selector: 'app-edit-hospital',
-  imports: [NgIf, NgClass, RouterLink, RouterOutlet, ReactiveFormsModule],
+  imports: [NgClass, RouterLink, RouterOutlet, 
+            ReactiveFormsModule],
   templateUrl: './edit-hospital.html',
   styleUrl: './edit-hospital.css',
   providers: [BaseServices]
@@ -57,18 +58,20 @@ export class EditHospital extends BaseComponent implements OnInit{
   setFormValue(){
     var id = +this.routerActive.snapshot.params["id"] |0;
     this.baseSrv.GetItemById(id, this.apiUrl)
-      .subscribe(item =>{
-        this.form.setValue({
-          name: item.name, 
-          description: item.description, 
-          email: item.email, 
-          address: item.address, 
-          phone: item.phone, 
-          country: item.country
-        });
-      },
-      error=>{
-        this.alertService.error(error);
-      });  
+      .subscribe({
+        next:(item) =>{
+          this.form.setValue({
+            name: item.name, 
+            description: item.description, 
+            email: item.email, 
+            address: item.address, 
+            phone: item.phone, 
+            country: item.country
+          });
+        },
+        error:(error)=>{
+          this.alertService.error(error);
+        }
+      });
   }
 }

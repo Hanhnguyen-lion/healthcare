@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Route, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AccountService } from './services/account';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ReactiveFormsModule, RouterLink, NgIf],
+  imports: [RouterOutlet, ReactiveFormsModule,RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

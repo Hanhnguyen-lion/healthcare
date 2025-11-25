@@ -8,12 +8,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { enviroment } from '../../enviroments/enviroment';
 import { Hospital } from '../models/hospital';
 import { Doctor } from '../models/doctor';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-view-department',
   imports: [RouterLink, RouterOutlet, 
-    ReactiveFormsModule, NgIf],
+    ReactiveFormsModule],
   templateUrl: './view-department.html',
   styleUrl: './view-department.css',
   providers: [BaseServices]
@@ -58,31 +57,41 @@ export class ViewDepartment extends BaseComponent implements OnInit{
   private setFormValue(){
     var id = +this.routerActive.snapshot.params["id"] |0;
     this.baseSrv.GetItemById(id, this.apiUrl)
-      .subscribe(item =>{
-        var hospital_id = +item.hospital_id | 0;
-        var doctor_id = +item.doctor_id| 0;
+      .subscribe({
+        next:(item)=>{
+          var hospital_id = +item.hospital_id | 0;
+          var doctor_id = +item.doctor_id| 0;
+          this.baseSrv.GetItems(`${enviroment.apiUrl}/Hospitals`)
+          .subscribe({
+            next:(items)=>{
+              var hospitalItem: Hospital = items.find(item => item.id == hospital_id);
+              var hospitalName = (hospitalItem == null) ? "" : hospitalItem.name;
+              this.baseSrv.GetItems(`${enviroment.apiUrl}/Doctors`)
+              .subscribe({
+                next:(items)=>{
+                  var doctorItem: Doctor = items.find(item => item.id == doctor_id);
+                  var doctorName = (doctorItem == null) ? "" : doctorItem.last_name + " " + doctorItem.first_name;
 
-        this.baseSrv.GetItems(`${enviroment.apiUrl}/Hospitals`)
-          .subscribe(items =>{
-            var hospitalItem: Hospital = items.find(item => item.id == hospital_id);
-            var hospitalName = (hospitalItem == null) ? "" : hospitalItem.name;
-        
-          this.baseSrv.GetItems(`${enviroment.apiUrl}/Doctors`)
-            .subscribe(items =>{
-              var doctorItem: Doctor = items.find(item => item.id == doctor_id);
-              var doctorName = (doctorItem == null) ? "" : doctorItem.last_name + " " + doctorItem.first_name;
-
-              this.form.setValue({
-                name: item.name,
-                phone: item.phone,
-                doctor_name: doctorName,
-                hospital_name: hospitalName
-              });
-            });
-          }); 
-      },
-      error=>{
-        this.alertService.error(error);
+                  this.form.setValue({
+                    name: item.name,
+                    phone: item.phone,
+                    doctor_name: doctorName,
+                    hospital_name: hospitalName
+                  });
+                },
+                error:(error)=>{
+                  this.alertService.error(error);
+                }
+              })
+            },
+            error:(error)=>{
+              this.alertService.error(error);
+            }
+          })
+        },
+        error:(error)=>{
+          this.alertService.error(error);
+        }
       });
   }
 }

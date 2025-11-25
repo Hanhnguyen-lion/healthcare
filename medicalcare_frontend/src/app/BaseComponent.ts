@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { DialogService } from "./services/dialog";
 import { ChangeDetectorRef, Component, inject, Inject, isDevMode, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
+import { formatDate } from "@angular/common";
 
 
 @Component({
@@ -72,17 +73,17 @@ export class BaseComponent implements OnInit {
 
     var item = this.form.value;
     this.baseSrv.Add(item, this.apiUrl)
-        .subscribe(
-            (data) =>{
-                this.alertService.success(this.successfullMessage, { keepAfterRouteChange: true });
-                this.detectChanges();
-                this.navigateTo(this.navigateByUrl);
-            }, 
-            error =>{
-                this.alertService.error(error);
-                this.loading = false;
-            }
-        );
+      .subscribe({
+        next: () =>{
+          this.alertService.success(this.successfullMessage, { keepAfterRouteChange: true });
+          this.detectChanges();
+          this.navigateTo(this.navigateByUrl);
+        },
+        error: (error)=>{
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
   }
 
   protected updateItem(){
@@ -101,34 +102,39 @@ export class BaseComponent implements OnInit {
     item.id = id;
 
     this.baseSrv.Update(item, this.apiUrl)
-        .subscribe(
-            (data) =>{
-                this.alertService.success(this.successfullMessage, { keepAfterRouteChange: true });
-                this.detectChanges();
-                this.navigateTo(this.navigateByUrl);
-            }, 
-            error =>{
-                this.alertService.error(error);
-                this.loading = false;
-            }
-        );
+      .subscribe({
+        next: () =>{
+          this.alertService.success(this.successfullMessage, { keepAfterRouteChange: true });
+          this.detectChanges();
+          this.navigateTo(this.navigateByUrl);
+        },
+        error: (error)=>{
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
   }
 
   protected deleteItem(id: number){
     this.dialogService.openConfirmDialog("Are you sure to want delete this item?", this.titleConfirmDialog)
-        .subscribe((result)=>{
-            if (result){
-                this.baseSrv.Delete(id, this.apiUrl)
-                .subscribe(
-                ()=>{
-                    this.loadData();
-                    this.detectChanges();
-                },
-                (error)=>{
-                    console.log(error);
-                })
+      .subscribe({
+        next: () =>{
+          this.baseSrv.Delete(id, this.apiUrl)
+          .subscribe({
+            next:()=>{
+              this.loadData();
+              this.detectChanges();
+            },
+            error:(error)=>{
+              this.alertService.error(error);
             }
-        });
+          });
+        },
+        error: (error)=>{
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
   }
 
   // Common methods for child components
@@ -136,8 +142,8 @@ export class BaseComponent implements OnInit {
     this.router.navigateByUrl(route);
   }
 
-  protected compareFn(option1: any, option2: any): boolean {
-    return option1 && option2 ? option1.id === option2.id : option1 === option2;
+  protected formatDateYYYYMMDD(value: Date, locale: string): string {
+    return formatDate(value, "yyyy-MM-dd", locale);
   }
 
   protected onEdit(){

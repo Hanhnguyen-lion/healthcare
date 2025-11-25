@@ -16,18 +16,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of data | async">
-        <td>{{item.name}}</td>
-        <td>{{item.type}}</td>
-        <td>{{item.price}}</td>
-        <td>{{item.input_date|date:'dd-MM-yyyy'}}</td>
-        <td>{{item.expire_date|date:'dd-MM-yyyy'}}</td>
-        <td>
-          <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Medicine/Edit/{{item.id}}">Edit</button>
-          <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Medicine/View/{{item.id}}">View</button>
-          <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
-        </td>
-      </tr>
+      @for (item of data | async; track $index) {
+        <tr>
+          <td>{{item.name}}</td>
+          <td>{{item.type}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.input_date|date:'dd-MM-yyyy'}}</td>
+          <td>{{item.expire_date|date:'dd-MM-yyyy'}}</td>
+          <td>
+            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Medicine/Edit/{{item.id}}">Edit</button>
+            <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Medicine/View/{{item.id}}">View</button>
+            <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
+          </td>
+        </tr>
+      }
     </tbody>
   </table>
   </div>

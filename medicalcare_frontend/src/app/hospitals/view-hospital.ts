@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseServices } from '../services/base-service';
-import { NgClass, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { enviroment } from '../../enviroments/enviroment';
@@ -10,7 +9,7 @@ import { AlertService } from '../helpers/alert-service';
 
 @Component({
   selector: 'app-view-hospital',
-  imports: [NgIf, RouterLink, RouterOutlet, 
+  imports: [RouterLink, RouterOutlet, 
           ReactiveFormsModule],
   templateUrl: './view-hospital.html',
   styleUrl: './view-hospital.css',

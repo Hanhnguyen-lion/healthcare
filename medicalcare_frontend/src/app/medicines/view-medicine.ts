@@ -1,7 +1,7 @@
-import { Component, Inject, inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { BaseServices } from '../services/base-service';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { formatDate, NgClass, NgIf } from '@angular/common';
+import { formatDate} from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { BaseComponent } from '../BaseComponent';
 import { DialogService } from '../services/dialog';
@@ -11,8 +11,7 @@ import { enviroment } from '../../enviroments/enviroment';
 @Component({
   selector: 'app-view-medicine',
   imports: [RouterLink, RouterOutlet,
-    ReactiveFormsModule,
-    NgIf],
+    ReactiveFormsModule],
   templateUrl: './view-medicine.html',
   styleUrl: './view-medicine.css',
   providers: [BaseServices]
@@ -55,18 +54,20 @@ export class ViewMedicine extends BaseComponent implements OnInit{
   private setFormValue(){
     var id = +this.routerActive.snapshot.params["id"] |0;
     this.baseSrv.GetItemById(id, this.apiUrl)
-      .subscribe(item =>{
-        this.form.setValue({
-          name: item.name, 
-          type: item.type, 
-          price: item.price, 
-          expire_date: (item.expire_date != null) ? formatDate(item.expire_date, "dd/MM/yyyy", this.locale) : "", 
-          input_date: (item.input_date != null) ? formatDate(item.input_date, "dd/MM/yyyy", this.locale) : ""
-        });
-      },
-      error=>{
-        this.alertService.error(error);
-      });
+      .subscribe({
+        next: (item) =>{
+          this.form.setValue({
+            name: item.name, 
+            type: item.type, 
+            price: item.price, 
+            expire_date: (item.expire_date != null) ? formatDate(item.expire_date, "dd/MM/yyyy", this.locale) : "", 
+            input_date: (item.input_date != null) ? formatDate(item.input_date, "dd/MM/yyyy", this.locale) : ""
+          });
+        },
+        error: (error) =>{
+          this.alertService.error(error);
+        }
+      })
   }
 
 }

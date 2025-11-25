@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/route
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { dateLessThanTodayValidator } from '../date-validators';
 import { AlertService } from '../helpers/alert-service';
-import { DatePipe, NgClass, NgIf } from '@angular/common';
+import { DatePipe, NgClass} from '@angular/common';
 import { BaseComponent } from '../BaseComponent';
 import { BaseServices } from '../services/base-service';
 import { DialogService } from '../services/dialog';
@@ -11,7 +11,8 @@ import { enviroment } from '../../enviroments/enviroment';
 
 @Component({
   selector: 'app-create-patient',
-  imports: [RouterLink, RouterOutlet, FormsModule, ReactiveFormsModule, DatePipe, NgIf, NgClass],
+  imports: [RouterLink, RouterOutlet, FormsModule, 
+    ReactiveFormsModule, DatePipe, NgClass],
   templateUrl: './create-patient.html',
   styleUrl: './create-patient.css',
   providers: [BaseServices]
