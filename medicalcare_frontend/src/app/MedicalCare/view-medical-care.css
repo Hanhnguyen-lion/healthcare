@@ -1,0 +1,30 @@
+    .my-double-bordered-table {
+      border: 3px double black;
+    }
+    .alnright{
+        text-align: right;
+    }
+    .alncenter{
+        text-align: center;
+    }
+    .alnleft{
+        text-align: left;
+    }
+    .borderleft{
+        border-left: 1px solid black;
+    }
+    .borderright{
+        border-right: 1px solid black;
+    }
+    .borderleft-double{
+        border-left: 3px double black;
+    }
+    .borderbottom{
+        border-bottom: 1px solid black;
+    }
+    .bordertop{
+        border-top: 1px solid black;
+    }
+    .bordertop-double{
+        border-top: 3px double black;
+    }

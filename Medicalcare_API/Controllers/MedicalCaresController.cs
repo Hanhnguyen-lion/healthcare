@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Medicalcare_API.Helpers;
 using Medicalcare_API.Models;
 using Medicalcare_API.DTOs;
+using System.Collections;
 
 namespace Medicalcare_API.Controllers{
 
@@ -21,6 +22,39 @@ namespace Medicalcare_API.Controllers{
             var data = await this.context.v_medicalcare.ToListAsync();
 
             return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("Patients")]
+        public async Task<IActionResult> GetPatients()
+        {
+            var data = await this.context.v_medicalcare.Select(li =>
+            new {
+                li.patient_id, 
+                li.patient_code
+            }).Distinct().ToListAsync();
+
+            return Ok(data);
+        }
+
+
+        [HttpGet]
+        [Route("Search")]
+        public async Task<IActionResult> SearchMedicalCares(
+            int patient_id, 
+            int visit_month,  
+            int visit_year)
+        {
+
+            IDictionary? item = new Dictionary<string, object>();
+            await Task.Run(() =>
+            {
+                item = this.context.GetMedicalDetails(
+                    patient_id: patient_id,
+                    visit_month: visit_month,
+                    visit_year: visit_year);
+            });
+            return Ok(item);
         }
 
         [HttpGet]
@@ -139,6 +173,17 @@ namespace Medicalcare_API.Controllers{
 
                 return Ok(new {message = "MedicalCare deleted "});
             }
+        }
+
+        [HttpGet]
+        [Route("Prescriptions")]
+        public async Task<IActionResult> GetPrescriptionsToPatient(int patient_id, int medicalcare_id)
+        {
+            var data = await this.context.v_prescription.Where(li=> 
+                li.medicalcare_id == medicalcare_id &&
+                li.patient_id == patient_id).ToListAsync();
+
+            return Ok(data);
         }
     }
 }

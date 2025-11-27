@@ -17,7 +17,40 @@ export class MedicalRecords {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/scss/mixins/_utilities.scss" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/scss/_tables.scss" rel="stylesheet" type="text/css"/>
         <style>
-            .my-double-bordered-table {
+
+.form-control-plaintext {
+  display: block;
+  width: 100%;
+  padding: .375rem 0;
+  margin-bottom: 0;
+  line-height: 1.5;
+  color: #212529;
+  background-color:transparent;
+  border: solid transparent;
+  border-width: 1 0;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &.form-control-sm,
+  &.form-control-lg {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+          .form-control-plaintext {
+              display: block;
+              width: 100%;
+              padding: .375rem 0;
+              margin-bottom: 0;
+              line-height: 1.5;
+              color: #212529;
+              background-color: transparent;
+              border: solid transparent;
+              border-width: 1px 0;
+          }
+                .my-double-bordered-table {
               border-top: 3px double black; /* Adjust thickness and color as needed */
               border-bottom: 3px double black; /* Adjust thickness and color as needed */
             }

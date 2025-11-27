@@ -27,6 +27,8 @@ import { ViewMedicine } from './medicines/view-medicine';
 import { CreateMedicine } from './medicines/create-medicine';
 import { MedicalCaresComponent } from './MedicalCare/medical-cares';
 import { CreateMedicalCare } from './MedicalCare/create-medical-care';
+import { ViewMedicalCareComponent } from './MedicalCare/view-medical-care';
+import { PrintMedicalCareComponent } from './MedicalCare/print-medical-care';
 
 
 export const routes: Routes = [
@@ -129,19 +131,23 @@ export const routes: Routes = [
     },
     {
         path: "Billing",
-        component: Billing
-    },
-    {
-        path: "MedicalCare",
         component: MedicalCaresComponent
     },
     {
-        path: "MedicalCare/Add",
+        path: "Billing/Add",
         component: CreateMedicalCare
     },
     {
-        path: "MedicalCare/Edit/:id",
+        path: "Billing/Edit/:id",
         component: CreateMedicalCare
+    },
+    {
+        path: "MedicalCare",
+        component: ViewMedicalCareComponent
+    },
+    {
+        path: "MedicalCare/Print/:id",
+        component: PrintMedicalCareComponent
     },
     { path: '**', redirectTo: '' }
 ];

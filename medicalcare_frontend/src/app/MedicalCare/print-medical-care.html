@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="row mt-3 mb-3">
+        <div class="form-group">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onPrint()">Print</button>
+        </div>
+    </div>
+    <h2>Hồ sơ bệnh án</h2>
+    <div id="MedicalReports">
+        <form [formGroup]="form">
+        <table class="table my-double-bordered-table">
+        <tr>
+            <td>Số thứ tự</td>
+            <td colspan="3"><input type="text" readonly class="form-control-plaintext" formControlName="patient_code"></td>
+            <td>&nbsp;</td>
+            <td class="alnright borderleft">Số bảo hiểm</td>
+            <td class="alncenter"><input type="text" readonly class="form-control-plaintext" formControlName="insurance_policy_number"></td>
+        </tr>
+        <tr>
+            <td colspan="5">&nbsp;</td>
+            <td class="alnright borderleft">Hạn sử dụng bảo hiểm</td>
+            <td class="alncenter"><input type="text" readonly class="form-control-plaintext" formControlName="insurance_expire"></td>
+        </tr>
+    <tr>
+        <td rowspan="4">Người bệnh</td>
+        <td>Họ Tên</td>
+        <td><input type="text" readonly class="form-control-plaintext" formControlName="patient_name"></td>
+        <td colspan="2">&nbsp;</td>
+        <td class="alnright borderleft">Tên người có bảo hiểm</td>
+        <td class="alncenter"><input type="text" readonly class="form-control-plaintext" formControlName="patient_name"></td>
+    </tr>
+    <tr>
+        <td>Ngày sinh</td>
+        <td><input type="text" readonly class="form-control-plaintext" formControlName="date_of_birth"></td>
+        <td>Giới tính</td>
+        <td><input type="text" readonly class="form-control-plaintext" formControlName="gender"></td>
+        <td rowspan="2" class="alnright borderleft">Địa chỉ</td>
+        <td rowspan="2" class="alncenter"><input type="text" readonly class="form-control-plaintext" formControlName="home_address"></td>
+    </tr>
+    <tr>
+        <td>Địa chỉ</td>
+        <td><input type="text" readonly class="form-control-plaintext" formControlName="home_address"></td>
+        <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+        <td>Công việc</td>
+        <td><input type="text" readonly class="form-control-plaintext" formControlName="job"></td>
+        <td>Dạng bảo hiểm</td>
+        <td><input type="text" readonly class="form-control-plaintext" formControlName="insurance_type"></td>
+        <td class="alnright borderleft">Địa chỉ công ty</td>
+        <td class="alncenter"><input type="text" readonly class="form-control-plaintext" formControlName="office_address"></td>
+    </tr>
+
+<!--
+            <div class="row">
+                <div class="me-auto col flex-wrap d-flex justify-content-end">
+                    <label class="form-label">Hạn sử dụng bảo hiểm</label>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label">{{patientItem?.insurance_expire|date:'dd/MM/yyyy'}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                    <label class="form-label">Người bệnh</label>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label">Họ Tên</label>
+                </div>
+                <div class="me-auto col">
+                    <label class="form-label">{{patientItem?.last_name}} {{patientItem?.first_name}}</label>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label">Tên người có bảo hiểm</label>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label">{{patientItem?.last_name}} {{patientItem?.first_name}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                    <label class="form-label">Người bệnh</label>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label">Ngày sinh</label>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label">{{patientItem?.date_of_birth|date:'dd/MM/yyyy'}}</label>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label">Giới tính</label>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label">{{patientItem?.gender}}</label>
+                </div>
+                
+                <div class="col-auto">
+                    <label class="form-label">Địa chỉ</label>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label">{{patientItem?.home_address}}</label>
+                </div>
+            </div> -->
+        </table>
+        </form>
+    </div>
+</div>

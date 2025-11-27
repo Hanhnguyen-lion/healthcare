@@ -53,7 +53,7 @@ export class BaseComponent implements OnInit {
       return (): any => undefined;
   }
 
-  private loadData(){
+  protected loadData(){
 
     this.data_1 = this.baseSrv.GetItems(this.apiUrl);
 

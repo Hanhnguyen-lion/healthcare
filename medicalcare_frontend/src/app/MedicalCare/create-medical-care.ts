@@ -12,7 +12,6 @@ import { Doctor } from '../models/doctor';
 import { Department } from '../models/department';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PrescriptionModal } from './prescription-modal';
-import { MedicalCareService } from '../services/medicalCare';
 import { Observable } from 'rxjs';
 import { TreatmentModal } from './treatment-modal';
 
@@ -48,14 +47,13 @@ export class CreateMedicalCare extends BaseComponent implements OnInit{
     protected override routerActive: ActivatedRoute,
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
-    public medicalSrv: MedicalCareService,
     @Inject(LOCALE_ID) private locale: string
   ){
     super(
       `${enviroment.apiUrl}/MedicalCares`, 
       "", 
       "Create Medical Care successful",
-      "/MedicalCare",
+      "/Billing",
       router,
       baseSrv,
       dialogService,

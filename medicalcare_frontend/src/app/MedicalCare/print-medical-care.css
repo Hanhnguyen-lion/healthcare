@@ -1,0 +1,20 @@
+    .my-double-bordered-table {
+      border: 3px double black;
+    }
+    .alnright{
+        text-align: right;
+    }
+    .alncenter{
+        text-align: center;
+    }
+    .alnleft{
+        text-align: left;
+    }
+    .borderleft{
+        border-left: 1px solid black;
+    }
+    /* Optional: To remove internal cell borders if desired */
+    /* .my-double-bordered-table th,
+    .my-double-bordered-table td {
+      border: none;
+    } */

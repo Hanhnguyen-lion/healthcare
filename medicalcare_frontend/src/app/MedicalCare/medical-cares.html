@@ -1,7 +1,7 @@
 <div class="container">
-    <h2>Hồ sơ bệnh án</h2>
+    <h2>Billing</h2>
     <div class="form-group mb-3">
-      <button class="btn btn-primary" routerLink="/MedicalCare/Add" type="submit">Add Medical Care</button>
+      <button class="btn btn-primary" routerLink="/Billing/Add" type="submit">Add Medical Care</button>
     </div>
 <div class="tableFixHead">
   <table class="table table-striped">
@@ -22,9 +22,8 @@
           <td>{{item.visit_date|date:'dd-MM-yyyy'}}</td>
           <td>{{item.diagnostic}}</td>
           <td>
-            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/MedicalCare/Print/{{item.id}}">Print</button>
-            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/MedicalCare/Edit/{{item.id}}">Edit</button>
-            <button class="btn btn-info" style="margin-left: 10px;" routerLink="/MedicalCare/View/{{item.id}}">View</button>
+            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Billing/Edit/{{item.id}}">Edit</button>
+            <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Billing/View/{{item.id}}">View</button>
             <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
           </td>
         </tr>

@@ -9,7 +9,6 @@ import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { enviroment } from '../../enviroments/enviroment';
-import { MedicalCareService } from '../services/medicalCare';
 import { AsyncPipe, formatDate, NgClass } from '@angular/common';
 import { Observable } from 'rxjs';
 
@@ -36,7 +35,6 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
     protected override routerActive: ActivatedRoute,
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
-    public medicalSrv: MedicalCareService,
     @Inject(LOCALE_ID) private locale: string
   ){
     super(

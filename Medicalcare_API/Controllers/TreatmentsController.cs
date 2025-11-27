@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Medicalcare_API.Helpers;
 using Medicalcare_API.Models;
+using Medicalcare_API.DTOs;
 
 namespace Medicalcare_API.Controllers{
 
@@ -28,7 +29,7 @@ namespace Medicalcare_API.Controllers{
         [Route("item/{id}")]
         public async Task<IActionResult> GetTreatmentById(int id)
         {
-            Treatment? item = await this.context.m_treatment.FirstOrDefaultAsync(
+            TreatmentDTO? item = await this.context.m_treatment.FirstOrDefaultAsync(
                     m => m.id == id);
             if (item == null)
             {
@@ -40,7 +41,7 @@ namespace Medicalcare_API.Controllers{
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> Add(Treatment item)
+        public async Task<IActionResult> Add(TreatmentDTO item)
         {
             // Validate the incoming model.
             if (!ModelState.IsValid)
@@ -60,7 +61,7 @@ namespace Medicalcare_API.Controllers{
 
         [HttpPut]
         [Route("Edit/{id}")]
-        public async Task<IActionResult> Edit(int id, Treatment item)
+        public async Task<IActionResult> Edit(int id, TreatmentDTO item)
         {
             // Validate the incoming model.
             if (!ModelState.IsValid)
@@ -73,7 +74,7 @@ namespace Medicalcare_API.Controllers{
                 return BadRequest("ID mismatch in the URL and body.");
             }
             // Check if patient exists
-            Treatment? editItem = await this.context.m_treatment.FirstOrDefaultAsync(
+            TreatmentDTO? editItem = await this.context.m_treatment.FirstOrDefaultAsync(
                     m => m.id == item.id);
             if (item == null)
             {
@@ -131,7 +132,7 @@ namespace Medicalcare_API.Controllers{
             }
 
             // Check if patient exists
-            Treatment? item = await this.context.m_treatment.FirstOrDefaultAsync(
+            TreatmentDTO? item = await this.context.m_treatment.FirstOrDefaultAsync(
                     m => m.id == id);
             if (item == null)
             {

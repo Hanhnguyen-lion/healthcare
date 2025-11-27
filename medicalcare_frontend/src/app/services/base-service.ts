@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 
 @Injectable()
 export class BaseServices {
@@ -17,6 +17,22 @@ export class BaseServices {
     return this.http.get<any[]>(url);
   }
 
+  SearchItems(url: string, item: any): Observable<any>{
+
+    return this.http.get(url, {params: item});
+  }
+
+  PrescriptionItemsToPatient(url: string, 
+      patient_id: number, 
+      medicalcare_id: number): Observable<any>{
+    
+        var item: any = {
+          patient_id : patient_id,
+          medicalcare_id: medicalcare_id
+        };
+    return this.http.get(url, {params: {item}});
+  }
+  
   GetItemById(id: number, url: string): Observable<any>{
     url = `${url}/${id}`;
     return this.http.get<any>(url)
