@@ -78,8 +78,6 @@ export class CreateMedicalCare extends BaseComponent implements OnInit{
       patient_id: ["", Validators.required],
       department_id: ["", Validators.required],
       doctor_id: ["", Validators.required],
-      start_date: [formatDate(this.today, "yyyy-MM-dd", this.locale), Validators.required],
-      end_date: [formatDate(this.today, "yyyy-MM-dd", this.locale), Validators.required],
       diagnostic: [""],
       notes: [""]
     });
@@ -96,8 +94,6 @@ export class CreateMedicalCare extends BaseComponent implements OnInit{
             patient_id: item.patient_id,
             department_id: item.department_id,
             doctor_id: item.doctor_id,
-            start_date: formatDate(start_date, "yyyy-MM-dd", this.locale),
-            end_date: formatDate(end_date, "yyyy-MM-dd", this.locale),
             diagnostic: item.diagnostic,
             notes: item.notes
           });

@@ -5,7 +5,7 @@
 <div class="modal-body">
     <div class="container">
             <form [formGroup]="form">
-                <div class="row mb-3">
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="fw-bold">Medicine <span class="text-danger">*</span></label>
@@ -45,36 +45,69 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                        <label class="fw-bold">Start date</label>
-                        <input type="date" class="form-control" formControlName="start_date" placeholder="Enter start date">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        <label class="fw-bold">End date</label>
-                        <input type="date" class="form-control" formControlName="end_date" placeholder="Enter end date">
-                        </div>
-                    </div>
-                </div>    
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="fw-bold">Frequency <span class="text-danger">*</span></label>
-                            <textarea rows="3" class="form-control" formControlName="frequency" placeholder="Enter frequency" [ngClass]="{ 'is-invalid': submitted && f.frequency.errors }"></textarea>
-                            @if (submitted && f.frequency.errors) {
+                            <label class="fw-bold">Quantity <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" formControlName="quantity" placeholder="Enter quantity" [ngClass]="{ 'is-invalid': submitted && f.quantity.errors }">
+                            @if (submitted && f.quantity.errors) {
                                 <div class="invalid-feedback">
-                                @if (f.frequency.errors.required) {
-                                    <div>Frequency is required</div>
+                                @if (f.quantity.errors.required) {
+                                    <div>Quantity is required</div>
                                 }
                                 </div>
                             }
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label></label>
+                            <select class="form-select" formControlName="medicine_type">
+                                @for (item of medicineTypeItems | async; track $index) {
+                                    <option [ngValue]="item.name_en">
+                                        {{item.name_en}}
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="fw-bold">Duration <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" formControlName="duration" placeholder="Enter duration" [ngClass]="{ 'is-invalid': submitted && f.duration.errors }">
+                            @if (submitted && f.duration.errors) {
+                                <div class="invalid-feedback">
+                                @if (f.duration.errors.required) {
+                                    <div>duration is required</div>
+                                }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label></label>
+                            <select class="form-select" formControlName="duration_type">
+                                @for (item of durationItems | async; track $index) {
+                                    <option [ngValue]="item.name_en">
+                                        {{item.name_en}}
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                        <label class="fw-bold">Prescription date</label>
+                        <input type="date" class="form-control" formControlName="prescription_date" placeholder="Enter prescription date">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="fw-bold">Dosage <span class="text-danger">*</span></label>
@@ -86,6 +119,14 @@
                                 }
                                 </div>
                             }
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="fw-bold">Notes</label>
+                            <textarea rows="3" class="form-control" formControlName="notes" placeholder="Enter notes"></textarea>
                         </div>
                     </div>
                 </div>

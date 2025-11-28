@@ -10,7 +10,7 @@ import { AlertService } from '../helpers/alert-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { enviroment } from '../../enviroments/enviroment';
 import { AsyncPipe, formatDate, NgClass } from '@angular/common';
-import { Observable } from 'rxjs';
+import { first, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-prescription-modal',
@@ -26,6 +26,8 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
 
   doctorItems?: Observable<Doctor[]>;
   medicineItems?:Observable<Medicine[]>;
+  medicineTypeItems?: Observable<any[]>
+  durationItems?: Observable<any[]>
   
   constructor(
     protected override router: Router,
@@ -53,14 +55,42 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
 
     this.medicineItems = this.baseSrv.GetItems(`${enviroment.apiUrl}/Medicines`);
     this.doctorItems = this.baseSrv.GetItems(`${enviroment.apiUrl}/Doctors`);
+    this.medicineTypeItems = this.baseSrv.GetItems(`${this.apiUrl}/MedicineTypes`);
+    this.durationItems = this.baseSrv.GetItems(`${this.apiUrl}/DurationTypes`);
+
 
     this.form = this.formBuilder.group({
       medicine_id: ["", Validators.required],
       doctor_id: ["", Validators.required],
       dosage: ["", Validators.required],
-      frequency: ["", Validators.required],
-      start_date: [formatDate(this.today, "yyyy-MM-dd", this.locale)],
-      end_date: [formatDate(this.today, "yyyy-MM-dd", this.locale)]
+      quantity: [1, Validators.required],
+      duration: [1, Validators.required],
+      prescription_date: [formatDate(this.today, "yyyy-MM-dd", this.locale)],
+      duration_type: ["", Validators.required],
+      medicine_type: ["day", Validators.required],
+      notes: [""]
+    });
+
+    this.durationItems.pipe(
+      first(),
+      map(arr => arr[0])
+    ).subscribe({
+      next: (firstElement)=>{
+        this.form.patchValue({
+          duration_type: firstElement.name_en
+        });
+      }
+    });
+
+    this.medicineTypeItems.pipe(
+      first(),
+      map(arr => arr[0])
+    ).subscribe({
+      next: (firstElement)=>{
+        this.form.patchValue({
+          medicine_type: firstElement.name_en
+        });
+      }
     });
 
     if (this.prescription_id > 0){
@@ -73,13 +103,16 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
               medicine_id: item.medicine_id,
               doctor_id: item.doctor_id,
               dosage: item.dosage,
-              frequency: item.frequency,
-              start_date: formatDate(item.start_date, "yyyy-MM-dd", this.locale),
-              end_date: formatDate(item.end_date, "yyyy-MM-dd", this.locale)
+              quantity: item.quantity,
+              duration: item.duration,
+              prescription_date: formatDate(item.prescription_date, "yyyy-MM-dd", this.locale),
+              duration_type: item.duration_type,
+              medicine_type: item.medicine_type,
+              notes: item.notes
             });
             this.detectChanges();  
           }
-        })
+        });
     }
   }
 

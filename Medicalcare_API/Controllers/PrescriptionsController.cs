@@ -26,6 +26,24 @@ namespace Medicalcare_API.Controllers{
         }
 
         [HttpGet]
+        [Route("MedicineTypes")]
+        public async Task<IActionResult> GetMedicineTypes()
+        {
+            var data = await this.context.m_medicine_type.ToListAsync();
+
+            return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("DurationTypes")]
+        public async Task<IActionResult> GetDurationTypes()
+        {
+            var data = await this.context.m_duration_type.ToListAsync();
+
+            return Ok(data);
+        }
+        
+        [HttpGet]
         [Route("item/{id}")]
         public async Task<IActionResult> GetPrescriptionById(int id)
         {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Route, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { AccountService } from './services/account';
 
 @Component({
@@ -12,7 +12,6 @@ import { AccountService } from './services/account';
 export class App {
 
   constructor(
-      private router: Router,
       private accountService: AccountService
 
   ){}

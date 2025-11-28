@@ -82,34 +82,6 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="fw-bold">Start Date <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" formControlName="start_date" placeholder="Enter start date" [ngClass]="{ 'is-invalid': submitted && f.start_date.errors }">
-                                    @if (submitted && f.start_date.errors) {
-                                        <div class="invalid-feedback">
-                                            @if (f.start_date.errors.required) {
-                                                <div>Start date required</div>
-                                            }
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="fw-bold">End Date <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" formControlName="end_date" placeholder="Enter start date" [ngClass]="{ 'is-invalid': submitted && f.end_date.errors }">
-                                    @if (submitted && f.end_date.errors) {
-                                        <div class="invalid-feedback">
-                                            @if (f.end_date.errors.required) {
-                                                <div>End date required</div>
-                                            }
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="fw-bold">Diagnostic</label>
@@ -186,10 +158,10 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Medicine Name</th>
+                                                <th>Quantity</th>
+                                                <th>Duration</th>
                                                 <th>Dosage</th>
-                                                <th>Frequency</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
+                                                <th>Prescription Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -198,10 +170,10 @@
                                                 <tr>
                                                     <td>{{$index + 1}}</td>
                                                     <td>{{item.medicine_name}}</td>
+                                                    <td>{{item.quantity}} {{item.medicine}}</td>
+                                                    <td>{{item.duration}} {{item.duration_type}}</td>
                                                     <td>{{item.dosage}}</td>
-                                                    <td>{{item.frequency}}</td>
-                                                    <td>{{item.start_date|date:'dd/MM/yyyy'}}</td>
-                                                    <td>{{item.end_date|date:'dd/MM/yyyy'}}</td>
+                                                    <td>{{item.prescription_date|date:'dd/MM/yyyy'}}</td>
                                                     <td>
                                                         <button class="btn btn-primary" style="margin-left: 10px;" (click)="addOrEditPrescription(item.id)">Edit</button>
                                                         <button class="btn btn-danger" style="margin-left: 10px;" (click)="deletePrescription(item.id)">Delete</button>

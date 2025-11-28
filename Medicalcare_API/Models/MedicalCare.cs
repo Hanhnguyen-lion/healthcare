@@ -14,10 +14,6 @@ namespace Medicalcare_API.Models{
         public int? visit_year{get;set;}
 
         public DateTime? visit_date{get;set;}
-
-        public DateTime? start_date{get;set;}
-
-        public DateTime? end_date{get;set;}
         public string? diagnostic{get;set;}
         public string? notes{get;set;}
         public string? doctor_name{get;set;}

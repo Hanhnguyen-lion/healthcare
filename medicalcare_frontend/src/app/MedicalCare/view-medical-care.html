@@ -45,9 +45,10 @@
                     </div>
                 </form>
                     <div class="input-group mb-3">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onSearch()">Search</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onSearch('Medicalcare')">Search Medicalcare</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onSearch('Billing')">Search Billing</button>
                     </div>
-                    @if(isSearch){
+                    @if(searchMedical || searchBilling){
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <div class="tableFixHead">
@@ -115,8 +116,16 @@
                                                 @for (item of this.medicalCares; track $index) {
                                                     <tr class="borderleft bordertop">
                                                         <td class="alncenter" colspan="4">{{item.diagnostic}}</td>
-                                                        <td class="alncenter borderleft">{{formatDateToString(item.start_date, 'dd/MM/yyyy')}}</td>
-                                                        <td class="alncenter borderleft">{{formatDateToString(item.end_date, 'dd/MM/yyyy')}}</td>
+                                                        <td class="alncenter borderleft">
+                                                            @if(item.start_date != null) {
+                                                                {{formatDateToString(item.start_date, "dd/MM/yyyy")}}
+                                                            }
+                                                        </td>
+                                                        <td class="alncenter borderleft">
+                                                            @if(item.end_date != null) {
+                                                                {{formatDateToString(item.end_date, "dd/MM/yyyy")}}
+                                                            }
+                                                        </td>
                                                         <td class="alncenter borderleft"></td>
                                                     </tr>
                                                 }
@@ -149,7 +158,7 @@
                                                             @for (prescriptionItem of item.prescriptions; track $index) {
                                                                 <tr>
                                                                     <td class="ps-5">{{prescriptionItem.medicine_name}}</td>
-                                                                    <td>{{prescriptionItem.frequency}}</td>
+                                                                    <td>{{prescriptionItem.quantity}} {{prescriptionItem.medicine}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td colspan="2" class="ps-5">{{prescriptionItem.dosage}}</td>
@@ -170,6 +179,20 @@
                                 </div>
                             </div>
                         </div>
+                    }
+                    @if(searchBilling) {
+                        <table class="table">
+                            <thead class="table-header">
+                            <tr>
+                                <th>#</th>
+                                <th>Prescription Date</th>
+                                <th>Medicine</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                            </tr>
+                            </thead>
+                        </table>
                     }
             </div>
         </div>
