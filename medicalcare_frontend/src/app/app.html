@@ -1,5 +1,5 @@
 <header>
-        <nav class="navbar navbar-expand-lg" style="background-color:rgb(35, 64, 196);opacity: 60%;" data-bs-theme="light">
+    <nav class="navbar navbar-expand-lg" style="background-color:rgb(35, 64, 196, 0.6);" data-bs-theme="light">
             <div class="container-fluid">
                 <div class="navbar-collapse collapse d-sm-inline-flex">
                     <div class="text-white">
@@ -31,8 +31,14 @@
                             <li class="nav-item text-white">
                                 <a class="nav-link text-white fw-bold" routerLink ="/Billing">Billing</a>
                             </li>
-                            <li class="nav-item text-white">
-                                <a class="nav-link text-white fw-bold" routerLink ="/MedicalCare">Medical Care</a>
+                            <li class="nav-item dropdown text-white">
+                                <a class="nav-link dropdown-toggle text-white fw-bold" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Medical Care
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" routerLink ="/MedicalCare">Create Medical Care</a></li>
+                                            <li><a class="dropdown-item" routerLink ="/MedicalCare/Print">Print Medical Care</a></li>
+                                        </ul>
                             </li>
                             <li class="nav-item text-white">
                                 <a class="nav-link text-white fw-bold" (click)="logout()" href="">Logout</a>

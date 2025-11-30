@@ -45,10 +45,9 @@
                     </div>
                 </form>
                     <div class="input-group mb-3">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onSearch('Medicalcare')">Search Medicalcare</button>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onSearch('Billing')">Search Billing</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onSearch()">Search</button>
                     </div>
-                    @if(searchMedical || searchBilling){
+                    @if(searchMedical){
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <div class="tableFixHead">
@@ -179,20 +178,6 @@
                                 </div>
                             </div>
                         </div>
-                    }
-                    @if(searchBilling) {
-                        <table class="table">
-                            <thead class="table-header">
-                            <tr>
-                                <th>#</th>
-                                <th>Prescription Date</th>
-                                <th>Medicine</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Amount</th>
-                            </tr>
-                            </thead>
-                        </table>
                     }
             </div>
         </div>

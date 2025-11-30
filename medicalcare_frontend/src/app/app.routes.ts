@@ -7,7 +7,6 @@ import { ForgotPassword } from './account/forgot-password';
 import { PatientComponent } from './patient/patient';
 import { EditPatient } from './patient/edit-patient';
 import { CreatePatient } from './patient/create-patient';
-import { Billing } from './billing/billing';
 import { ViewPatient } from './patient/view-patient';
 import { HospitalsComponent } from './hospitals/hospitals';
 import { EditHospital } from './hospitals/edit-hospital';
@@ -29,6 +28,7 @@ import { MedicalCaresComponent } from './MedicalCare/medical-cares';
 import { CreateMedicalCare } from './MedicalCare/create-medical-care';
 import { ViewMedicalCareComponent } from './MedicalCare/view-medical-care';
 import { PrintMedicalCareComponent } from './MedicalCare/print-medical-care';
+import { BillingComponent } from './billing/billing';
 
 
 export const routes: Routes = [
@@ -131,18 +131,22 @@ export const routes: Routes = [
     },
     {
         path: "Billing",
-        component: MedicalCaresComponent
-    },
-    {
-        path: "Billing/Add",
-        component: CreateMedicalCare
-    },
-    {
-        path: "Billing/Edit/:id",
-        component: CreateMedicalCare
+        component: BillingComponent
     },
     {
         path: "MedicalCare",
+        component: MedicalCaresComponent
+    },
+    {
+        path: "MedicalCare/Add",
+        component: CreateMedicalCare
+    },
+    {
+        path: "MedicalCare/Edit/:id",
+        component: CreateMedicalCare
+    },
+    {
+        path: "MedicalCare/Print",
         component: ViewMedicalCareComponent
     },
     {

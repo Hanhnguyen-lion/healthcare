@@ -53,7 +53,7 @@ export class CreateMedicalCare extends BaseComponent implements OnInit{
       `${enviroment.apiUrl}/MedicalCares`, 
       "", 
       "Create Medical Care successful",
-      "/Billing",
+      "/MedicalCare",
       router,
       baseSrv,
       dialogService,

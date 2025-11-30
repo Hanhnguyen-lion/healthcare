@@ -24,8 +24,7 @@ export class ViewMedicalCareComponent extends BaseComponent implements OnInit{
   years:number[] = [];
 
   searchMedical:boolean = false;
-  searchBilling:boolean = false;
-
+  
   medicalCares?:any[];
   searchItem?:Observable<any>;
   patientItem?:any;
@@ -138,19 +137,11 @@ export class ViewMedicalCareComponent extends BaseComponent implements OnInit{
     return (n<10 ? '0'+n : n);
   }
 
-  onSearch(searchType: string){
+  onSearch(){
+    this.searchMedical = true;
     this.medicalCares = undefined;
     var url = `${enviroment.apiUrl}/MedicalCares/Search`
     var searchValue = this.form.value;
-    if (searchType == "Medicalcare"){
-      this.searchMedical = true;
-      this.searchBilling = false;
-    }
-    else if (searchType == "Billing"){
-      this.searchMedical = false;
-      this.searchBilling = true;
-      url = `${enviroment.apiUrl}/MedicalCares/Billing`
-    }
     this.searchItem = this.baseSrv.SearchItems(url, searchValue);
     
     this.searchItem.subscribe({
@@ -158,13 +149,7 @@ export class ViewMedicalCareComponent extends BaseComponent implements OnInit{
         this.patientItem = item;
         var patient_id = item.patient_id;
         if (patient_id > 0){
-          if (this.searchMedical)
-            this.medicalCares = item.medical;
-          else{
-            this.medicalCares = item.billing;
-            console.log(item);
-            this.total = item.total;
-          }
+          this.medicalCares = item.medical
           this.cdr.detectChanges();  
           this.form.patchValue({
             DataLoaded: "loaded"

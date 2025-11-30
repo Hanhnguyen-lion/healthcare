@@ -1,99 +1,185 @@
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h4>Billing</h4>
-        </div>        
-        <div class="card-body" id="billing">
-                <div class="row g-3 mb-3 align-items-center">
-                    <div class="col-auto">
-                        <label class="fw-bold">Date:</label>
+<div class="container mt-3">
+    <div class="row mt-3">
+        <div class="card">
+            <div class="card-header">
+                <form [formGroup]="form">
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Patient</label>
+                        <div class="col-sm-8">
+                            <select class="form-select" formControlName="patient_id">
+                                @for (item of data | async; track $index) {
+                                    <option [ngValue] ="item.patient_id">
+                                        {{item.patient_code}}
+                                    </option>                            
+                                }
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <label class="fw-normal">Sep-01-2025</label>
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Month of visit date</label>
+                        <div class="col-sm-8">
+                            <select class="form-select" formControlName="visit_month">
+                                @for (month of months; track $index) {
+                                    <option [ngValue] ="month">
+                                        {{pad(month)}}
+                                    </option>                            
+                                }
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="row g-3 mb-3 align-items-center">
-                    <div class="col-auto">
-                        <label class="fw-bold">Patient Name:</label>
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Year of visit date</label>
+                        <div class="col-sm-8">
+                            <select class="form-select" formControlName="visit_year">
+                                <option [ngValue]="0" selected></option>
+                                @for (year of years; track $index) {
+                                    <option [ngValue]="year">
+                                        {{year}}
+                                    </option>                            
+                                }
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <label class="fw-normal">XXXX</label>
+                    <div>
+                        <input type="hidden" formControlName="DataLoaded">
                     </div>
-                </div>
-                <div class="row g-3 mb-3 align-items-center">
-                    <div class="col-auto">
-                        <label class="fw-bold">Address:</label>
+                </form>
+                    <div class="input-group mb-3">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onSearch()">Search</button>
                     </div>
-                    <div class="col-auto">
-                        <label class="fw-normal">XXXX</label>
-                    </div>
-                </div>
-                <div class="row g-3 mb-3 align-items-center">
-                    <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Medicine Name</th>
-                            <th scope="col">Dosage</th>
-                            <th scope="col">Duration</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Medicine 1</td>
-                            <td>1 Morning, 1 Night</td>
-                            <td>10 days</td>
-                            <td>20</td>
-                            <td>$10</td>
-                            <td>$200</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Medicine 2</td>
-                            <td>1 Morning, 1 Night</td>
-                            <td>10 days</td>
-                            <td>20</td>
-                            <td>$10</td>
-                            <td>$200</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Medicine 3</td>
-                            <td>1 Morning, 1 Night</td>
-                            <td>10 days</td>
-                            <td>20</td>
-                            <td>$10</td>
-                            <td>$200</td>
-                        </tr>
-                    </tbody>
-                    <thead>
-                        <tr>
-                            <th scope="col">Sub Total</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col">60</th>
-                            <th scope="col">$30</th>
-                            <th scope="col">$600</th>
-                        </tr>
-                    </thead>
-                    </table>
-                </div>
-            </div>    
-    </div>
+                    @if(searchBilling){
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="tableFixHead">
+                                    <div class="container">
+                                        <h2>Billing</h2>
+                                        <div id="MedicalReports">
+                                            <table class="my-double-bordered-table">
+                                                <tr>
+                                                    <td>Số thứ tự</td>
+                                                    <td class="borderleft" colspan="3">{{patientItem?.patient_code??""}}</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="alnrleft borderleft-double">Số bảo hiểm</td>
+                                                    <td class="alncenter borderleft">{{patientItem?.insurance_policy_number??""}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="5" class=" bordertop">&nbsp;</td>
+                                                    <td class="alnrleft borderleft-double bordertop">Hạn sử dụng bảo hiểm</td>
+                                                    <td class="alncenter borderleft bordertop">{{formatDateToString(patientItem?.insurance_expire??today, 'dd/MM/yyyy')}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="4" class="bordertop-double">Người bệnh</td>
+                                                    <td class="borderleft bordertop-double">Họ Tên</td>
+                                                    <td class="borderleft bordertop-double">{{patientItem?.patient_name??""}}
+                                                    </td>
+                                                    <td colspan="2" class="bordertop-double">&nbsp;</td>
+                                                    <td class="alnrleft borderleft-double bordertop">Tên người có bảo hiểm</td>
+                                                    <td class="alncenter borderleft bordertop">{{patientItem?.patient_name??""}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="borderleft bordertop">Ngày sinh</td>
+                                                    <td class="borderleft bordertop">{{formatDateToString(patientItem?.date_of_birth??today, 'dd/MM/yyyy')}}
+                                                    </td>
+                                                    <td class="borderleft bordertop">Giới tính</td>
+                                                    <td class="borderleft bordertop">{{patientItem?.gender??""}}
+                                                    </td>
+                                                    <td rowspan="2" class="alnrleft borderleft-double bordertop">Địa chỉ</td>
+                                                    <td rowspan="2" class="alncenter borderleft bordertop">{{patientItem?.home_address??""}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="borderleft bordertop">Địa chỉ</td>
+                                                    <td class="borderleft bordertop">{{patientItem?.home_address??""}}
+                                                    </td>
+                                                    <td class="bordertop" colspan="2">&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="borderleft bordertop">Công việc</td>
+                                                    <td class="borderleft bordertop">{{patientItem?.job??""}}
+                                                    </td>
+                                                    <td class="borderleft bordertop">Dạng bảo hiểm</td>
+                                                    <td class="borderleft bordertop">{{patientItem?.insurance_type??""}}
+                                                    </td>
+                                                    <td class="alnrleft borderleft-double bordertop">Địa chỉ công ty</td>
+                                                    <td class="alncenter borderleft bordertop">{{patientItem?.office_address??""}}
+                                                    </td>
+                                                </tr>
+                                                <tr class="borderleft bordertop-double">
+                                                    <td class="alncenter" colspan="4">Tên bệnh</td>
+                                                    <td class="alncenter borderleft">Bắt đầu</td>
+                                                    <td class="alncenter borderleft">Kết thúc</td>
+                                                    <td class="alncenter borderleft">Chuyển bệnh</td>
+                                                </tr>
+                                                @for (item of this.billing; track $index) {
+                                                    <tr class="borderleft bordertop">
+                                                        <td class="alncenter" colspan="4">{{item.diagnostic}}</td>
+                                                        <td class="alncenter borderleft">
+                                                            @if(item.start_date != null) {
+                                                                {{formatDateToString(item.start_date, "dd/MM/yyyy")}}
+                                                            }
+                                                        </td>
+                                                        <td class="alncenter borderleft">
+                                                            @if(item.end_date != null) {
+                                                                {{formatDateToString(item.end_date, "dd/MM/yyyy")}}
+                                                            }
+                                                        </td>
+                                                        <td class="alncenter borderleft"></td>
+                                                    </tr>
+                                                }
+                                                <tr class="borderleft bordertop-double borderbottom">
+                                                    <td class="alncenter borderleft" colspan="7">Đơn thuốc - Phẫu thuật - Trị liệu</td>
+                                                </tr>
+                                                @for (item of billing; track $index){
+                                                    <tr>
+                                                        <td colspan="7">
+<div class="tableFixHead">
+  <table class="table table-striped">
+    <thead class="table-header">
+                                                                <tr>
+                                                                    <th colspan="4" class="ps-3">Đơn thuốc</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th style="width: 25%;">Name</th>
+                                                                    <th style="width: 25%;">Quantity</th>
+                                                                    <th style="width: 25%;">Price</th>
+                                                                    <th style="width: 25%;">Amount</th>
+                                                                </tr>
+                                                                </thead>
+                                                            @for (prescriptionItem of item.billings; track $index) {
+                                                                <tr>
+                                                                    <td style="width: 25%;">{{prescriptionItem.medicine_name}}</td>
+                                                                    <td style="width: 25%;">{{prescriptionItem.quantity | number:'0.2'}}</td>
+                                                                    <td style="width: 25%;">{{prescriptionItem.price | number:'0.2'}}</td>
+                                                                    <td style="width: 25%;">{{prescriptionItem.amount | number:'0.2'}}</td>
+                                                                </tr>
+                                                            }
+                                                                <tr>
+                                                                    <td style="width: 25%;"></td>
+                                                                    <td style="width: 25%;"></td>
+                                                                    <td style="width: 25%;"></td>
+                                                                    <td style="width: 25%;" class="fw-bold">{{item.total | number:'0.2'}}</td>
+                                                                </tr>
+                                                            </table>
 </div>
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <div class="form-group mb-3 d-grid gap-2 d-md-flex">
-                <button class="btn btn-primary" type="button" (click)="printInvoice()">
-                    Print
-                </button>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </table>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="form-group">
+                                                <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onPrint()">Print</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
             </div>
         </div>
     </div>
 </div>
+<router-outlet></router-outlet>

@@ -181,6 +181,7 @@ namespace Medicalcare_API.Helpers{
                     var dicPres = new Dictionary<string, object>
                     {
                         ["prescription_id"] = presItem?.id??0,
+                        ["medicine_name"] = presItem?.medicine_name??"",
                         ["quantity"] = presItem?.quantity??0,
                         ["prescription_date"] = presItem?.prescription_date??null,
                         ["price"] = presItem?.price??0,
