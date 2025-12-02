@@ -16,11 +16,11 @@ namespace Medicalcare_API.Controllers{
         }
 
         [HttpGet]
-        [Route("items/{medicalcare_id}")]
-        public async Task<IActionResult> GetTreatments(int medicalcare_id)
+        [Route("items/{billing_id}")]
+        public async Task<IActionResult> GetTreatments(int billing_id)
         {
-            var data = await this.context.m_treatment.Where(li=> li.medicalcare_id == null ||
-                li.medicalcare_id == medicalcare_id).ToListAsync();
+            var data = await this.context.v_treatment.Where(
+                li=> li.billing_id == billing_id).ToListAsync();
 
             return Ok(data);
         }
@@ -76,19 +76,28 @@ namespace Medicalcare_API.Controllers{
             // Check if patient exists
             TreatmentDTO? editItem = await this.context.m_treatment.FirstOrDefaultAsync(
                     m => m.id == item.id);
-            if (item == null)
+            if (editItem == null)
             {
-                return NotFound(new { message = "Treatment not found." });
+                if (item?.billing_id > 0)
+                {
+                    if (item != null)
+                    {
+                        this.context.m_treatment.Add(item);
+                        this.context.SaveChanges();
+                    }
+                    return Ok(item);
+                }
+                else
+                {
+                    return NotFound(new { message = "Treatment not found." });
+                }
             }
             else
             {
                 await Task.Run(() =>
                 {
-                    if (editItem != null)
-                    {
-                        this.context.m_treatment.Entry(editItem).CurrentValues.SetValues(item);
-                        this.context.SaveChanges();
-                    }
+                    this.context.m_treatment.Entry(editItem).CurrentValues.SetValues(item);
+                    this.context.SaveChanges();
                 });
 
                 return Ok(item);

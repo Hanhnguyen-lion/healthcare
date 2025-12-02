@@ -72,6 +72,32 @@ export class BaseComponent implements OnInit {
     this.loading = true;
 
     var item = this.form.value;
+
+    this.baseSrv.Add(item, this.apiUrl)
+      .subscribe({
+        next: () =>{
+          this.alertService.success(this.successfullMessage, { keepAfterRouteChange: true });
+          this.detectChanges();
+          this.navigateTo(this.navigateByUrl);
+        },
+        error: (error)=>{
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
+  }
+
+  protected add(item: any){
+
+    this.submitted = true;
+    this.alertService.clear();
+
+    if (this.form.invalid){
+        return;
+    }
+
+    this.loading = true;
+
     this.baseSrv.Add(item, this.apiUrl)
       .subscribe({
         next: () =>{
@@ -118,17 +144,19 @@ export class BaseComponent implements OnInit {
   protected deleteItem(id: number){
     this.dialogService.openConfirmDialog("Are you sure to want delete this item?", this.titleConfirmDialog)
       .subscribe({
-        next: () =>{
-          this.baseSrv.Delete(id, this.apiUrl)
-          .subscribe({
-            next:()=>{
-              this.loadData();
-              this.detectChanges();
-            },
-            error:(error)=>{
-              this.alertService.error(error);
-            }
-          });
+        next: (is_deleted: boolean) =>{
+          if (is_deleted){
+            this.baseSrv.Delete(id, this.apiUrl)
+            .subscribe({
+              next:()=>{
+                this.loadData();
+                this.detectChanges();
+              },
+              error:(error)=>{
+                this.alertService.error(error);
+              }
+            });
+          }
         },
         error: (error)=>{
           this.alertService.error(error);
@@ -138,7 +166,7 @@ export class BaseComponent implements OnInit {
   }
 
   // Common methods for child components
-  private navigateTo(route: string): void {
+  public navigateTo(route: string): void {
     this.router.navigateByUrl(route);
   }
 

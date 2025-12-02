@@ -5,18 +5,12 @@ namespace Medicalcare_API.Models{
     public class Billing{
         
         [Key]
-        public int id{get;set;}
+        public int billing_id{get;set;}
 
-        public int? medicalcare_id{get;set;}
-        public int? medicine_id{get;set;}
-        public int? patient_id{get;set;}
-
-        public DateTime? prescription_date{get;set;}
-        public int? quantity{get;set;}
-        public decimal? price{get;set;}
-        public decimal? amount{get;set;}
-
-        public string? medicine_name{get;set;}
-        public string? medicine_type{get;set;}
-   }
+	    public int? patient_id {get;set;}
+        public string? patient_code {get;set;}
+        public string? patient_name {get;set;}
+        public decimal? total {get;set;}
+        public DateTime? billing_date{get;set;}
+    }
 }

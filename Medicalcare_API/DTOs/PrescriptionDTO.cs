@@ -7,12 +7,9 @@ namespace Medicalcare_API.DTOs{
         [Key]
         public int id{get;set;}
 
-        public int? medicalcare_id{get;set;}
+        public int? billing_id{get;set;}
         public int? medicine_id{get;set;}
-        public int? doctor_id{get;set;}
-
         public string? dosage{get;set;}
-        public DateTime? prescription_date{get;set;}
         public int? quantity{get;set;}
         public int? duration{get;set;}
         public string? duration_type{get;set;}

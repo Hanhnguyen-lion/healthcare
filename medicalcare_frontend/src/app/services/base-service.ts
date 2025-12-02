@@ -53,6 +53,7 @@ export class BaseServices {
 
   Add(item: any, url: string): Observable<any>{
     url = `${url}/Add`;
+    console.log("url:", url);
     return this.http.post<any>(url, item, this.httpHeader);
   }
 }

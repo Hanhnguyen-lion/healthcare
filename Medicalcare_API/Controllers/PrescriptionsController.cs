@@ -16,11 +16,11 @@ namespace Medicalcare_API.Controllers{
         }
 
         [HttpGet]
-        [Route("items/{medicalcare_id}")]
-        public async Task<IActionResult> GetPrescriptions(int medicalcare_id)
+        [Route("items/{billing_id}")]
+        public async Task<IActionResult> GetPrescriptions(int billing_id)
         {
-            var data = await this.context.v_prescription.Where(li=> li.medicalcare_id == null ||
-                li.medicalcare_id == medicalcare_id).ToListAsync();
+            var data = await this.context.v_prescription.Where(
+                li=> li.billing_id == billing_id).ToListAsync();
 
             return Ok(data);
         }
@@ -79,7 +79,7 @@ namespace Medicalcare_API.Controllers{
 
         [HttpPut]
         [Route("Edit/{id}")]
-        public async Task<IActionResult> Edit(int id, Prescription item)
+        public async Task<IActionResult> Edit(int id, PrescriptionDTO item)
         {
             // Validate the incoming model.
             if (!ModelState.IsValid)
@@ -94,9 +94,19 @@ namespace Medicalcare_API.Controllers{
             // Check if patient exists
             PrescriptionDTO? editItem = await this.context.h_prescription.FirstOrDefaultAsync(
                     m => m.id == item.id);
-            if (item == null)
+            if (editItem == null)
             {
-                return NotFound(new { message = "Prescription not found." });
+                if (item?.billing_id == 0)
+                    return NotFound(new { message = "Prescription not found." });
+                else
+                {
+                    if (item != null)
+                    {
+                        this.context.h_prescription.Add(item);
+                        this.context.SaveChanges();
+                    }
+                    return Ok(item);
+                }
             }
             else
             {

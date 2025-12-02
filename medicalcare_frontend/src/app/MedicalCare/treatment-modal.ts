@@ -4,24 +4,24 @@ import { BaseComponent } from '../BaseComponent';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { enviroment } from '../../enviroments/enviroment';
-import { DatePipe, formatDate } from '@angular/common';
+import { DatePipe, formatDate, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-treatment-modal',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass],
   templateUrl: './treatment-modal.html',
   styleUrl: './treatment-modal.css',
   providers: [BaseServices]
 })
 export class TreatmentModal extends BaseComponent implements OnInit{
   
-  medicalcare_id: number = 0;
+  billing_id: number = 0;
   treatment_id: number = 0;
-  title:string = "Add New Treatment";
-
+  title:string = "Add Treatment";
+  treatmentItem?:any;
 
   constructor(
     protected override router: Router,
@@ -50,7 +50,8 @@ export class TreatmentModal extends BaseComponent implements OnInit{
     this.form = this.formBuilder.group({
       treatment_type: [""],
       description: [""],
-      treatment_date: [formatDate(this.today, "yyyy-MM-dd", this.locale)]
+      quantity: ["", Validators.required],
+      amount: ["", Validators.required]
     });
 
     if (this.treatment_id > 0){
@@ -62,7 +63,8 @@ export class TreatmentModal extends BaseComponent implements OnInit{
             this.form.setValue({
               treatment_type: item.treatment_type,
               description: item.description,
-              treatment_date: formatDate(item.treatment_date, "yyyy-MM-dd", this.locale)
+              quantity: item.quantity,
+              amount: item.amount
             });
             this.detectChanges();  
           }
@@ -76,12 +78,17 @@ export class TreatmentModal extends BaseComponent implements OnInit{
   }
 
   onConfirm(){
+    this.submitted = true;
+
+    if (this.form.invalid){
+      return;      
+    }
+    
     var item = this.form.value;
     item.id = this.treatment_id;
-    if (this.medicalcare_id > 0)
-      item.medicalcare_id = this.medicalcare_id;
+    item.billing_id = (this.billing_id > 0) ? this.billing_id : 0;
 
-    if (this.treatment_id > 0){
+    if (this.billing_id > 0){
       this.baseSrv.Update(item, this.apiUrl).subscribe({
         next:()=>{
           this.activeModal.close(true);
@@ -92,14 +99,17 @@ export class TreatmentModal extends BaseComponent implements OnInit{
       });
     }
     else{
-      this.baseSrv.Add(item, this.apiUrl).subscribe({
-        next:()=>{
-          this.activeModal.close(true);
-        },
-        error: (error) =>{
-          console.log(error);
+
+      var url = `${enviroment.apiUrl}/Billings/TreatmentItem`;
+
+      this.baseSrv.http.post(url, item, this.baseSrv.httpHeader)
+      .subscribe({
+          next:(data)=>{
+            this.treatmentItem = data;
+            this.activeModal.close(true);
+          }
         }
-      });
+      )
     }
   }
 }

@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { enviroment } from '../../enviroments/enviroment';
 import { AsyncPipe, formatDate, NgClass } from '@angular/common';
 import { first, map, Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-prescription-modal',
@@ -21,8 +22,9 @@ import { first, map, Observable } from 'rxjs';
 })
 export class PrescriptionModal extends BaseComponent implements OnInit{
   
-  medicalcare_id: number = 0;
+  billing_id: number = 0;
   prescription_id: number = 0;
+  prescriptionItem?: any;
 
   doctorItems?: Observable<Doctor[]>;
   medicineItems?:Observable<Medicine[]>;
@@ -61,11 +63,9 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
 
     this.form = this.formBuilder.group({
       medicine_id: ["", Validators.required],
-      doctor_id: ["", Validators.required],
       dosage: ["", Validators.required],
       quantity: [1, Validators.required],
       duration: [1, Validators.required],
-      prescription_date: [formatDate(this.today, "yyyy-MM-dd", this.locale)],
       duration_type: ["", Validators.required],
       medicine_type: ["day", Validators.required],
       notes: [""]
@@ -101,11 +101,9 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
 
             this.form.setValue({
               medicine_id: item.medicine_id,
-              doctor_id: item.doctor_id,
               dosage: item.dosage,
               quantity: item.quantity,
               duration: item.duration,
-              prescription_date: formatDate(item.prescription_date, "yyyy-MM-dd", this.locale),
               duration_type: item.duration_type,
               medicine_type: item.medicine_type,
               notes: item.notes
@@ -127,10 +125,8 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
     }
     var item = this.form.value;
     item.id = this.prescription_id;
-    if (this.medicalcare_id > 0)
-      item.medicalcare_id = this.medicalcare_id;
-
-    if (this.prescription_id > 0){
+    item.billing_id = (this.billing_id > 0) ? this.billing_id : 0;
+    if (this.billing_id > 0){
       this.baseSrv.Update(item, this.apiUrl).subscribe({
         next:()=>{
           this.activeModal.close(true);
@@ -141,14 +137,39 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
       });
     }
     else{
-      this.baseSrv.Add(item, this.apiUrl).subscribe({
-        next:()=>{
-          this.activeModal.close(true);
-        },
-        error: (error) =>{
-          console.log(error);
+      var url = `${enviroment.apiUrl}/Billings/PrescriptionItem`;
+
+      this.baseSrv.http.post(url, item, this.baseSrv.httpHeader)
+      .subscribe({
+          next:(data)=>{
+            this.prescriptionItem = data;
+            this.activeModal.close(true);
+          }
         }
-      });
+      )
     }
+
+    // if (this.prescription_id > 0){
+    //   this.activeModal.close(true);
+    //   // this.baseSrv.Update(item, this.apiUrl).subscribe({
+    //   //   next:()=>{
+    //   //     this.activeModal.close(true);
+    //   //   },
+    //   //   error: (error) =>{
+    //   //     console.log(error);
+    //   //   }
+    //   // });
+    // }
+    // else{
+    //   this.baseSrv.Add(item, this.apiUrl).subscribe({
+    //     next:()=>{
+    //       this.activeModal.close(true);
+    //     },
+    //     error: (error) =>{
+    //       console.log(error);
+    //     }
+    //   });
+    // }
+    this.activeModal.close(true);
   }
 }

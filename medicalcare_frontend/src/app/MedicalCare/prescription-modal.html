@@ -6,7 +6,7 @@
     <div class="container">
             <form [formGroup]="form">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label class="fw-bold">Medicine <span class="text-danger">*</span></label>
                             <select class="form-select" formControlName="medicine_id" placeholder="Enter Medicine" [ngClass]="{ 'is-invalid': submitted && f.medicine_id.errors }">
@@ -23,25 +23,6 @@
                                 }
                                 </div>
                             }
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        <label class="fw-bold">Doctor <span class="text-danger">*</span></label>
-                        <select class="form-select" formControlName="doctor_id" placeholder="Enter doctor" [ngClass]="{ 'is-invalid': submitted && f.doctor_id.errors }">
-                            @for (item of doctorItems | async; track $index) {
-                                <option [ngValue]="item.id">
-                                    {{item.last_name}} {{item.first_name}}
-                                </option>
-                            }
-                        </select>
-                        @if (submitted && f.doctor_id.errors) {
-                            <div class="invalid-feedback">
-                            @if (f.doctor_id.errors.required) {
-                                <div>Doctor is required</div>
-                            }
-                            </div>
-                        }
                         </div>
                     </div>
                 </div>
@@ -96,14 +77,6 @@
                                     </option>
                                 }
                             </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                        <label class="fw-bold">Prescription date</label>
-                        <input type="date" class="form-control" formControlName="prescription_date" placeholder="Enter prescription date">
                         </div>
                     </div>
                 </div>

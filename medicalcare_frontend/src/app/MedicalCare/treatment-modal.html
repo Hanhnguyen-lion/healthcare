@@ -5,15 +5,36 @@
 <div class="modal-body">
     <div class="container">
             <form [formGroup]="form">
-
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="form-group">
-                        <label class="fw-bold">Treatment date</label>
-                        <input type="date" class="form-control" formControlName="treatment_date" placeholder="Enter treatment date">
+                            <label class="fw-bold">Quantity <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" formControlName="quantity" placeholder="Enter quantity" [ngClass]="{ 'is-invalid': submitted && f.quantity.errors }">
+                            @if (submitted && f.quantity.errors) {
+                                <div class="invalid-feedback">
+                                @if (f.quantity.errors.required) {
+                                    <div>Quantity is required</div>
+                                }
+                                </div>
+                            }
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="fw-bold">Amount <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" formControlName="amount" placeholder="Enter amount" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
+                            @if (submitted && f.quantity.errors) {
+                                <div class="invalid-feedback">
+                                @if (f.quantity.errors.required) {
+                                    <div>Amount is required</div>
+                                }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label class="fw-bold">Treatment Type</label>
                             <input type="text" class="form-control" formControlName="treatment_type" placeholder="Enter treatment type">
