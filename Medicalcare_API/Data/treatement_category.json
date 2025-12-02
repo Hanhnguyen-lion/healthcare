@@ -1,0 +1,50 @@
+[
+  {
+    "name_en": "MRI",
+    "name_vn": "MRI",
+    "name_jp": null,
+    "description": "MRI"
+  },
+  {
+    "name_en": "X-quang",
+    "name_vn": "X-quang",
+    "name_jp": null,
+    "description": "X-quang"
+  },
+  {
+    "name_en": "Therapy",
+    "name_vn": "Trị liệu",
+    "name_jp": null,
+    "description": "Therapy"
+  },
+  {
+    "name_en": "Blood test",
+    "name_vn": "Xét nghiệm máu",
+    "name_jp": null,
+    "description": "blood test"
+  },
+  {
+    "name_en": "Surgery",
+    "name_vn": "Phẫu thuật",
+    "name_jp": null,
+    "description": "Surgery"
+  },
+  {
+    "name_en": "Chemotherapy",
+    "name_vn": "Hóa trị",
+    "name_jp": null,
+    "description": "Chemotherapy"
+  },
+  {
+    "name_en": "Radiation therapy",
+    "name_vn": "Xạ trị",
+    "name_jp": null,
+    "description": "Radiation therapy"
+  },
+  {
+    "name_en": "Examination",
+    "name_vn": "Khám",
+    "name_jp": null,
+    "description": "Examination"
+  }
+]

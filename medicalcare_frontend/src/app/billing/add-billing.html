@@ -6,7 +6,7 @@
                     <h3>{{title}}</h3>
                     <form [formGroup]="form">
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="fw-bold">Patient <span class="text-danger">*</span></label>
                                     <select class="form-select" formControlName="patient_id" placeholder="Enter Patient" [ngClass]="{ 'is-invalid': submitted && f.patient_id.errors }">
@@ -26,6 +26,8 @@
                                     }
                                 </div>
                             </div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="fw-bold">Doctor <span class="text-danger">*</span></label>
@@ -45,8 +47,6 @@
                                     }
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="fw-bold">Department <span class="text-danger">*</span></label>
@@ -64,13 +64,6 @@
                                             }
                                         </div>
                                     }
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="fw-bold">Appointment</label>
-                                    <select class="form-select" formControlName="appointment_id" placeholder="Enter Appointment">
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -91,22 +84,16 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="fw-bold">Discharge Date</label>
-                                    <input type="date" class="form-control" formControlName="discharge_date" placeholder="Enter discharge date">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="fw-bold">Total days</label>
-                                    <input type="number" class="form-control" formControlName="days" placeholder="Enter total days">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="fw-bold">Amount</label>
-                                    <input type="number" class="form-control" formControlName="amount" placeholder="Enter amount">
+                                    <label class="fw-bold">Discharge Date <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" formControlName="discharge_date" placeholder="Enter discharge date" [ngClass]="{ 'is-invalid': submitted && f.discharge_date.errors }">
+                                    @if (submitted && f.discharge_date.errors) {
+                                        <div class="invalid-feedback">
+                                            @if (f.discharge_date.errors.required) {
+                                                <div>Discharge date is required
+                                                </div>
+                                            }
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -235,4 +222,5 @@
         </div>
     </div>
 </div>
+<app-footer></app-footer>
 <router-outlet></router-outlet>

@@ -32,6 +32,7 @@ namespace Medicalcare_API.Helpers{
         public DbSet<Prescription> v_prescription{get;set;}
         public DbSet<DurationType> m_duration_type{get;set;}
         public DbSet<MedicineType> m_medicine_type{get;set;}
+        public DbSet<TreatmentCategory> m_treatment_category{get;set;}
         public DbSet<BillingDTO> h_billing{get;set;}
         public DbSet<Billing> v_billing{get;set;}
 
@@ -97,108 +98,106 @@ namespace Medicalcare_API.Helpers{
             return newItem;
         }
         
-        // public IDictionary? GetMedicalDetails(
-        //     int patient_id, 
-        //     int visit_month,  
-        //     int visit_year)
-        // {
-        //     var item = m_patient.Where(li => li.id == patient_id).FirstOrDefault<Patient?>();
+        public IDictionary? GetMedicalDetails(
+            int patient_id, 
+            int admission_month,  
+            int admission_year)
+        {
+            var item = m_patient.Where(li => li.id == patient_id).FirstOrDefault<Patient?>();
 
-        //     var first_name = item?.first_name??"";
-        //     var last_name = item?.last_name??"";
+            var first_name = item?.first_name??"";
+            var last_name = item?.last_name??"";
 
-        //     var paItem = new Dictionary<string, object>
-        //     {
-        //         ["patient_id"] = patient_id,
-        //         ["patient_code"] = item?.code??"",
-        //         ["patient_name"] = $"{last_name} {first_name}",
-        //         ["gender"] = item?.gender??"",
-        //         ["insurance_policy_number"] = item?.insurance_policy_number??"",
-        //         ["insurance_type"] = item?.insurance_type??"",
-        //         ["date_of_birth"] = item?.date_of_birth??new DateTime(),
-        //         ["insurance_expire"] = item?.insurance_expire??new DateTime(),
-        //         ["job"] = item?.job??"",
-        //         ["home_address"] = item?.home_address??"",
-        //         ["office_address"] = item?.office_address??"",
-        //     };
+            var paItem = new Dictionary<string, object>
+            {
+                ["patient_id"] = patient_id,
+                ["patient_code"] = item?.code??"",
+                ["patient_name"] = $"{last_name} {first_name}",
+                ["gender"] = item?.gender??"",
+                ["insurance_policy_number"] = item?.insurance_policy_number??"",
+                ["insurance_type"] = item?.insurance_type??"",
+                ["date_of_birth"] = item?.date_of_birth??new DateTime(),
+                ["insurance_expire"] = item?.insurance_expire??new DateTime(),
+                ["job"] = item?.job??"",
+                ["home_address"] = item?.home_address??"",
+                ["office_address"] = item?.office_address??"",
+            };
 
-        //     var medicalItems = v_medicalcare.Where(li => li.patient_id == patient_id &&
-        //         (li.visit_month== visit_month) &&
-        //         (li.visit_year== visit_year)).ToList<MedicalCare?>();
-        //     List<IDictionary> medicals = new List<IDictionary>();
+            var medicalItems = v_medicalcare.Where(li => li.patient_id == patient_id &&
+                (li.admission_month== admission_month) &&
+                (li.admission_year== admission_year)).ToList<MedicalCare?>();
+            List<IDictionary> medicals = new List<IDictionary>();
 
-        //     foreach (var medicalItem in medicalItems)
-        //     {
-        //         var medicalcare_id = medicalItem?.id??0;
-        //         var it = new Dictionary<string, object>
-        //         {
-        //             ["medicalcare_id"] = medicalcare_id,
-        //             ["diagnostic"] = medicalItem?.diagnostic??"",
-        //         };
+            foreach (var medicalItem in medicalItems)
+            {
+                var billing_id = medicalItem?.id??0;
+                var it = new Dictionary<string, object>
+                {
+                    ["billing_id"] = billing_id,
+                    ["diagnostic"] = medicalItem?.diagnostic??"",
+                };
 
-        //         var presItems = v_prescription.Where(li => li.patient_id == patient_id && li.medicalcare_id == medicalcare_id).ToList<Prescription?>();
-        //         List<IDictionary> prescriptions = new List<IDictionary>();
+                var presItems = v_prescription.Where(li => li.patient_id == patient_id && li.billing_id == billing_id).ToList<Prescription?>();
+                List<IDictionary> prescriptions = new List<IDictionary>();
 
-        //         foreach (var presItem in presItems)
-        //         {
-        //             var dicPres = new Dictionary<string, object>
-        //             {
-        //                 ["prescription_id"] = presItem?.id??0,
-        //                 ["dosage"] = presItem?.dosage??"",
-        //                 ["quantity"] = presItem?.quantity??0,
-        //                 ["duration"] = presItem?.duration??0,
-        //                 ["duration_type"] = presItem?.duration_type??"",
-        //                 ["medicine"] = presItem?.medicine??"",
-        //                 ["prescription_date"] = presItem?.prescription_date??DateTime.Today,
-        //                 ["notes"] = presItem?.notes??"",
-        //                 ["medicine_name"] = presItem?.medicine_name??"",
-        //             };
-        //             prescriptions.Add(dicPres);
-        //         }
-        //         it["prescriptions"] = prescriptions;
+                foreach (var presItem in presItems)
+                {
+                    var dicPres = new Dictionary<string, object>
+                    {
+                        ["prescription_id"] = presItem?.id??0,
+                        ["dosage"] = presItem?.dosage??"",
+                        ["quantity"] = presItem?.quantity??0,
+                        ["duration"] = presItem?.duration??0,
+                        ["duration_type"] = presItem?.duration_type??"",
+                        ["medicine"] = presItem?.medicine??"",
+                        ["prescription_date"] = presItem?.prescription_date??DateTime.Today,
+                        ["notes"] = presItem?.notes??"",
+                        ["medicine_name"] = presItem?.medicine_name??"",
+                    };
+                    prescriptions.Add(dicPres);
+                }
+                it["prescriptions"] = prescriptions;
 
-        //         var treatmentItems = v_treatment.Where(li => li.patient_id == patient_id && li.medicalcare_id == medicalcare_id)
-        //             .ToList<Treatment?>()
-        //             .OrderBy(li=> li?.medicalcare_id)
-        //             .ThenBy(li=>li?.treatment_date);
+                var treatmentItems = v_treatment.Where(li => li.patient_id == patient_id && li.billing_id == billing_id)
+                    .ToList<Treatment?>()
+                    .OrderBy(li=> li?.billing_id)
+                    .ThenBy(li=>li?.treatment_date);
                 
-        //         List<IDictionary> treatments = new List<IDictionary>();
+                List<IDictionary> treatments = new List<IDictionary>();
 
                 
-        //         if (treatmentItems != null)
-        //         {
-        //             foreach (var treatmentItem in treatmentItems)
-        //             {
-        //                 var dicTreatment = new Dictionary<string, object>
-        //                 {
-        //                     ["treatment_id"] = treatmentItem?.id??0,
-        //                     ["treatment_type"] = treatmentItem?.treatment_type??"",
-        //                     ["description"] = treatmentItem?.description??"",
-        //                     ["treatment_date"] = treatmentItem?.treatment_date??new DateTime(),
-        //                 };
-        //                 treatments.Add(dicTreatment);
-        //             }
-        //             DateTime? start_date = treatmentItems?.First()?.treatment_date??null;
-        //             DateTime? end_date = (treatmentItems?.Count() > 1) ? treatmentItems?.Last()?.treatment_date??null: null;
-        //             it["start_date"] = start_date;
-        //             it["end_date"] = end_date;
-        //         }
+                if (treatmentItems != null)
+                {
+                    foreach (var treatmentItem in treatmentItems)
+                    {
+                        var dicTreatment = new Dictionary<string, object>
+                        {
+                            ["treatment_id"] = treatmentItem?.id??0,
+                            ["treatment_type"] = treatmentItem?.treatment_type??"",
+                            ["description"] = treatmentItem?.description??"",
+                            ["treatment_date"] = treatmentItem?.treatment_date??new DateTime(),
+                        };
+                        treatments.Add(dicTreatment);
+                    }
+                    DateTime? start_date = treatmentItems?.First()?.treatment_date??null;
+                    DateTime? end_date = (treatmentItems?.Count() > 1) ? treatmentItems?.Last()?.treatment_date??null: null;
+                    it["start_date"] = start_date;
+                    it["end_date"] = end_date;
+                }
                 
-        //         it["treatments"] = treatments;
+                it["treatments"] = treatments;
 
-        //         medicals.Add(it);
-        //     }
-        //     paItem["medical"] = medicals;
+                medicals.Add(it);
+            }
+            paItem["medical"] = medicals;
 
-        //     return paItem;
-        // }
+            return paItem;
+        }
        
         public IDictionary? GetBillingDetails(int billing_id)
         {
-            Console.WriteLine("billing_id: "+billing_id);
             var billingItem = h_billing.Where(li => li.id == billing_id).FirstOrDefault();
             var patient_id = billingItem?.patient_id;
-            Console.WriteLine("patient_id: "+patient_id);
             var item = m_patient.Where(li => li.id == patient_id).FirstOrDefault<Patient?>();
 
             var first_name = item?.first_name??"";
@@ -220,8 +219,8 @@ namespace Medicalcare_API.Helpers{
             };
             if (billingItem != null)
             {
-                var days = billingItem.days;
-                billingItem.amount = (days > 0) ? days*billingItem.amount: billingItem.amount;
+                var billing = v_billing.Where(li => li.billing_id == billing_id).FirstOrDefault();
+                billingItem.amount = billing?.total??0;
                 paItem["billing"] = billingItem;
             }
             var prescriptionItems = v_prescription.Where(li => li.billing_id == billing_id).ToList<Prescription?>();
@@ -267,6 +266,12 @@ namespace Medicalcare_API.Helpers{
         {
             var jsonContent = File.ReadAllText(filePath);
             return JsonSerializer.Deserialize<List<Patient>>(jsonContent);
+        }
+
+        public List<IDictionary>? ReadJsonFile(string filePath)
+        {
+            var jsonContent = File.ReadAllText(filePath);
+            return JsonSerializer.Deserialize<List<IDictionary>>(jsonContent);
         }
 
         public List<Hospital>? ReadJsonFileToHospital(string filePath)

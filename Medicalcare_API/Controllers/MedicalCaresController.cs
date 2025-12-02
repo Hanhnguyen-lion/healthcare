@@ -37,43 +37,24 @@ namespace Medicalcare_API.Controllers{
             return Ok(data);
         }
 
-        // [HttpGet]
-        // [Route("Search")]
-        // public async Task<IActionResult> SearchMedicalCares(
-        //     int patient_id, 
-        //     int visit_month,  
-        //     int visit_year)
-        // {
+        [HttpGet]
+        [Route("Search")]
+        public async Task<IActionResult> SearchMedicalCares(
+            int patient_id, 
+            int admission_month,  
+            int admission_year)
+        {
 
-        //     IDictionary? item = new Dictionary<string, object>();
-        //     await Task.Run(() =>
-        //     {
-        //         item = this.context.GetMedicalDetails(
-        //             patient_id: patient_id,
-        //             visit_month: visit_month,
-        //             visit_year: visit_year);
-        //     });
-        //     return Ok(item);
-        // }
-
-        // [HttpGet]
-        // [Route("Billing")]
-        // public async Task<IActionResult> SearchBillings(
-        //     int patient_id, 
-        //     int visit_month,  
-        //     int visit_year)
-        // {
-
-        //     IDictionary? item = new Dictionary<string, object>();
-        //     await Task.Run(() =>
-        //     {
-        //         item = this.context.GetBillingDetails(
-        //             patient_id: patient_id,
-        //             visit_month: visit_month,
-        //             visit_year: visit_year);
-        //     });
-        //     return Ok(item);
-        // }
+            IDictionary? item = new Dictionary<string, object>();
+            await Task.Run(() =>
+            {
+                item = this.context.GetMedicalDetails(
+                    patient_id: patient_id,
+                    admission_month: admission_month,
+                    admission_year: admission_year);
+            });
+            return Ok(item);
+        }
 
         [HttpGet]
         [Route("{id}")]

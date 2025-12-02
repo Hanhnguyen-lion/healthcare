@@ -51,16 +51,12 @@ namespace Medicalcare_API.Controllers{
             {
                 await Task.Run(() =>
                 {
-                    int? appointment_id = (string.IsNullOrEmpty(item["appointment_id"].ToString())) ? null : Convert.ToInt32(item["appointment_id"].ToString());
                     DateTime? discharge_date = (string.IsNullOrEmpty(item["discharge_date"].ToString())) ? null : Convert.ToDateTime(item["discharge_date"].ToString());
                     var billingItem = new BillingDTO();
                     billingItem.doctor_id = Convert.ToInt32(item["doctor_id"].ToString());
                     billingItem.patient_id = Convert.ToInt32(item["patient_id"].ToString());
-                    billingItem.amount = Convert.ToDecimal(item["amount"].ToString());
-                    billingItem.days = Convert.ToInt32(item["days"].ToString());
                     billingItem.admission_date = Convert.ToDateTime(item["admission_date"].ToString());
                     billingItem.discharge_date = discharge_date;
-                    billingItem.appointment_id = appointment_id;
                     billingItem.department_id = Convert.ToInt32(item["department_id"].ToString());
                     billingItem.notes = item["notes"].ToString();
                     billingItem.diagnostic = item["diagnostic"].ToString();

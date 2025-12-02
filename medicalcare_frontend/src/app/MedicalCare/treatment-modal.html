@@ -37,7 +37,13 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="fw-bold">Treatment Type</label>
-                            <input type="text" class="form-control" formControlName="treatment_type" placeholder="Enter treatment type">
+                            <select class="form-select" formControlName="category_id">
+                                @for (item of categoryItems | async; track $index) {
+                                    <option [ngValue]="item.id">
+                                        {{item.name_en}}
+                                    </option>
+                                }
+                            </select>
                         </div>
                     </div>
                 </div>    

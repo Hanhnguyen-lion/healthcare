@@ -8,11 +8,12 @@ import { BaseComponent } from '../BaseComponent';
 import { BaseServices } from '../services/base-service';
 import { DialogService } from '../services/dialog';
 import { enviroment } from '../../enviroments/enviroment';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-create-patient',
   imports: [RouterLink, RouterOutlet, FormsModule, 
-    ReactiveFormsModule, DatePipe, NgClass],
+    ReactiveFormsModule, DatePipe, NgClass, Footer],
   templateUrl: './create-patient.html',
   styleUrl: './create-patient.css',
   providers: [BaseServices]

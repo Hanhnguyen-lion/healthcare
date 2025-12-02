@@ -24,13 +24,13 @@ import { MedicinesComponent } from './medicines/medicines';
 import { EditMedicine } from './medicines/edit-medicine';
 import { ViewMedicine } from './medicines/view-medicine';
 import { CreateMedicine } from './medicines/create-medicine';
-import { MedicalCaresComponent } from './MedicalCare/medical-cares';
-import { CreateMedicalCare } from './MedicalCare/create-medical-care';
 import { ViewMedicalCareComponent } from './MedicalCare/view-medical-care';
 import { PrintMedicalCareComponent } from './MedicalCare/print-medical-care';
 import { BillingComponent } from './billing/billing';
 import { AddBilling } from './billing/add-billing';
 import { BillingDetail } from './billing/billing-detail';
+import { TreatmentCategoriesComponent } from './treatment/treatment-categories';
+import { AddTreatmentCategory } from './treatment/add-treatment-category';
 
 
 export const routes: Routes = [
@@ -116,6 +116,18 @@ export const routes: Routes = [
         component: CreateMedicine
     },
     {
+        path: "Treatement/Category",
+        component: TreatmentCategoriesComponent
+    },
+    {
+        path: "Treatement/Category/Edit/:id",
+        component: AddTreatmentCategory
+    },
+    {
+        path: "Treatement/Category/Add",
+        component: AddTreatmentCategory
+    },
+    {
         path: "Patient",
         component: PatientComponent
     },
@@ -146,10 +158,6 @@ export const routes: Routes = [
     {
         path: "Billing/View/:id",
         component: BillingDetail
-    },
-    {
-        path: "MedicalCare",
-        component: MedicalCaresComponent
     },
     {
         path: "MedicalCare/Print",

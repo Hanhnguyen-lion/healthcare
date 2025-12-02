@@ -6,10 +6,11 @@ import { enviroment } from '../../enviroments/enviroment';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
 import { AsyncPipe } from '@angular/common';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-hospitals',
-  imports: [RouterLink, RouterOutlet, AsyncPipe],
+  imports: [RouterLink, RouterOutlet, AsyncPipe, Footer],
   templateUrl: './hospitals.html',
   styleUrl: './hospitals.css',
   providers: [BaseServices]

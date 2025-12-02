@@ -7,11 +7,12 @@ import { AlertService } from '../helpers/alert-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { enviroment } from '../../enviroments/enviroment';
 import { DatePipe, formatDate, NgClass} from '@angular/common';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-edit-medicine',
   imports: [RouterLink, RouterOutlet,
-    ReactiveFormsModule, NgClass
+    ReactiveFormsModule, NgClass, Footer
   ],
   templateUrl: './edit-medicine.html',
   styleUrl: './edit-medicine.css',

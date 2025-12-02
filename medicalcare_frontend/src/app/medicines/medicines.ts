@@ -6,10 +6,11 @@ import { BaseServices } from '../services/base-service';
 import { DialogService } from '../services/dialog';
 import { enviroment } from '../../enviroments/enviroment';
 import { AlertService } from '../helpers/alert-service';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-medicines',
-  imports: [AsyncPipe, RouterLink, RouterOutlet, DatePipe],
+  imports: [AsyncPipe, RouterLink, RouterOutlet, DatePipe, Footer],
   templateUrl: './medicines.html',
   styleUrl: './medicines.css',
   providers: [BaseServices]

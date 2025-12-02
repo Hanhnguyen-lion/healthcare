@@ -8,6 +8,8 @@ namespace Medicalcare_API.Models{
         public int id{get;set;}
 
         public int? billing_id{get;set;}
+        public int? patient_id{get;set;}
+        public int? category_id{get;set;}
 
         public DateTime? treatment_date{get;set;}
         public string? treatment_type{get;set;}

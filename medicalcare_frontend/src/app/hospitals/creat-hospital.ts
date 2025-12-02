@@ -7,10 +7,12 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { DialogService } from '../services/dialog';
 import { BaseComponent } from '../BaseComponent';
 import { BaseServices } from '../services/base-service';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-creat-hospital',
-  imports: [NgClass, FormsModule, ReactiveFormsModule, RouterLink, RouterOutlet],
+  imports: [NgClass, FormsModule, ReactiveFormsModule, 
+    RouterLink, RouterOutlet, Footer],
   templateUrl: './creat-hospital.html',
   styleUrl: './creat-hospital.css',
   providers: [BaseServices]

@@ -6,11 +6,12 @@ import { BaseComponent } from '../BaseComponent';
 import { BaseServices } from '../services/base-service';
 import { enviroment } from '../../enviroments/enviroment';
 import { AlertService } from '../helpers/alert-service';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-patient',
   imports: [RouterLink, RouterOutlet, 
-          AsyncPipe, DatePipe],
+          AsyncPipe, DatePipe, Footer],
   templateUrl: './patient.html',
   styleUrl: './patient.css',
   providers: [BaseServices]

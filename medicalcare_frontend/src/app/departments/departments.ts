@@ -6,10 +6,11 @@ import { BaseComponent } from '../BaseComponent';
 import { BaseServices } from '../services/base-service';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-departments',
-  imports: [RouterLink, RouterOutlet, AsyncPipe],
+  imports: [RouterLink, RouterOutlet, AsyncPipe, Footer],
   templateUrl: './departments.html',
   styleUrl: './departments.css',
   providers: [BaseServices]

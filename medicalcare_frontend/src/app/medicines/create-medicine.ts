@@ -7,12 +7,13 @@ import { AlertService } from '../helpers/alert-service';
 import { enviroment } from '../../enviroments/enviroment';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe, NgClass} from '@angular/common';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-create-medicine',
   imports: [RouterLink, RouterOutlet, 
           ReactiveFormsModule, NgClass,
-          DatePipe],
+          DatePipe, Footer],
   templateUrl: './create-medicine.html',
   styleUrl: './create-medicine.css',
   providers: [BaseServices]

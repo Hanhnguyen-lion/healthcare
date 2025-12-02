@@ -10,11 +10,12 @@ import { AsyncPipe, NgClass} from '@angular/common';
 import { Hospital } from '../models/hospital';
 import { Doctor } from '../models/doctor';
 import { Observable } from 'rxjs';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-edit-department',
   imports: [RouterLink, RouterOutlet,
-    ReactiveFormsModule, NgClass, AsyncPipe],
+    ReactiveFormsModule, NgClass, AsyncPipe, Footer],
   templateUrl: './edit-department.html',
   styleUrl: './edit-department.css',
   providers: [BaseServices]

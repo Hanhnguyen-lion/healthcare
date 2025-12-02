@@ -7,11 +7,12 @@ import { DialogService } from '../services/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { enviroment } from '../../enviroments/enviroment';
 import { AsyncPipe, DatePipe, DecimalPipe} from '@angular/common';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-billing',
   imports: [ReactiveFormsModule, AsyncPipe, 
-    RouterOutlet, DatePipe, RouterLink, DecimalPipe],
+    RouterOutlet, DatePipe, RouterLink, DecimalPipe, Footer],
   templateUrl: './billing.html',
   styleUrl: './billing.css',
   providers:[BaseServices]

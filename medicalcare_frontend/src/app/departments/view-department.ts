@@ -8,11 +8,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { enviroment } from '../../enviroments/enviroment';
 import { Hospital } from '../models/hospital';
 import { Doctor } from '../models/doctor';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-view-department',
   imports: [RouterLink, RouterOutlet, 
-    ReactiveFormsModule],
+    ReactiveFormsModule, Footer],
   templateUrl: './view-department.html',
   styleUrl: './view-department.css',
   providers: [BaseServices]

@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseServices } from '../services/base-service';
 import { BaseComponent } from '../BaseComponent';
-import { enviroment } from '../../enviroments/enviroment';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
-import { AsyncPipe, DatePipe} from '@angular/common';
+import { enviroment } from '../../enviroments/enviroment';
+import { Footer } from '../footer/footer';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-medical-cares',
-  imports: [RouterLink, RouterOutlet, 
-            DatePipe, AsyncPipe],
-  templateUrl: './medical-cares.html',
-  styleUrl: './medical-cares.css',
-    providers: [BaseServices]
+  selector: 'app-treatment-categories',
+  imports: [RouterOutlet, RouterLink, Footer, AsyncPipe],
+  templateUrl: './treatment-categories.html',
+  styleUrl: './treatment-categories.css',
+  providers: [BaseServices]
 })
-export class MedicalCaresComponent extends BaseComponent implements OnInit {
+export class TreatmentCategoriesComponent extends BaseComponent implements OnInit{
+
   
   constructor(
     protected override router: Router,
@@ -25,8 +26,8 @@ export class MedicalCaresComponent extends BaseComponent implements OnInit {
     protected override routerActive: ActivatedRoute
   ){
     super(
-      `${enviroment.apiUrl}/MedicalCares`,
-      "Delete MedicalCare",
+      `${enviroment.apiUrl}/Treatments/Category`,
+      "Delete Treatement Category",
       "",
       "", 
       router, 
@@ -36,4 +37,5 @@ export class MedicalCaresComponent extends BaseComponent implements OnInit {
       routerActive
     );
   }
+
 }

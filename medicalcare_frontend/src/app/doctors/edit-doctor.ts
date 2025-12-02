@@ -9,11 +9,12 @@ import { enviroment } from '../../enviroments/enviroment';
 import { AsyncPipe, NgClass} from '@angular/common';
 import { Department } from '../models/department';
 import { Observable } from 'rxjs';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-edit-doctor',
   imports: [RouterLink, RouterOutlet,
-    ReactiveFormsModule, NgClass, AsyncPipe],
+    ReactiveFormsModule, NgClass, AsyncPipe, Footer],
   templateUrl: './edit-doctor.html',
   styleUrl: './edit-doctor.css',
   providers: [BaseServices]

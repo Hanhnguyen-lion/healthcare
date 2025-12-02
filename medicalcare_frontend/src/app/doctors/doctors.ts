@@ -6,10 +6,11 @@ import { BaseServices } from '../services/base-service';
 import { DialogService } from '../services/dialog';
 import { enviroment } from '../../enviroments/enviroment';
 import { AlertService } from '../helpers/alert-service';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-doctors',
-  imports: [RouterLink, RouterOutlet, AsyncPipe],
+  imports: [RouterLink, RouterOutlet, AsyncPipe, Footer],
   templateUrl: './doctors.html',
   styleUrl: './doctors.css',
   providers: [BaseServices]

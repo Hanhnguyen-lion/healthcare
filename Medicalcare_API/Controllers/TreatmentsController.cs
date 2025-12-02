@@ -11,6 +11,8 @@ namespace Medicalcare_API.Controllers{
     [Route("Medicalcare/api/[controller]")]
     public class TreatmentsController: ControllerBase{
         readonly DataContext context;
+        readonly string JsonFile = "Data/treatement_category.json";
+
         public TreatmentsController(DataContext context){
             this.context = context;
         }
@@ -157,6 +159,139 @@ namespace Medicalcare_API.Controllers{
 
                 return Ok(new {message = "Treatment deleted "});
             }
+        }
+
+        [HttpGet]
+        [Route("Category")]
+        public async Task<IActionResult> GetCategories()
+        {
+            var data = await this.context.m_treatment_category.ToListAsync();
+
+            return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("Category/{id}")]
+        public async Task<IActionResult> GetCategoryById(int id)
+        {
+            TreatmentCategory? item = await this.context.m_treatment_category.FirstOrDefaultAsync(
+                    m => m.id == id);
+            if (item == null)
+            {
+                return NotFound(new { message = "Treatment Category not found." });
+            }
+            return Ok(item);
+        }
+
+
+        [HttpPost]
+        [Route("Category/Add")]
+        public async Task<IActionResult> AddCategory(TreatmentCategory item)
+        {
+            // Validate the incoming model.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (item != null)
+            {
+                await Task.Run(() =>
+                {
+                    this.context.m_treatment_category.Add(item);
+                    this.context.SaveChanges();
+                });
+            }
+            return Ok(new { message = "Treatment Category add successfully." });
+        }        
+
+        [HttpPut]
+        [Route("Category/Edit/{id}")]
+        public async Task<IActionResult> EditCategory(int id, MedicineType item)
+        {
+            // Validate the incoming model.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != item.id)
+            {
+                return BadRequest("ID mismatch in the URL and body.");
+            }
+            // Check if patient exists
+            TreatmentCategory? editItem = await this.context.m_treatment_category.FirstOrDefaultAsync(
+                    m => m.id == item.id);
+            if (editItem == null)
+            {
+                return NotFound(new { message = "Treatment Category not found." });
+            }
+            else
+            {
+                await Task.Run(() =>
+                {
+                    this.context.m_treatment_category.Entry(editItem).CurrentValues.SetValues(item);
+                    this.context.SaveChanges();
+                });
+
+                return Ok(item);
+            }
+        }
+ 
+        [HttpDelete]
+        [Route("Category/Delete/{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            // Validate the incoming model.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Check if patient exists
+            TreatmentCategory? item = await this.context.m_treatment_category.FirstOrDefaultAsync(
+                    m => m.id == id);
+            if (item == null)
+            {
+                return NotFound(new { message = "Treatment Category not found." });
+            }
+            else
+            {
+                await Task.Run(() =>
+                {
+                    this.context.m_treatment_category.Remove(item);
+                    this.context.SaveChanges();
+                });
+
+                return Ok(new {message = "Treatment Category deleted "});
+            }
+        }
+
+        [HttpPost]
+        [Route("Category/ImportJson")]
+        public async Task<IActionResult> ImportJson()
+        {
+            await Task.Run(() =>
+            {
+                var items = this.context.ReadJsonFile(JsonFile);
+                if (items != null)
+                {
+                    List<TreatmentCategory> treatmentCategories = new List<TreatmentCategory>();
+                    foreach (var item in items)
+                    {
+                        treatmentCategories.Add(new TreatmentCategory
+                        {
+                            name_en = item?["name_en"]?.ToString(),
+                            name_vn = item?["name_vn"]?.ToString(),
+                            name_jp = item?["name_jp"]?.ToString(),
+                            description = item?["description"]?.ToString(),
+                        });
+                    }
+                    this.context.m_treatment_category.AddRange(treatmentCategories);
+                    this.context.SaveChanges();
+                }
+            });
+
+            return Ok(new {message = "Import Json to treatment category table"});
         }
     }
 }

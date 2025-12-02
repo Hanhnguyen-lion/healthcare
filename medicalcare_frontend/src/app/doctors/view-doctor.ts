@@ -8,11 +8,12 @@ import { Hospital } from '../models/hospital';
 import { Department } from '../models/department';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-view-doctor',
   imports: [RouterLink, RouterOutlet, 
-          ReactiveFormsModule],
+          ReactiveFormsModule, Footer],
   templateUrl: './view-doctor.html',
   styleUrl: './view-doctor.css',
   providers: [BaseServices]

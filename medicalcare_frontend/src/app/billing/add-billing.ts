@@ -14,11 +14,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AsyncPipe, DatePipe, DecimalPipe, formatDate, NgClass } from '@angular/common';
 import { PrescriptionModal } from '../MedicalCare/prescription-modal';
 import { TreatmentModal } from '../MedicalCare/treatment-modal';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-add-billing',
   imports: [RouterOutlet, AsyncPipe, ReactiveFormsModule,
-            NgClass, DatePipe, DecimalPipe],
+            NgClass, DatePipe, DecimalPipe, Footer],
   templateUrl: './add-billing.html',
   styleUrl: './add-billing.css',
       providers: [BaseServices]
@@ -75,11 +76,8 @@ export class AddBilling extends BaseComponent implements OnInit{
       patient_id: ["", Validators.required],
       department_id: ["", Validators.required],
       doctor_id: ["", Validators.required],
-      appointment_id: [""],
       admission_date: [formatDate(this.today, "yyyy-MM-dd", this.locale), Validators.required],
-      discharge_date: [""],
-      days: [0],
-      amount: [0],
+      discharge_date: [formatDate(this.today, "yyyy-MM-dd", this.locale), Validators.required],
       diagnostic: [""],
       notes: [""]
     });
@@ -88,20 +86,16 @@ export class AddBilling extends BaseComponent implements OnInit{
       this.baseSrv.GetItemById(this.billing_id, this.apiUrl)
       .subscribe({
         next:(item) =>{
-          var admission_date = (item.admission_date != null)? item.admission_date:null;
-          var discharge_date = (item.discharge_date != null)? item.discharge_date:null;
+          var admission_date = (item.admission_date != null)? item.admission_date:this.today;
+          var discharge_date = (item.discharge_date != null)? item.discharge_date:this.today;
           this.form.setValue({
             admission_date: formatDate(admission_date, "yyyy-MM-dd", this.locale),
-            discharge_date: (discharge_date != null) ? formatDate(discharge_date, "yyyy-MM-dd", this.locale):"",
+            discharge_date: formatDate(discharge_date, "yyyy-MM-dd", this.locale),
             patient_id: item.patient_id,
             department_id: item.department_id,
             doctor_id: item.doctor_id,
-            appointment_id: item.appointment_id,
-            days: item.days,
-            amount: item.amount,
             diagnostic: item.diagnostic,
             notes: item.notes,
-
           });
         }
       })

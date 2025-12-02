@@ -8,12 +8,12 @@ import { BaseComponent } from '../BaseComponent';
 import { BaseServices } from '../services/base-service';
 import { DialogService } from '../services/dialog';
 import { enviroment } from '../../enviroments/enviroment';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-edit-patient',
   imports: [RouterLink, RouterOutlet, 
-      ReactiveFormsModule, 
-      NgClass],
+      ReactiveFormsModule, NgClass, Footer],
   templateUrl: './edit-patient.html',
   styleUrl: './edit-patient.css',
   providers: [BaseServices]

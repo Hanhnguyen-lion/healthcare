@@ -1,25 +1,26 @@
 <div class="container">
-    <h2>Department List</h2>
+    <h2>Treatment Category List</h2>
     <div class="form-group mb-3">
-      <button class="btn btn-primary" routerLink="/Department/Add" type="submit">Add Department</button>
+      <button class="btn btn-primary" routerLink="/Treatement/Category/Add" type="submit">Add Treatment Category</button>
     </div>
 <div class="tableFixHead">
   <table class="table table-striped">
     <thead class="table-header">
       <tr>
-        <th>Name</th>
-        <th>Phone</th>
+        <th>Name EN</th>
+        <th>Name VN</th>
+        <th>Name JP</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       @for (item of data | async; track $index) {
         <tr>
-          <td>{{item.name}}</td>
-          <td>{{item.phone}}</td>
+          <td>{{item.name_en}}</td>
+          <td>{{item.name_vn}}</td>
+          <td>{{item.name_jp}}</td>
           <td>
-            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Department/Edit/{{item.id}}">Edit</button>
-            <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Department/View/{{item.id}}">View</button>
+            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Treatement/Category/Edit/{{item.id}}">Edit</button>
             <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
           </td>
         </tr>

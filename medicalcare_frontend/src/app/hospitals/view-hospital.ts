@@ -6,11 +6,12 @@ import { enviroment } from '../../enviroments/enviroment';
 import { BaseComponent } from '../BaseComponent';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-view-hospital',
   imports: [RouterLink, RouterOutlet, 
-          ReactiveFormsModule],
+          ReactiveFormsModule, Footer],
   templateUrl: './view-hospital.html',
   styleUrl: './view-hospital.css',
   providers: [BaseServices]

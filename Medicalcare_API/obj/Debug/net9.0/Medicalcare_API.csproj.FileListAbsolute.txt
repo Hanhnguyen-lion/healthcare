@@ -42,3 +42,4 @@
 /data/projects/healthcare/Medicalcare_API/bin/Debug/net9.0/Data/medicine.json
 /data/projects/healthcare/Medicalcare_API/bin/Debug/net9.0/Data/departments.json
 /data/projects/healthcare/Medicalcare_API/bin/Debug/net9.0/Data/doctor.json
+/data/projects/healthcare/Medicalcare_API/bin/Debug/net9.0/Data/treatement_category.json

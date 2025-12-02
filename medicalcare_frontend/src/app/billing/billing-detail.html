@@ -67,28 +67,27 @@
                                                     <td class="alncenter borderleft">Chuyển bệnh</td>
                                                 </tr>
                                                 <tr class="borderleft bordertop-double">
-                                                    <td class="alncenter" colspan="7">
+                                                    <td colspan="7">
                                                         <table class="table">
                                                             <tr>
                                                                 <td>Admission Date: 
-                                                                    @if(billingItem.admission_date != null) {
-                                                                        {{formatDateToString(billingItem.admission_date, "dd/MM/yyyy")}}
-                                                                    }
+                                                                    {{formatDateToString(billingItem?.admission_date, "dd/MM/yyyy")}}
                                                                 </td>
-                                                                <td>Total Days: {{billingItem.days}}</td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td>Discharge Date: 
-                                                                    @if(billingItem.discharge_date != null) {
-                                                                        {{formatDateToString(billingItem.discharge_date, "dd/MM/yyyy")}}
-                                                                    }
-                                                                </td>
-                                                                <td>Total: {{billingItem.amount | number:'0.2'}}
+                                                                    {{formatDateToString(billingItem?.discharge_date, "dd/MM/yyyy")}}
                                                                 </td>
                                                             </tr>
                                                         </table>
                                                     </td>
                                                 </tr>
+                                                <tr class="borderleft fw-bold">
+                                                    <td colspan="7">
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-12">Treatment
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>                                            
                                                 <tr class="borderleft bordertop-double">
                                                     <td class="alncenter" colspan="7">
                                                         <div class="row mb-3">
@@ -119,6 +118,14 @@
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="borderleft fw-bold">
+                                                    <td colspan="7">
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-12">Rescription
                                                             </div>
                                                         </div>
                                                     </td>
@@ -157,6 +164,24 @@
                                                         </div>
                                                     </td>
                                                 </tr>                                            
+                                                <tr class="borderleft bordertop-double">
+                                                    <td class="alnright" colspan="7">
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-12">
+                                                                <div class="tableFixHead">
+                                                                    <table class="table table-striped">
+                                                                        <thead class="table-header">
+                                                                            <tr>
+                                                                                <th colspan="5">Total</th>
+                                                                                <th>{{billingItem?.amount|number:'0.2'}}</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>                                            
                                             </table>
                                         </div>
                                         <div class="row mt-3">
@@ -173,4 +198,5 @@
         </div>
     </div>
 </div>
+<app-footer></app-footer>
 <router-outlet></router-outlet>

@@ -102,10 +102,7 @@ SELECT
     mp.code as patient_code,
     format('%s %s'::text, mp.last_name, mp.first_name) AS patient_name,
     hb.billing_date,
-    SUM(case 
-		    when hb.days > 0 THEN hb.amount * hb.days
-		    else hb.amount
-    end + (hp.quantity * mm.price) + (mt.quantity * mt.amount)) total
+    SUM((hp.quantity * mm.price) + (mt.quantity * mt.amount)) total
    FROM h_billing hb
    left join m_patient mp on hb.patient_id = mp.id
      LEFT JOIN h_prescription hp ON hp.billing_id = hb.id
@@ -120,3 +117,26 @@ group by
     hb.billing_date
   ORDER BY billing_id;
 
+
+drop VIEW if exists public.v_medicalcare;
+CREATE VIEW public.v_medicalcare
+AS SELECT hb.id,
+    hb.patient_id,
+    mp.code AS patient_code,
+    format('%s %s'::text, mp.last_name, mp.first_name) AS patient_name,
+    hb.admission_date,
+    date_part('month'::text, hb.admission_date)::integer AS admission_month,
+    date_part('year'::text, hb.admission_date)::integer AS admission_year,
+    hb.diagnostic,
+    hb.notes,
+    hb.department_id,
+    mdep.name AS department_name,
+    hb.doctor_id,
+    format('%s %s'::text, md.last_name, md.first_name) AS doctor_name
+   FROM h_billing hb
+     LEFT JOIN m_patient mp ON hb.patient_id = mp.id
+     LEFT JOIN m_doctor md ON hb.doctor_id = md.id
+     LEFT JOIN m_department mdep ON hb.department_id = mdep.id
+  ORDER BY 
+	mp.code, 
+	hb.admission_date DESC;

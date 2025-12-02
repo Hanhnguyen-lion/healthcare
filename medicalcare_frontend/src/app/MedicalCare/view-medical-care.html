@@ -16,9 +16,9 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label class="col-sm-4 col-form-label">Month of visit date</label>
+                        <label class="col-sm-4 col-form-label">Month of admission date</label>
                         <div class="col-sm-8">
-                            <select class="form-select" formControlName="visit_month">
+                            <select class="form-select" formControlName="admission_month">
                                 @for (month of months; track $index) {
                                     <option [ngValue] ="month">
                                         {{pad(month)}}
@@ -28,9 +28,9 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label class="col-sm-4 col-form-label">Year of visit date</label>
+                        <label class="col-sm-4 col-form-label">Year of admission date</label>
                         <div class="col-sm-8">
-                            <select class="form-select" formControlName="visit_year">
+                            <select class="form-select" formControlName="admission_year">
                                 <option [ngValue]="0" selected></option>
                                 @for (year of years; track $index) {
                                     <option [ngValue]="year">
@@ -183,4 +183,5 @@
         </div>
     </div>
 </div>
+<app-footer></app-footer>
 <router-outlet></router-outlet>

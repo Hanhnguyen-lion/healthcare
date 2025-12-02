@@ -7,10 +7,11 @@ import { BaseServices } from '../services/base-service';
 import { enviroment } from '../../enviroments/enviroment';
 import { BaseComponent } from '../BaseComponent';
 import { DialogService } from '../services/dialog';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-view-patient',
-  imports: [RouterLink, RouterOutlet, ReactiveFormsModule],
+  imports: [RouterLink, RouterOutlet, ReactiveFormsModule, Footer],
   templateUrl: './view-patient.html',
   styleUrl: './view-patient.css',
   providers: [BaseServices]

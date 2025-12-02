@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { BaseServices } from '../services/base-service';
-import { AsyncPipe, DecimalPipe, formatDate } from '@angular/common';
+import { DecimalPipe, formatDate } from '@angular/common';
 import { enviroment } from '../../enviroments/enviroment';
 import { ActivatedRoute, Router, RouterOutlet, RouterLinkWithHref } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,10 +8,11 @@ import { BaseComponent } from '../BaseComponent';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-billing-detail',
-  imports: [ReactiveFormsModule, RouterOutlet, DecimalPipe, RouterLinkWithHref],
+  imports: [ReactiveFormsModule, RouterOutlet, DecimalPipe, Footer],
   templateUrl: './billing-detail.html',
   styleUrl: './billing-detail.css',
   providers:[BaseServices]
@@ -51,7 +52,6 @@ export class BillingDetail extends BaseComponent implements OnInit{
 
   override ngOnInit(): void {
       this.billing_id = this.routerActive.snapshot.params["id"] | 0;
-      console.log("this.billing_id :", this.billing_id);
       this.getBillingDetail();
   }
 
@@ -102,12 +102,7 @@ export class BillingDetail extends BaseComponent implements OnInit{
     }
   }  
 
-  pad(n: number) {
-    return (n<10 ? '0'+n : n);
-  }
-
   getBillingDetail(){
-    console.log(this.billing_id);
     this.billingDetail = this.baseSrv.GetItemById(this.billing_id, this.apiUrl);
     this.billingDetail.subscribe({
       next: (item) =>{

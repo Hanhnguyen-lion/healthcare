@@ -7,12 +7,13 @@ import { enviroment } from '../../enviroments/enviroment';
 import { DialogService } from '../services/dialog';
 import { BaseComponent } from '../BaseComponent';
 import { BaseServices } from '../services/base-service';
+import { Footer } from '../footer/footer';
 
 
 @Component({
   selector: 'app-edit-hospital',
   imports: [NgClass, RouterLink, RouterOutlet, 
-            ReactiveFormsModule],
+            ReactiveFormsModule, Footer],
   templateUrl: './edit-hospital.html',
   styleUrl: './edit-hospital.css',
   providers: [BaseServices]

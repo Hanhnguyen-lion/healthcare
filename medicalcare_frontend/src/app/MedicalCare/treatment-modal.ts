@@ -7,11 +7,12 @@ import { AlertService } from '../helpers/alert-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { enviroment } from '../../enviroments/enviroment';
-import { DatePipe, formatDate, NgClass } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-treatment-modal',
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule, NgClass, AsyncPipe],
   templateUrl: './treatment-modal.html',
   styleUrl: './treatment-modal.css',
   providers: [BaseServices]
@@ -22,6 +23,7 @@ export class TreatmentModal extends BaseComponent implements OnInit{
   treatment_id: number = 0;
   title:string = "Add Treatment";
   treatmentItem?:any;
+  categoryItems?:Observable<any[]>;
 
   constructor(
     protected override router: Router,
@@ -46,9 +48,10 @@ export class TreatmentModal extends BaseComponent implements OnInit{
   }
 
   override ngOnInit(): void {
+    this.categoryItems = this.baseSrv.GetItems(`${this.apiUrl}/Category`);
 
     this.form = this.formBuilder.group({
-      treatment_type: [""],
+      category_id: [""],
       description: [""],
       quantity: ["", Validators.required],
       amount: ["", Validators.required]
@@ -61,7 +64,7 @@ export class TreatmentModal extends BaseComponent implements OnInit{
         .subscribe({
           next: (item) =>{
             this.form.setValue({
-              treatment_type: item.treatment_type,
+              category_id: item.category_id,
               description: item.description,
               quantity: item.quantity,
               amount: item.amount

@@ -8,11 +8,12 @@ import { BaseComponent } from '../BaseComponent';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
 import { Observable } from 'rxjs';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-view-medical-care',
   imports: [ReactiveFormsModule, 
-    AsyncPipe, RouterOutlet],
+    AsyncPipe, RouterOutlet, Footer],
   templateUrl: './view-medical-care.html',
   styleUrl: './view-medical-care.css',
   providers:[BaseServices]
@@ -60,8 +61,8 @@ export class ViewMedicalCareComponent extends BaseComponent implements OnInit{
 
     this.form = this.formBuilder.group({
       patient_id: [0],
-      visit_month: [this.today.getMonth() + 1],
-      visit_year: [this.currentYear],
+      admission_month: [this.today.getMonth() + 1],
+      admission_year: [this.currentYear],
       DataLoaded :[""]
     });
 
@@ -136,6 +137,7 @@ export class ViewMedicalCareComponent extends BaseComponent implements OnInit{
   pad(n: number) {
     return (n<10 ? '0'+n : n);
   }
+
 
   onSearch(){
     this.searchMedical = true;
