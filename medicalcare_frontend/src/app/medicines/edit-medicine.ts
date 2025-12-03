@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../BaseComponent';
 import { BaseServices } from '../services/base-service';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -6,13 +6,14 @@ import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { enviroment } from '../../enviroments/enviroment';
-import { DatePipe, formatDate, NgClass} from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass} from '@angular/common';
 import { Footer } from '../footer/footer';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-medicine',
   imports: [RouterLink, RouterOutlet,
-    ReactiveFormsModule, NgClass, Footer
+    ReactiveFormsModule, NgClass, Footer, AsyncPipe
   ],
   templateUrl: './edit-medicine.html',
   styleUrl: './edit-medicine.css',
@@ -20,14 +21,15 @@ import { Footer } from '../footer/footer';
 })
 export class EditMedicine extends BaseComponent implements OnInit{
 
+  medicineTypeItems?: Observable<any[]>;
+
   constructor(
     protected override router: Router,
     protected override baseSrv: BaseServices,
     protected override dialogService: DialogService,
     protected override alertService: AlertService,
     protected override routerActive: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    @Inject(LOCALE_ID) private locale:string
+    private formBuilder: FormBuilder
   ){
     super(
       `${enviroment.apiUrl}/Medicines`, 
@@ -42,12 +44,13 @@ export class EditMedicine extends BaseComponent implements OnInit{
   }
   
   override ngOnInit(): void {
+    var url = `${enviroment.apiUrl}/Prescriptions/MedicineTypes`;
+    console.log(url);
+    this.medicineTypeItems = this.baseSrv.GetItems(url);
 
     this.form = this.formBuilder.group({
       name: ["", Validators.required],
-      input_date: [formatDate(this.today, "yyyy-MM-dd", this.locale), Validators.required],
-      expire_date: [formatDate(this.today, "yyyy-MM-dd", this.locale), Validators.required],
-      type: [""],
+      category_id: [""],
       price: [""]
     });
     
@@ -59,14 +62,10 @@ export class EditMedicine extends BaseComponent implements OnInit{
     this.baseSrv.GetItemById(id, this.apiUrl)
       .subscribe({
         next:(item)=>{
-          var input_date = (item.input_date != null) ? item.input_date: this.today;  
-          var expire_date = (item.expire_date != null) ? item.expire_date: this.today;  
           
           this.form.setValue({
             name: item.name, 
-            input_date: this.formatDateYYYYMMDD(input_date, this.locale), 
-            expire_date: this.formatDateYYYYMMDD(expire_date, this.locale), 
-            type: item.type, 
+            category_id: item.category_id, 
             price: item.price
           });
         },

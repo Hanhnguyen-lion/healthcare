@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Medicalcare_API.Helpers;
 using Medicalcare_API.Models;
 using System.Text.Json;
+using Medicalcare_API.DTOs;
 
 namespace Medicalcare_API.Controllers{
 
@@ -19,7 +20,7 @@ namespace Medicalcare_API.Controllers{
         [HttpGet]
         public async Task<IActionResult> GetItems()
         {
-            var data = await this.context.m_medicine.ToListAsync();
+            var data = await this.context.v_medicine.ToListAsync();
 
             return Ok(data);
         }
@@ -28,7 +29,7 @@ namespace Medicalcare_API.Controllers{
         [Route("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            Medicine? item = await this.context.m_medicine.FirstOrDefaultAsync(
+            v_medicine? item = await this.context.v_medicine.FirstOrDefaultAsync(
                     m => m.id == id);
             if (item == null)
             {
@@ -39,25 +40,25 @@ namespace Medicalcare_API.Controllers{
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> Add(Medicine patient)
+        public async Task<IActionResult> Add(m_medicine item)
         {
             // Validate the incoming model.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (patient != null)
+            if (item != null)
             {
-                string? name = patient.name?.ToLower();
-                Medicine? item = await this.context.m_medicine.FirstOrDefaultAsync(m => m.name == name);
-                if (item != null)
+                string? name = item.name?.ToLower();
+                m_medicine? newItem = await this.context.m_medicine.FirstOrDefaultAsync(m => m.name == name);
+                if (newItem != null)
                 {
                     return Conflict(new { message = "Medicine is already exists." });
                 }
 
                 await Task.Run(() =>
                 {
-                    this.context.m_medicine.Add(patient);
+                    this.context.m_medicine.Add(item);
                     this.context.SaveChanges();
                 });
             }
@@ -66,7 +67,7 @@ namespace Medicalcare_API.Controllers{
 
         [HttpPut]
         [Route("Edit/{id}")]
-        public async Task<IActionResult> Edit(int id, Medicine patient)
+        public async Task<IActionResult> Edit(int id, m_medicine patient)
         {
             // Validate the incoming model.
             if (!ModelState.IsValid)
@@ -78,7 +79,7 @@ namespace Medicalcare_API.Controllers{
             {
                 return BadRequest("ID mismatch in the URL and body.");
             }
-            Medicine? item = await this.context.m_medicine.FirstOrDefaultAsync(
+            m_medicine? item = await this.context.m_medicine.FirstOrDefaultAsync(
                     m => m.id == patient.id);
             if (item == null)
             {
@@ -106,7 +107,7 @@ namespace Medicalcare_API.Controllers{
                 return BadRequest(ModelState);
             }
 
-            Medicine? item = await this.context.m_medicine.FirstOrDefaultAsync(
+            m_medicine? item = await this.context.m_medicine.FirstOrDefaultAsync(
                     m => m.id == id);
             if (item == null)
             {
@@ -133,19 +134,16 @@ namespace Medicalcare_API.Controllers{
                 for (int i = 0; i < 50; i++)
                 {
                     var name = $"Medicine_00{i+1}";
-                    var item = new Medicine
+                    var item = new m_medicine
                     {
                         name = name,
-                        type = name,
-                        price = 100M,
-                        input_date = DateTime.Today,
-                        expire_date = DateTime.Today.AddYears(-1)
+                        price = 100M
                     };
                     this.context.m_medicine.Add(item);
                 }
                 this.context.SaveChanges();
 
-                List<Medicine> items = this.context.m_medicine.ToList();
+                List<m_medicine> items = this.context.m_medicine.ToList();
 
                 var jsonString = JsonSerializer.Serialize(items, new JsonSerializerOptions{WriteIndented=true});
 
@@ -171,5 +169,112 @@ namespace Medicalcare_API.Controllers{
 
             return Ok(new {message = "Import Json to medicine table"});
         }
+
+
+        [HttpGet]
+        [Route("Category")]
+        public async Task<IActionResult> GetCategories()
+        {
+            var data = await this.context.m_medicine_type.ToListAsync();
+
+            return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("Category/{id}")]
+        public async Task<IActionResult> GetCategoryById(int id)
+        {
+            MedicineType? item = await this.context.m_medicine_type.FirstOrDefaultAsync(
+                    m => m.id == id);
+            if (item == null)
+            {
+                return NotFound(new { message = "Medicine Category not found." });
+            }
+            return Ok(item);
+        }
+
+
+        [HttpPost]
+        [Route("Category/Add")]
+        public async Task<IActionResult> AddCategory(MedicineType item)
+        {
+            // Validate the incoming model.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (item != null)
+            {
+                await Task.Run(() =>
+                {
+                    this.context.m_medicine_type.Add(item);
+                    this.context.SaveChanges();
+                });
+            }
+            return Ok(new { message = "Medicine Category add successfully." });
+        }        
+
+        [HttpPut]
+        [Route("Category/Edit/{id}")]
+        public async Task<IActionResult> EditCategory(int id, MedicineType item)
+        {
+            // Validate the incoming model.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != item.id)
+            {
+                return BadRequest("ID mismatch in the URL and body.");
+            }
+            // Check if patient exists
+            MedicineType? editItem = await this.context.m_medicine_type.FirstOrDefaultAsync(
+                    m => m.id == item.id);
+            if (editItem == null)
+            {
+                return NotFound(new { message = "Medicine Category not found." });
+            }
+            else
+            {
+                await Task.Run(() =>
+                {
+                    this.context.m_medicine_type.Entry(editItem).CurrentValues.SetValues(item);
+                    this.context.SaveChanges();
+                });
+
+                return Ok(item);
+            }
+        }
+ 
+        [HttpDelete]
+        [Route("Category/Delete/{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            // Validate the incoming model.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Check if patient exists
+            MedicineType? item = await this.context.m_medicine_type.FirstOrDefaultAsync(
+                    m => m.id == id);
+            if (item == null)
+            {
+                return NotFound(new { message = "Medicine Category not found." });
+            }
+            else
+            {
+                await Task.Run(() =>
+                {
+                    this.context.m_medicine_type.Remove(item);
+                    this.context.SaveChanges();
+                });
+
+                return Ok(new {message = "Medicine Category deleted "});
+            }
+        }
+        
     }
 }

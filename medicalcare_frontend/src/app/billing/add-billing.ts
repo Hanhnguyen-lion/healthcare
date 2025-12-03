@@ -115,22 +115,27 @@ export class AddBilling extends BaseComponent implements OnInit{
     })
   }
 
-  deletePrescription(id: number){
+  deletePrescription(id: number, new_id: number){
     var url = `${enviroment.apiUrl}/Prescriptions`;
     this.dialogService.openConfirmDialog("Are you sure to want delete this item?", "Delete Prescription")
       .subscribe({
         next: (is_delete:boolean) =>{
           if (is_delete){
-            this.baseSrv.Delete(id, url)
-            .subscribe({
-              next:()=>{
-                this.loadPrescriptions();
-                this.detectChanges();
-              },
-              error:(error)=>{
-                this.alertService.error(error);
-              }
-            });
+            if (id > 0){
+              this.baseSrv.Delete(id, url)
+              .subscribe({
+                next:()=>{
+                  this.loadPrescriptions();
+                  this.detectChanges();
+                },
+                error:(error)=>{
+                  console.log(error);
+                }
+              });
+            }
+            else{
+              this.prescriptionItems = this.RemoveItemToObservable(this.prescriptionItems, new_id);
+            }
           }
         },
         error: (error)=>{
@@ -140,22 +145,29 @@ export class AddBilling extends BaseComponent implements OnInit{
       });
   }
 
-  deleteTreatment(id: number){
+  deleteTreatment(id: number, new_id: number){
     var url = `${enviroment.apiUrl}/Treatments`;
-    this.dialogService.openConfirmDialog("Are you sure to want delete this item?", "Delete Treatment")
+    this.dialogService.openConfirmDialog(
+        "Are you sure to want delete this item?", 
+        "Delete Treatment")
       .subscribe({
         next: (is_delete:boolean) =>{
           if (is_delete){
-            this.baseSrv.Delete(id, url)
-            .subscribe({
-              next:()=>{
-                this.loadTreatments();
-                this.detectChanges();
-              },
-              error:(error)=>{
-                this.alertService.error(error);
-              }
-            });
+            if (id > 0){
+              this.baseSrv.Delete(id, url)
+                .subscribe({
+                  next:()=>{
+                    this.loadTreatments();
+                    this.detectChanges();
+                  },
+                  error:(error)=>{
+                    console.log(error);
+                  }
+                });
+            }
+            else{
+              this.treatmentItems = this.RemoveItemToObservable(this.treatmentItems, new_id);
+            }
           }
         },
         error: (error)=>{
@@ -165,12 +177,19 @@ export class AddBilling extends BaseComponent implements OnInit{
       });
   }
 
-  addOrEditTreatment(id: number){
+  addOrEditTreatment(id: number, new_id: number){
+    var treatmentItem = this.treatmentItems?.pipe(
+      map(items => items.find(item => item.new_id === new_id)));
+
     var activeModal = this.modalService.open(
                       TreatmentModal, 
                       { size: 'lg', backdrop: 'static' });
+    activeModal.componentInstance.treatmentItemObs = treatmentItem;
+
     activeModal.componentInstance.treatment_id = id;
+    activeModal.componentInstance.new_treatment_id = new_id;
     activeModal.componentInstance.billing_id = this.billing_id;
+    
     activeModal.closed.subscribe({
       next:(isClose:boolean)=>{
           if (isClose){
@@ -180,9 +199,7 @@ export class AddBilling extends BaseComponent implements OnInit{
             else{
               var treatmentItem = activeModal.componentInstance.treatmentItem;
               if (treatmentItem != null){
-                this.treatmentItems = this.treatmentItems?.pipe(
-                  map(arr => [...arr, treatmentItem])
-                );
+                this.treatmentItems = this.AddItemToObservable(this.treatmentItems, treatmentItem);
               }
             }
           }
@@ -190,12 +207,48 @@ export class AddBilling extends BaseComponent implements OnInit{
     });
   }
 
-  addOrEditPrescription(id: number){
-    var activeModal = this.modalService.open(
+  private AddItemToObservable(
+    items: Observable<any[]>|undefined, 
+    item: any): Observable<any[]>|undefined{
+    if (items != null){
+      items = items?.pipe(
+        map(arr => {
+          var index = arr.findIndex(li => li.new_id == item.new_id);
+          var newItems = [...arr];
+          if (index != -1){
+            newItems[index] = item;
+            return newItems;
+          }
+          return [...arr, item];
+        })
+      );
+    }
+    return items;
+  }
+
+  private RemoveItemToObservable(
+    items: Observable<any[]>|undefined, 
+    id: number): Observable<any[]>|undefined{
+
+    return items?.pipe(
+      map((arra: any[]) => {
+        // Create a new array excluding the item with the specified ID
+        return arra.filter((item) => item.new_id !== id);
+      }));      
+  }
+
+  addOrEditPrescription(id: number, new_id: number){
+    var prescriptionItem = this.prescriptionItems?.pipe(
+      map(items => items.find(item => item.new_id === new_id)));
+
+      var activeModal = this.modalService.open(
                       PrescriptionModal, 
                       { size: 'lg', backdrop: 'static' });
     activeModal.componentInstance.prescription_id = id;
     activeModal.componentInstance.billing_id = this.billing_id;
+    activeModal.componentInstance.prescriptionItemObs = prescriptionItem;
+    activeModal.componentInstance.new_prescription_id = new_id;
+
     activeModal.closed.subscribe({
       next:(isClose:boolean)=>{
         if (isClose){
@@ -205,9 +258,7 @@ export class AddBilling extends BaseComponent implements OnInit{
           else{
             var prescriptionItem = activeModal.componentInstance.prescriptionItem;
             if (prescriptionItem != null){
-              this.prescriptionItems = this.prescriptionItems?.pipe(
-                map(arr => [...arr, prescriptionItem])
-              );
+              this.prescriptionItems = this.AddItemToObservable(this.prescriptionItems, prescriptionItem);
             }
           }
         }
@@ -216,7 +267,12 @@ export class AddBilling extends BaseComponent implements OnInit{
   }
 
   addOrEditItem(){
-
+    this.submitted = true;
+    if (this.form.invalid){
+      return;
+    }
+    this.loading = true;
+    
     if (this.billing_id > 0){
       this.updateItem();
     }

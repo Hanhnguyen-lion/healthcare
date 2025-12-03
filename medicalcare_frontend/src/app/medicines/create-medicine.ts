@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../BaseComponent';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BaseServices } from '../services/base-service';
@@ -6,19 +6,22 @@ import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
 import { enviroment } from '../../enviroments/enviroment';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DatePipe, NgClass} from '@angular/common';
+import { AsyncPipe, NgClass} from '@angular/common';
 import { Footer } from '../footer/footer';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-medicine',
   imports: [RouterLink, RouterOutlet, 
           ReactiveFormsModule, NgClass,
-          DatePipe, Footer],
+          AsyncPipe, Footer],
   templateUrl: './create-medicine.html',
   styleUrl: './create-medicine.css',
   providers: [BaseServices]
 })
 export class CreateMedicine extends BaseComponent implements OnInit{
+
+  medicineTypeItems?: Observable<any[]>;
 
   constructor(
     protected override router: Router,
@@ -27,7 +30,6 @@ export class CreateMedicine extends BaseComponent implements OnInit{
     protected override alertService: AlertService,
     protected override routerActive: ActivatedRoute,
     private formBuilder: FormBuilder,
-    @Inject(LOCALE_ID) private locale:string
   ){
     super(
       `${enviroment.apiUrl}/Medicines`, 
@@ -42,11 +44,13 @@ export class CreateMedicine extends BaseComponent implements OnInit{
   }
 
   override ngOnInit(): void {
+    var url = `${enviroment.apiUrl}/Prescriptions/MedicineTypes`;
+    console.log(url);
+    this.medicineTypeItems = this.baseSrv.GetItems(url);
+
     this.form = this.formBuilder.group({
       name: ["", Validators.required],
-      input_date: [this.formatDateYYYYMMDD(this.today, this.locale), Validators.required],
-      expire_date: [this.formatDateYYYYMMDD(this.today, this.locale), Validators.required],
-      type: [""],
+      category_id: [""],
       price: [""]
     });
   }

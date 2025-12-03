@@ -206,7 +206,7 @@ namespace Medicalcare_API.Controllers{
 
         [HttpPut]
         [Route("Category/Edit/{id}")]
-        public async Task<IActionResult> EditCategory(int id, MedicineType item)
+        public async Task<IActionResult> EditCategory(int id, TreatmentCategory item)
         {
             // Validate the incoming model.
             if (!ModelState.IsValid)

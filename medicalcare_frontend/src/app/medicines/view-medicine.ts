@@ -43,9 +43,7 @@ export class ViewMedicine extends BaseComponent implements OnInit{
   override ngOnInit(): void {
     this.form = this.formBuilder.group({
       name: [""],
-      input_date: [""],
-      expire_date: [""],
-      type: [""],
+      medicine_type: [""],
       price: [""]
     });
 
@@ -59,10 +57,8 @@ export class ViewMedicine extends BaseComponent implements OnInit{
         next: (item) =>{
           this.form.setValue({
             name: item.name, 
-            type: item.type, 
-            price: item.price, 
-            expire_date: (item.expire_date != null) ? formatDate(item.expire_date, "dd/MM/yyyy", this.locale) : "", 
-            input_date: (item.input_date != null) ? formatDate(item.input_date, "dd/MM/yyyy", this.locale) : ""
+            medicine_type: item.medicine_type, 
+            price: item.price
           });
         },
         error: (error) =>{

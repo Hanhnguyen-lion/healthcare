@@ -6,11 +6,11 @@ import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
 import { enviroment } from '../../enviroments/enviroment';
 import { Footer } from '../footer/footer';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-treatment-categories',
-  imports: [RouterOutlet, RouterLink, Footer, AsyncPipe],
+  imports: [RouterOutlet, RouterLink, Footer, AsyncPipe, DecimalPipe],
   templateUrl: './treatment-categories.html',
   styleUrl: './treatment-categories.css',
   providers: [BaseServices]

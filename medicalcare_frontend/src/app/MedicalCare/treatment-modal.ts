@@ -21,8 +21,10 @@ export class TreatmentModal extends BaseComponent implements OnInit{
   
   billing_id: number = 0;
   treatment_id: number = 0;
+  new_treatment_id: number = 0;
   title:string = "Add Treatment";
   treatmentItem?:any;
+  treatmentItemObs?:Observable<any>;
   categoryItems?:Observable<any[]>;
 
   constructor(
@@ -53,12 +55,10 @@ export class TreatmentModal extends BaseComponent implements OnInit{
     this.form = this.formBuilder.group({
       category_id: [""],
       description: [""],
-      quantity: ["", Validators.required],
-      amount: ["", Validators.required]
+      quantity: ["", Validators.required]
     });
 
     if (this.treatment_id > 0){
-      this.title = "Edit Treatment";
       var url = `${this.apiUrl}/item`;
       this.baseSrv.GetItemById(this.treatment_id, url)
         .subscribe({
@@ -66,15 +66,27 @@ export class TreatmentModal extends BaseComponent implements OnInit{
             this.form.setValue({
               category_id: item.category_id,
               description: item.description,
-              quantity: item.quantity,
-              amount: item.amount
+              quantity: item.quantity
             });
             this.detectChanges();  
           }
-        })
+        });
+    }
+    else{
+      if (this.new_treatment_id > 0){
+        this.title = "Edit Treatment";
+        this.treatmentItemObs?.subscribe({
+          next:(item)=>{
+            this.form.setValue({
+              category_id: item.category_id,
+              description: item.description,
+              quantity: item.quantity
+            });
+          }
+        });
+      }
     }
   }
-
 
   onClose(){
     this.activeModal.dismiss();
@@ -89,6 +101,7 @@ export class TreatmentModal extends BaseComponent implements OnInit{
     
     var item = this.form.value;
     item.id = this.treatment_id;
+    item.new_id = this.new_treatment_id;
     item.billing_id = (this.billing_id > 0) ? this.billing_id : 0;
 
     if (this.billing_id > 0){

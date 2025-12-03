@@ -31,6 +31,8 @@ import { AddBilling } from './billing/add-billing';
 import { BillingDetail } from './billing/billing-detail';
 import { TreatmentCategoriesComponent } from './treatment/treatment-categories';
 import { AddTreatmentCategory } from './treatment/add-treatment-category';
+import { MedicineCategoriesComponent } from './medicines/medicine-categories';
+import { AddMedicineCategoryComponent } from './medicines/add-medicine-category';
 
 
 export const routes: Routes = [
@@ -126,6 +128,18 @@ export const routes: Routes = [
     {
         path: "Treatement/Category/Add",
         component: AddTreatmentCategory
+    },
+    {
+        path: "Medicine/Category",
+        component: MedicineCategoriesComponent
+    },
+    {
+        path: "Medicine/Category/Edit/:id",
+        component: AddMedicineCategoryComponent
+    },
+    {
+        path: "Medicine/Category/Add",
+        component: AddMedicineCategoryComponent
     },
     {
         path: "Patient",

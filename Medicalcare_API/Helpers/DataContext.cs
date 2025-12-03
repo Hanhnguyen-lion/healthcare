@@ -1,14 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Medicalcare_API.Models;
-using System.IO;
 using System.Text.Json;
 using System.Collections;
-using System.ComponentModel;
 using Medicalcare_API.DTOs;
-using Microsoft.VisualBasic;
-using System.Diagnostics;
-using System;
-using Medicalcare_API.Controllers;
 
 namespace Medicalcare_API.Helpers{
     public class DataContext: DbContext{
@@ -22,7 +16,8 @@ namespace Medicalcare_API.Helpers{
         public DbSet<Hospital> m_hospital{get;set;}
         public DbSet<Department> m_department{get;set;}
         public DbSet<Doctor> m_doctor{get;set;}
-        public DbSet<Medicine> m_medicine{get;set;}
+        public DbSet<m_medicine> m_medicine{get;set;}
+        public DbSet<v_medicine> v_medicine{get;set;}
         public DbSet<MedicalCareDTO> h_medicalcare{get;set;}
         public DbSet<MedicalCare> v_medicalcare{get;set;}
         public DbSet<TreatmentDTO> m_treatment{get;set;}
@@ -45,10 +40,15 @@ namespace Medicalcare_API.Helpers{
         {
             var medicine_id =  Convert.ToInt32(item["medicine_id"].ToString());
             var id =  Convert.ToInt32(item["id"].ToString());
-            var new_id = (id == 0) ? new Random().Next(100, 500): id;
+            var new_id =  Convert.ToInt32(item["new_id"].ToString());
+            if (id == 0 && new_id == 0)
+                new_id = new Random().Next(100, 500);
+            else if (id > 0)
+                new_id = id;
+                
             var billing_id = Convert.ToInt32(item["billing_id"].ToString());
             var quantity = Convert.ToInt32(item["quantity"].ToString());
-            var medicine = m_medicine.Where(li => li.id == medicine_id).FirstOrDefault<Medicine?>();
+            var medicine = m_medicine.Where(li => li.id == medicine_id).FirstOrDefault<m_medicine?>();
             var medicine_name = medicine?.name??"";
             var price = medicine?.price??0;
             var medicine_type = item["medicine_type"].ToString();
@@ -79,19 +79,43 @@ namespace Medicalcare_API.Helpers{
         public IDictionary? GetTreatmentItem(Dictionary<string, object> item)
         {
             var id =  Convert.ToInt32(item["id"].ToString());
-            var new_id = (id == 0) ? new Random().Next(100, 500): id;
+            var new_id =  Convert.ToInt32(item["new_id"].ToString());
+
+            if (id == 0 && new_id == 0)
+            {
+                new_id = new Random().Next(100, 500);
+            }
+            else if (id > 0)
+            {
+                new_id = id;
+            }
+
             var billing_id = Convert.ToInt32(item["billing_id"].ToString());
+            var category_id = Convert.ToInt32(item["category_id"].ToString());
             var quantity = Convert.ToInt32(item["quantity"].ToString());
-            var amount = Convert.ToDecimal(item["amount"].ToString());
+            var description = item["description"].ToString();
+            var categoryItem = m_treatment_category.Where(li=> li.id == category_id).FirstOrDefault();
+            decimal? price = 0M;
+            decimal? total = 0M;
+            var treatment_type = "";
+            if (categoryItem != null)
+            {
+                price = categoryItem.price;
+                total = price * quantity;
+                treatment_type = categoryItem.name_en;
+            }
             var newItem = new Dictionary<string, object>
             {
                 ["id"]  = id,
                 ["new_id"] = new_id,
                 ["billing_id"]  = billing_id,
                 ["quantity"]  = quantity,
-                ["amount"]  = amount,
-                ["total"]  = amount * quantity,
-                ["treatment_date"]  = DateTime.Today
+                ["amount"]  = price??0,
+                ["total"]  = total??0,
+                ["treatment_date"]  = DateTime.Today,
+                ["description"] = description??"",
+                ["treatment_type"] = treatment_type??"",
+                ["category_id"] = category_id
             };
             return newItem;
         }
@@ -179,8 +203,8 @@ namespace Medicalcare_API.Helpers{
                     }
                     DateTime? start_date = treatmentItems?.First()?.treatment_date??null;
                     DateTime? end_date = (treatmentItems?.Count() > 1) ? treatmentItems?.Last()?.treatment_date??null: null;
-                    it["start_date"] = start_date;
-                    it["end_date"] = end_date;
+                    it["start_date"] = start_date??DateTime.Today;
+                    it["end_date"] = end_date??DateTime.Today;
                 }
                 
                 it["treatments"] = treatments;
@@ -290,10 +314,10 @@ namespace Medicalcare_API.Helpers{
             return JsonSerializer.Deserialize<List<Department>>(jsonContent);
         }
 
-        public List<Medicine>? ReadJsonFileToMedicine(string filePath)
+        public List<m_medicine>? ReadJsonFileToMedicine(string filePath)
         {
             var jsonContent = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<Medicine>>(jsonContent);
+            return JsonSerializer.Deserialize<List<m_medicine>>(jsonContent);
         }
     }
 }

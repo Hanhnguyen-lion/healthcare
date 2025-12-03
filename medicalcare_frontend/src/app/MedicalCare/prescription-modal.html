@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title">Add Prescription</h4>
+    <h4 class="modal-title">{{title}}</h4>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onClose()"></button>
 </div>
 <div class="modal-body">
@@ -83,15 +83,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="fw-bold">Dosage <span class="text-danger">*</span></label>
-                            <textarea rows="3" class="form-control" formControlName="dosage" placeholder="Enter dosage" [ngClass]="{ 'is-invalid': submitted && f.dosage.errors }"></textarea>
-                            @if (submitted && f.dosage.errors) {
-                                <div class="invalid-feedback">
-                                @if (f.dosage.errors.required) {
-                                    <div>Dosage is required</div>
-                                }
-                                </div>
-                            }
+                            <label class="fw-bold">Dosage</label>
+                            <textarea rows="3" class="form-control" formControlName="dosage" placeholder="Enter dosage"></textarea>
                         </div>
                     </div>
                 </div>

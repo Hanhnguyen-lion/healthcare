@@ -24,12 +24,16 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
   
   billing_id: number = 0;
   prescription_id: number = 0;
+  new_prescription_id: number = 0;
   prescriptionItem?: any;
+  title:string = "Add Treatment";
+
+  prescriptionItemObs?:Observable<any>;
 
   doctorItems?: Observable<Doctor[]>;
   medicineItems?:Observable<Medicine[]>;
-  medicineTypeItems?: Observable<any[]>
-  durationItems?: Observable<any[]>
+  medicineTypeItems?: Observable<any[]>;
+  durationItems?: Observable<any[]>;
   
   constructor(
     protected override router: Router,
@@ -60,14 +64,13 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
     this.medicineTypeItems = this.baseSrv.GetItems(`${this.apiUrl}/MedicineTypes`);
     this.durationItems = this.baseSrv.GetItems(`${this.apiUrl}/DurationTypes`);
 
-
     this.form = this.formBuilder.group({
       medicine_id: ["", Validators.required],
-      dosage: ["", Validators.required],
       quantity: [1, Validators.required],
       duration: [1, Validators.required],
       duration_type: ["", Validators.required],
       medicine_type: ["day", Validators.required],
+      dosage: [""],
       notes: [""]
     });
 
@@ -94,11 +97,11 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
     });
 
     if (this.prescription_id > 0){
+      this.title = "Edit Prescription";
       var url = `${this.apiUrl}/item`;
       this.baseSrv.GetItemById(this.prescription_id, url)
         .subscribe({
           next: (item) =>{
-
             this.form.setValue({
               medicine_id: item.medicine_id,
               dosage: item.dosage,
@@ -111,6 +114,24 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
             this.detectChanges();  
           }
         });
+    }
+    else{
+      if (this.new_prescription_id > 0){
+        this.title = "Edit Prescription";
+          this.prescriptionItemObs?.subscribe({
+            next:(item)=>{
+              this.form.setValue({
+                medicine_id: item.medicine_id,
+                dosage: item.dosage,
+                quantity: item.quantity,
+                duration: item.duration,
+                duration_type: item.duration_type,
+                medicine_type: item.medicine_type,
+                notes: item.notes
+              });
+            }
+          });
+      }
     }
   }
 
@@ -125,6 +146,7 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
     }
     var item = this.form.value;
     item.id = this.prescription_id;
+    item.new_id = this.new_prescription_id;
     item.billing_id = (this.billing_id > 0) ? this.billing_id : 0;
     if (this.billing_id > 0){
       this.baseSrv.Update(item, this.apiUrl).subscribe({
@@ -149,27 +171,6 @@ export class PrescriptionModal extends BaseComponent implements OnInit{
       )
     }
 
-    // if (this.prescription_id > 0){
-    //   this.activeModal.close(true);
-    //   // this.baseSrv.Update(item, this.apiUrl).subscribe({
-    //   //   next:()=>{
-    //   //     this.activeModal.close(true);
-    //   //   },
-    //   //   error: (error) =>{
-    //   //     console.log(error);
-    //   //   }
-    //   // });
-    // }
-    // else{
-    //   this.baseSrv.Add(item, this.apiUrl).subscribe({
-    //     next:()=>{
-    //       this.activeModal.close(true);
-    //     },
-    //     error: (error) =>{
-    //       console.log(error);
-    //     }
-    //   });
-    // }
     this.activeModal.close(true);
   }
 }

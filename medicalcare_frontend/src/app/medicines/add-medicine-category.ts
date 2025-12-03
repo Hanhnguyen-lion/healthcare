@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseServices } from '../services/base-service';
 import { BaseComponent } from '../BaseComponent';
-import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { DialogService } from '../services/dialog';
 import { AlertService } from '../helpers/alert-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -10,16 +10,15 @@ import { Footer } from '../footer/footer';
 import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-add-treatment-category',
-  imports: [ReactiveFormsModule, Footer, 
-    RouterOutlet, RouterLink, NgClass],
-  templateUrl: './add-treatment-category.html',
-  styleUrl: './add-treatment-category.css',
+  selector: 'app-add-medicine-category',
+  imports: [Footer, RouterOutlet, ReactiveFormsModule, NgClass],
+  templateUrl: './add-medicine-category.html',
+  styleUrl: './add-medicine-category.css',
   providers: [BaseServices]
 })
-export class AddTreatmentCategory extends BaseComponent implements OnInit{
+export class AddMedicineCategoryComponent extends BaseComponent implements OnInit{
 
-  title: string = "Add Treatment Category";
+  title: string = "Add Medicine Category";
   id: number = 0;
 
   constructor(
@@ -31,10 +30,10 @@ export class AddTreatmentCategory extends BaseComponent implements OnInit{
     private formBuilder: FormBuilder
   ){
     super(
-      `${enviroment.apiUrl}/Treatments/Category`, 
+      `${enviroment.apiUrl}/Medicines/Category`, 
       "", 
       "Create Medicine successful",
-      "/Treatement/Category",
+      "/Medicine/Category",
       router,
       baseSrv,
       dialogService,
@@ -47,14 +46,13 @@ export class AddTreatmentCategory extends BaseComponent implements OnInit{
     this.id = +this.routerActive.snapshot.params["id"] | 0;
 
     if (this.id > 0){
-      this.title = "Edit Treatement Category";
+      this.title = "Edit Medicine Category";
     }
 
     this.form = this.formBuilder.group({
       name_en: ["", Validators.required],
       name_vn: [""],
       name_jp: [""],
-      price:[0],
       description: [""]
     });
 
@@ -80,7 +78,6 @@ export class AddTreatmentCategory extends BaseComponent implements OnInit{
               name_en: item.name_en,
               name_vn: item.name_vn,
               name_jp: item.name_jp,
-              price: item.price,
               description:item.description
             });
           },
@@ -90,4 +87,5 @@ export class AddTreatmentCategory extends BaseComponent implements OnInit{
         });
       }
   }
+
 }

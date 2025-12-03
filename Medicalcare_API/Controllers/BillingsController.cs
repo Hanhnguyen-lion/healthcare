@@ -92,7 +92,8 @@ namespace Medicalcare_API.Controllers{
                             
                             treatmentItem.billing_id = id;
                             treatmentItem.quantity = Convert.ToInt32(item["quantity"].ToString());
-                            treatmentItem.amount = Convert.ToDecimal(item["amount"].ToString());
+                            treatmentItem.description = item["description"].ToString();
+                            treatmentItem.category_id = Convert.ToInt32(item["category_id"].ToString());
 
                             this.context.m_treatment.Add(treatmentItem);
                         } 
