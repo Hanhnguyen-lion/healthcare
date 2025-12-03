@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Billing List</h2>
     <div class="form-group mb-3">
-      <button class="btn btn-primary" routerLink="/Billing/Add" type="submit">Add Billing</button>
+      <button class="btn btn-outline-primary" routerLink="/Billing/Add" type="submit">Add Billing</button>
     </div>
 <div class="tableFixHead">
   <table class="table table-striped">
@@ -22,9 +22,9 @@
           <td>{{item.patient_name}}</td>
           <td>{{item.total|number:'0.2'}}</td>
           <td>
-            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Billing/Edit/{{item.billing_id}}">Edit</button>
-            <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Billing/View/{{item.billing_id}}">View</button>
-            <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.billing_id)">Delete</button>
+            <button class="btn btn-outline-primary" style="margin-left: 10px;" routerLink="/Billing/Edit/{{item.billing_id}}">Edit</button>
+            <button class="btn btn-outline-info" style="margin-left: 10px;" routerLink="/Billing/View/{{item.billing_id}}">View</button>
+            <button class="btn btn-outline-danger" style="margin-left: 10px;" (click)="deleteItem(item.billing_id)">Delete</button>
           </td>
         </tr>
       }

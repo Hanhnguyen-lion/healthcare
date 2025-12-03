@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Medicine Category List</h2>
     <div class="form-group mb-3">
-      <button class="btn btn-primary" routerLink="/Medicine/Category/Add" type="submit">Add Medicine Category</button>
+      <button class="btn btn-outline-primary" routerLink="/Medicine/Category/Add" type="submit">Add Medicine Category</button>
     </div>
 <div class="tableFixHead">
   <table class="table table-striped">
@@ -20,8 +20,8 @@
           <td>{{item.name_vn}}</td>
           <td>{{item.name_jp}}</td>
           <td>
-            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Medicine/Category/Edit/{{item.id}}">Edit</button>
-            <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
+            <button class="btn btn-outline-primary" style="margin-left: 10px;" routerLink="/Medicine/Category/Edit/{{item.id}}">Edit</button>
+            <button class="btn btn-outline-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
           </td>
         </tr>
       }

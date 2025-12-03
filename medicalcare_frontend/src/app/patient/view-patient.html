@@ -139,14 +139,14 @@
             </div>
             <div class="row mb-3">
               <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
-                <button [disabled]="loading" (click)="onEdit()" class="btn btn-primary">
+                <button [disabled]="loading" (click)="onEdit()" class="btn btn-outline-primary">
                     @if (loading){
                       <span class="spinner-border spinner-border-sm mr-1"></span>
                     }
                     Edit
                 </button>
 
-                <button class="btn btn-secondary" routerLink="/Patient">Cancel</button>
+                <button class="btn btn-outline-secondary" routerLink="/Patient">Cancel</button>
               </div>
             </div>
           </form>

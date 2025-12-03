@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Treatment Category List</h2>
     <div class="form-group mb-3">
-      <button class="btn btn-primary" routerLink="/Treatement/Category/Add" type="submit">Add Treatment Category</button>
+      <button class="btn btn-outline-primary" routerLink="/Treatement/Category/Add" type="submit">Add Treatment Category</button>
     </div>
 <div class="tableFixHead">
   <table class="table table-striped">
@@ -22,8 +22,8 @@
           <td>{{item.name_jp}}</td>
           <td>{{item.price | number:'0.2'}}</td>
           <td>
-            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Treatement/Category/Edit/{{item.id}}">Edit</button>
-            <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
+            <button class="btn btn-outline-primary" style="margin-left: 10px;" routerLink="/Treatement/Category/Edit/{{item.id}}">Edit</button>
+            <button class="btn btn-outline-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
           </td>
         </tr>
       }

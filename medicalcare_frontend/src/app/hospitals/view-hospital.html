@@ -43,14 +43,14 @@
             </div>
             <div class="row mb-3">
               <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
-                <button [disabled]="loading" class="btn btn-primary" (click)="onEdit()">
+                <button [disabled]="loading" class="btn btn-outline-primary" (click)="onEdit()">
                   @if(loading){
                     <span class="spinner-border spinner-border-sm mr-1"></span>
                   }
                   Save
                 </button>
 
-                <button class="btn btn-secondary" routerLink="/Hospital">Cancel</button>
+                <button class="btn btn-outline-secondary" routerLink="/Hospital">Cancel</button>
               </div>
             </div>
           </form>

@@ -87,5 +87,4 @@ export class AddMedicineCategoryComponent extends BaseComponent implements OnIni
         });
       }
   }
-
 }

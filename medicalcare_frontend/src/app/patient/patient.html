@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Patient List</h2>
     <div class="form-group mb-3">
-      <button class="btn btn-primary" routerLink="/Patient/Add" type="submit">Add Patient</button>
+      <button class="btn btn-outline-primary" routerLink="/Patient/Add" type="submit">Add Patient</button>
     </div>
 <div class="tableFixHead">
   <table class="table table-striped">
@@ -24,9 +24,9 @@
           <td>{{item.date_of_birth | date: 'dd/MM/yyyy'}}</td>
           <td>{{item.gender}}</td>
           <td>
-            <button class="btn btn-primary" style="margin-left: 10px;" routerLink="/Patient/Edit/{{item.id}}">Edit</button>
-            <button class="btn btn-info" style="margin-left: 10px;" routerLink="/Patient/View/{{item.id}}">View</button>
-            <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
+            <button class="btn btn-outline-primary" style="margin-left: 10px;" routerLink="/Patient/Edit/{{item.id}}">Edit</button>
+            <button class="btn btn-outline-info" style="margin-left: 10px;" routerLink="/Patient/View/{{item.id}}">View</button>
+            <button class="btn btn-outline-danger" style="margin-left: 10px;" (click)="deleteItem(item.id)">Delete</button>
           </td>
         </tr>
       }

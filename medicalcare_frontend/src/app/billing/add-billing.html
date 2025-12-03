@@ -122,7 +122,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <button class="btn btn-primary" type="button" (click)="addOrEditTreatment(0, 0)">Add</button>
+                                <button class="btn btn-outline-primary" type="button" (click)="addOrEditTreatment(0, 0)">Add</button>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -150,8 +150,8 @@
                                                     <td>{{item.amount|number:'0.2'}}</td>
                                                     <td>{{item.total|number:'0.2'}}</td>
                                                     <td>
-                                                        <button class="btn btn-primary" style="margin-left: 10px;" (click)="addOrEditTreatment(item.id, item.new_id)">Edit</button>
-                                                        <button class="btn btn-danger" style="margin-left: 10px;" (click)="deleteTreatment(item.id, item.new_id)">Delete</button>
+                                                        <button class="btn btn-outline-primary" style="margin-left: 10px;" (click)="addOrEditTreatment(item.id, item.new_id)">Edit</button>
+                                                        <button class="btn btn-outline-danger" style="margin-left: 10px;" (click)="deleteTreatment(item.id, item.new_id)">Delete</button>
                                                     </td>
                                                 </tr>
                                             }
@@ -167,7 +167,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <button class="btn btn-primary" type="button" (click)="addOrEditPrescription(0, 0)">Add</button>
+                                <button class="btn btn-outline-primary" type="button" (click)="addOrEditPrescription(0, 0)">Add</button>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -195,8 +195,8 @@
                                                     <td>{{item.amount|number:'0.2'}}</td>
                                                     <td>{{item.total|number:'0.2'}}</td>
                                                     <td>
-                                                        <button class="btn btn-primary" style="margin-left: 10px;" (click)="addOrEditPrescription(item.id, item.new_id)">Edit</button>
-                                                        <button class="btn btn-danger" style="margin-left: 10px;" (click)="deletePrescription(item.id, item.new_id)">Delete</button>
+                                                        <button class="btn btn-outline-primary" style="margin-left: 10px;" (click)="addOrEditPrescription(item.id, item.new_id)">Edit</button>
+                                                        <button class="btn btn-outline-danger" style="margin-left: 10px;" (click)="deletePrescription(item.id, item.new_id)">Delete</button>
                                                     </td>
                                                 </tr>
                                             }
@@ -207,13 +207,13 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col form-group mb-3 d-grid gap-2 d-md-flex">
-                                <button type="button" [disabled]="loading" class="btn btn-primary" (click)="addOrEditItem()">
+                                <button type="button" [disabled]="loading" class="btn btn-outline-primary" (click)="addOrEditItem()">
                                         @if (loading){
                                             <span class="spinner-border spinner-border-sm mr-1"></span>
                                         }
                                         Save
                                 </button>
-                                <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+                                <button class="btn btn-outline-secondary" (click)="cancel()">Cancel</button>
                             </div>
                         </div>
                     </form>
