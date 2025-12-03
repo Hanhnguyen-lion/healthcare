@@ -83,7 +83,6 @@ namespace Medicalcare_API.Helpers{
             var billing_id = Convert.ToInt32(item["billing_id"].ToString());
             var quantity = Convert.ToInt32(item["quantity"].ToString());
             var amount = Convert.ToDecimal(item["amount"].ToString());
-            string? treatment_type = item["treatment_type"].ToString();
             var newItem = new Dictionary<string, object>
             {
                 ["id"]  = id,
@@ -92,7 +91,6 @@ namespace Medicalcare_API.Helpers{
                 ["quantity"]  = quantity,
                 ["amount"]  = amount,
                 ["total"]  = amount * quantity,
-                ["treatment_type"] = treatment_type??"",
                 ["treatment_date"]  = DateTime.Today
             };
             return newItem;
